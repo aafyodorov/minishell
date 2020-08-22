@@ -12,7 +12,19 @@ int			ft_echo(char *str) {
 }
 
 int			ft_cd(char *str) {
-	ft_printf("cd\n");
+	int		i;
+	char	tmp[1024];
+
+	i = 0;
+	if (!str)
+	{
+		while (ft_strncmp("HOME=", g_env[i], 5))
+			i++;
+		ft_strcpy(tmp, &g_env[i][5]);
+		chdir(tmp);
+		return (0);
+	}
+	chdir(str);
 	return (0);
 }
 
@@ -32,7 +44,13 @@ int			ft_unset(char *str) {
 }
 
 int			ft_env(char *str) {
-	ft_printf("env\n");
+	int		i;
+
+	i = 0;
+	if (str)
+		return (ft_printf("Invalid argument\n"));
+	while (g_env[i])
+		ft_printf("%s\n", g_env[i++]);
 	return (0);
 }
 
@@ -66,13 +84,14 @@ char*		start_fork(char *str, char *arg)
 		wait(0);
 	else if (pid == 0)
 	{
-		sleep(60);
 		while (++i < 7)
+		{
 			if (ft_strcmp(funcs_str[i], str))
 			{
 				funcs[i](arg);
 				exit(0);
 			}
+		}
 	}
 	else
 	{
@@ -133,13 +152,15 @@ void	get_envs(char **envp)
 {
 	int			i;
 
-	g_env = (char **)calloc(sizeof(char *), 1);
+	i = 0;
+	while (envp[i])
+		i++;
+	g_env = (char **)calloc(sizeof(char *) * i + 1, 1);
 	i = 0;
 	while (envp[i])
 	{
 		g_env[i] = (char *)malloc(ft_strlen(envp[i]) + 1);
 		ft_strcpy(g_env[i], envp[i]);
-		// ft_printf("%s\n", g_env[i]);						////////////// удалить строчку
 		i++;
 	}
 }
@@ -163,6 +184,7 @@ int		main(int argc, char **argv, char **envp)
 			return (free_args(&g_env) +
 					free_str(&str_args) +
 					ft_printf("%s\n", strerror(errno)));
+		getcwd(homepath, 1024);
 		minishell(args);
 		ft_printf("%sminishell%s:%s~%s%s$ ", GREEN, RESET, BLUE, homepath, RESET);
 		free_str(&str_args);

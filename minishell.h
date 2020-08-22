@@ -5,8 +5,7 @@
 #define BLUE "\033[1;34m"
 #define RESET "\033[0m" 
 
-char		**g_env;
-char		*g_res;
+char		**g_env;char		*g_res;
 
 int			ft_echo(char *str);
 int			ft_cd(char *str);

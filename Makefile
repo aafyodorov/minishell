@@ -7,7 +7,7 @@ PURPLE = \033[0;35m
 
 CC = gcc
 # FLAGS = -Wall -Werror -Wextra -ggdb
-FLAGS = -ggdb
+FLAGS = -g
 AR = ar rs
 RM = rm -rf
 
@@ -19,8 +19,7 @@ NAME = libminishell.a
 HEADER = minishell.h
 HEADERDIR = ./
 
-SRC = minishell.c\
-	  free.c\
+SRC = free.c\
 	  check.c
 
 SRCDIR = ./
@@ -34,8 +33,8 @@ DEP = $(OBJ:.o=.d)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@cp $(LIBFTDIR)$(LIBFT) $(NAME)
-	@$(AR) $(NAME) $(OBJ)
+	cp $(LIBFTDIR)$(LIBFT) $(NAME)
+	$(AR) $(NAME) $(OBJ)
 	@echo "$(PURPLE)  Library $(NAME) created  $(B&W)"
 
 -include $(DEP)
@@ -57,7 +56,7 @@ clean:
 
 fclean:
 	@$(MAKE) fclean -C $(LIBFTDIR)
-	@$(RM) $(OBJDIR) $(NAME) ./tests
+	@$(RM) $(OBJDIR) $(NAME) ./tests test
 	@echo "$(RED)  Library $(NAME) deleted  $(B&W)"
 
 re: fclean all
