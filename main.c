@@ -12,8 +12,8 @@ int			ft_echo(char *str) {
 }
 
 int			ft_cd(char *str) {
-	int		i;
-	char	tmp[1024];
+	int			i;
+	char		tmp[1024];
 
 	i = 0;
 	if (!str)
@@ -29,7 +29,10 @@ int			ft_cd(char *str) {
 }
 
 int			ft_pwd(char *str) {
-	ft_printf("pwd\n");
+	char		homepath[1024];
+
+	getcwd(homepath, 1024);
+	ft_printf("%s\n", homepath);
 	return (0);
 }
 
@@ -44,7 +47,7 @@ int			ft_unset(char *str) {
 }
 
 int			ft_env(char *str) {
-	int		i;
+	int			i;
 
 	i = 0;
 	if (str)
@@ -61,8 +64,8 @@ int			ft_exit(char *str) {
 
 char*		start_fork(char *str, char *arg)
 {
-	int		i;
-	pid_t	pid;
+	int			i;
+	pid_t		pid;
 	int			(*funcs[7])(char *) = {ft_echo,
 										ft_cd,
 										ft_pwd,
@@ -178,7 +181,7 @@ int		main(int argc, char **argv, char **envp)
 	str_args = NULL;
 	args = NULL;
 	g_env = NULL;
-	while ((get_next_line(1, &str_args) != -1))									// бесконечный цикл для ввода команд
+	while ((get_next_line(0, &str_args) != -1))									// бесконечный цикл для ввода команд
 	{
 		if(!(args = ft_split(str_args, ' ')))
 			return (free_args(&g_env) +
