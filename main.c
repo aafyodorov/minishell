@@ -12,16 +12,14 @@ int			ft_echo(char *str) {
 }
 
 int			ft_cd(char *str) {
-	int			i;
-	char		tmp[1024];
+	t_env		*tmp_env;
 
-	i = 0;
+	tmp_env = g_env;
 	if (!str)
 	{
-		while (ft_strncmp("HOME=", g_env[i], 5))
-			i++;
-		ft_strcpy(tmp, &g_env[i][5]);
-		chdir(tmp);
+		while (tmp_env && ft_strncmp("HOME=", tmp_env->env, 5))
+			tmp_env = tmp_env->next;
+		chdir(&tmp_env->env[5]);
 		return (0);
 	}
 	chdir(str);
@@ -43,17 +41,6 @@ int			ft_export(char *str) {
 
 int			ft_unset(char *str) {
 	ft_printf("unset\n");
-	return (0);
-}
-
-int			ft_env(char *str) {
-	int			i;
-
-	i = 0;
-	if (str)
-		return (ft_printf("Invalid argument\n"));
-	while (g_env[i])
-		ft_printf("%s\n", g_env[i++]);
 	return (0);
 }
 
@@ -83,19 +70,19 @@ char*		start_fork(char *str, char *arg)
 
 	i = -1;
 	pid = fork();
-	if (pid > 0)	
-		wait(0);
-	else if (pid == 0)
+	if (pid == 0)
 	{
 		while (++i < 7)
 		{
-			if (ft_strcmp(funcs_str[i], str))
+			if (!ft_strcmp(funcs_str[i], str))
 			{
 				funcs[i](arg);
 				exit(0);
 			}
 		}
 	}
+	else if (pid > 0)	
+		wait(0);
 	else
 	{
 		ft_printf("%s\n", strerror(errno));
@@ -151,23 +138,6 @@ void	minishell(char **args) {
 
 // }
 
-void	get_envs(char **envp)
-{
-	int			i;
-
-	i = 0;
-	while (envp[i])
-		i++;
-	g_env = (char **)calloc(sizeof(char *) * i + 1, 1);
-	i = 0;
-	while (envp[i])
-	{
-		g_env[i] = (char *)malloc(ft_strlen(envp[i]) + 1);
-		ft_strcpy(g_env[i], envp[i]);
-		i++;
-	}
-}
-
 int		main(int argc, char **argv, char **envp)
 {
 	char		*str_args;
@@ -175,6 +145,7 @@ int		main(int argc, char **argv, char **envp)
 	char		homepath[1024];
 
 	get_envs(envp);																// записываем список переменных среды, прищедших через envp в глобальную переменную 
+	// g_env = envp;
 	memset(homepath, 0, 1024);
 	getcwd(homepath, 1024);														// записываем в homepath путь текущей директории
 	ft_printf("%sminishell%s:%s~%s%s$ ", GREEN, RESET, BLUE, homepath, RESET);
@@ -184,7 +155,7 @@ int		main(int argc, char **argv, char **envp)
 	while ((get_next_line(0, &str_args) != -1))									// бесконечный цикл для ввода команд
 	{
 		if(!(args = ft_split(str_args, ' ')))
-			return (free_args(&g_env) +
+			return (free_env(g_env) +
 					free_str(&str_args) +
 					ft_printf("%s\n", strerror(errno)));
 		getcwd(homepath, 1024);
@@ -196,5 +167,5 @@ int		main(int argc, char **argv, char **envp)
 	}
 	free_str(&str_args);
 	free_args(&args);
-	free_args(&g_env);
+	free_env(g_env);
 }
