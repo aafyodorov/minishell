@@ -1,6 +1,14 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <errno.h>
+#include "libftprintf.h"
+#include "libft.h"
+
 #define GREEN "\033[1;32m"
 #define BLUE "\033[1;34m"
 #define RESET "\033[0m"
@@ -15,15 +23,12 @@ int			ft_unset(char **args, char **env, char *ret);
 int			ft_env(char **args, char **env, char *ret);
 int			ft_exit(char **args, char **env, char *ret);
 
-void		get_envs(char **envp);
+char		**get_envs(char **envp);
 
 int			free_str(char **str);
 int			free_args(char ***args);
 
 int			check_func(char *str);
-int			check_args(char *str);
 int			check_operator(char *str);
-
-void		get_envs(char **envp);
 
 #endif

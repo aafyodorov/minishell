@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:56 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/25 01:33:58 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/25 01:58:17 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,9 @@ int	check_func(char *str)
 	return (-1);
 }
 
-int	check_args(char *str)
-{
-	return (0);
-}
-
 int	check_operator(char *str)
 {
-	return (0);
+	return (!ft_strcmp(str, ";") || !ft_strcmp(str, "|") ||
+			!ft_strcmp(str, ">") || !ft_strcmp(str, ">>") ||
+			!ft_strcmp(str, "<"));
 }

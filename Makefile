@@ -21,7 +21,13 @@ HEADERDIR = ./
 
 SRC = free.c\
 	  check.c\
-	  ft_env.c
+	  ft_cd.c\
+	  ft_pwd.c\
+	  ft_env.c\
+	  ft_echo.c\
+	  ft_exit.c\
+	  ft_unset.c\
+	  ft_export.c
 
 SRCDIR = ./
 
