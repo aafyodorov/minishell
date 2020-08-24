@@ -20,7 +20,8 @@ HEADER = minishell.h
 HEADERDIR = ./
 
 SRC = free.c\
-	  check.c
+	  check.c\
+	  env.c
 
 SRCDIR = ./
 

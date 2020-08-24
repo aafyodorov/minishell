@@ -6,29 +6,43 @@
 #include "libftprintf.h"
 #include "libft.h"
 
-int			ft_echo(char *str) {
-	ft_printf("%s\n", str);
+int			ft_echo(char **args, char **env, char *ret)
+{
+	int			i;
+
+	i = 0;
+	while (args[i])
+		ft_printf("%s\n", args[i++]);
+	if (ft_strcmp(args[0], "-n"))
+		ft_printf("\n");
 	return (0);
 }
 
-int			ft_cd(char *str) {
+int			ft_cd(char **args, char **env, char *ret)
+{
 	int			i;
 	char		tmp[1024];
 
 	i = 0;
-	if (!str)
+	while (args[i])
+		i++;
+	if (i > 1)
+		return (ft_printf("cd: слишком много аргументов\n"));
+	if (i == 0)
 	{
-		while (ft_strncmp("HOME=", g_env[i], 5))
+		while (ft_strncmp("HOME=", env[i], 5))
 			i++;
-		ft_strcpy(tmp, &g_env[i][5]);
+		ft_strcpy(tmp, &env[i][5]);
 		chdir(tmp);
 		return (0);
 	}
-	chdir(str);
+	if (chdir(args[0]))
+		return (ft_printf("%s\n", strerror(errno)));
 	return (0);
 }
 
-int			ft_pwd(char *str) {
+int			ft_pwd(char **args, char **env, char *ret)
+{
 	char		homepath[1024];
 
 	getcwd(homepath, 1024);
@@ -36,65 +50,45 @@ int			ft_pwd(char *str) {
 	return (0);
 }
 
-int			ft_export(char *str) {
+int			ft_export(char **args, char **env, char *ret)
+{
 	ft_printf("export\n");
 	return (0);
 }
 
-int			ft_unset(char *str) {
+int			ft_unset(char **args, char **env, char *ret)
+{
 	ft_printf("unset\n");
 	return (0);
 }
 
-int			ft_env(char *str) {
-	int			i;
-
-	i = 0;
-	if (str)
-		return (ft_printf("Invalid argument\n"));
-	while (g_env[i])
-		ft_printf("%s\n", g_env[i++]);
-	return (0);
-}
-
-int			ft_exit(char *str) {
+int			ft_exit(char **args, char **env, char *ret)
+{
 	ft_printf("exit\n");
 	return (0);
 }
 
-char*		start_fork(char *str, char *arg)
+char*		start_fork(char *func, char **args, char *ret)
 {
 	int			i;
 	pid_t		pid;
-	int			(*funcs[7])(char *) = {ft_echo,
-										ft_cd,
-										ft_pwd,
-										ft_export,
-										ft_unset,
-										ft_env,
-										ft_exit};
-	const char	*funcs_str[7] = {"echo",
-								"cd",
-								"pwd",
-								"export",
-								"unset",
-								"env",
-								"exit"};
+	int			(*funcs[7])(char **, char **, char *) = {ft_echo,
+														ft_cd,
+														ft_pwd,
+														ft_export,
+														ft_unset,
+														ft_env,
+														ft_exit};
 
-	i = -1;
 	pid = fork();
 	if (pid > 0)	
 		wait(0);
 	else if (pid == 0)
 	{
-		while (++i < 7)
-		{
-			if (ft_strcmp(funcs_str[i], str))
-			{
-				funcs[i](arg);
-				exit(0);
-			}
-		}
+		if ((i = check_func(func)) >= 0)
+			funcs[i](args, g_env, ret);
+		else
+			execve(func, args, g_env);
 	}
 	else
 	{
@@ -104,97 +98,71 @@ char*		start_fork(char *str, char *arg)
 	return (NULL);
 }
 
-void	minishell(char **args) {
-	char	*res;
-	int		i;
+char 	**get_args_str(char **parse, int i)					// получаем массив строк - аргументы функции
+{
 	int		j;
+	char	**args;
 
-	i = 0;
-	res = NULL;
-	while (args[i])
-	{
-		if (check_func(args[i]) && (!args[i + 1] || !check_args(args[i + 1])))
-			res = start_fork(args[i], NULL);
-		else if (check_func(args[i]) && res)
-			res = start_fork(args[i], res);
-		else if (check_func(args[i]) && args[i + 1] && check_args(args[i + 1]))
-			res = start_fork(args[i], args[i + 1]);
-		else
-			ft_printf("%s\n", "command not found");
-		i += res ? 2 : 1;
-		if (check_operator(args[i]))
-		{
-			ft_printf("s\n", res);
-			res = NULL;
-			i++;
-		}
-	}
+	j = i + 1;
+	while ((parse[j] && !check_operator(parse[j])))
+		j++;
+	args = (char **)malloc(sizeof(char *) * j);
+	j = 0;
+	i++;
+	while ((parse[i] && !check_operator(parse[i])))
+		args[j++] = ft_strdup(parse[i++]);
+	args[j] = NULL;
+	return (args);
 }
 
-// void	check_args(char **args)
-// {
-// 	pid_t		pid;
-// 	const char	*funcs[7] = {"echo",
-// 							"cd",
-// 							"pwd",
-// 							"export",
-// 							"unset",
-// 							"env",
-// 							"exit"};
-// 	pid = fork();
-// 	if (pid == 0)
-// 		wait();
-// 	while (*args)
-// 	{
-// 		if (!ft_strcmp());
-// 	}
-
-// }
-
-void	get_envs(char **envp)
-{
-	int			i;
+void	minishell(char **parse) {
+	int		i;
+	char	**args;
+	char	*ret;
 
 	i = 0;
-	while (envp[i])
-		i++;
-	g_env = (char **)calloc(sizeof(char *) * i + 1, 1);
-	i = 0;
-	while (envp[i])
+	ret = NULL;
+	while (parse[i])
 	{
-		g_env[i] = (char *)malloc(ft_strlen(envp[i]) + 1);
-		ft_strcpy(g_env[i], envp[i]);
-		i++;
+		if (!check_operator(parse[i]))
+		{
+			args = get_args_str(parse, i);
+			ret = start_fork(parse[i], args, ret);
+			while (parse[i] && !check_operator(parse[i]))
+				i++;
+			free_args(&args);
+		}
+		else if (check_operator(parse[i]))
+			return;									///////////////////////////добавить_функцию//////////////////////////////
 	}
 }
 
 int		main(int argc, char **argv, char **envp)
 {
-	char		*str_args;
-	char		**args;
+	char		*input;
+	char		**parse;
 	char		homepath[1024];
 
 	get_envs(envp);																// записываем список переменных среды, прищедших через envp в глобальную переменную 
 	memset(homepath, 0, 1024);
 	getcwd(homepath, 1024);														// записываем в homepath путь текущей директории
 	ft_printf("%sminishell%s:%s~%s%s$ ", GREEN, RESET, BLUE, homepath, RESET);
-	str_args = NULL;
-	args = NULL;
-	g_env = NULL;
-	while ((get_next_line(0, &str_args) != -1))									// бесконечный цикл для ввода команд
+	input = NULL;
+	parse = NULL;
+	while ((get_next_line(0, &input) != -1))									// бесконечный цикл для ввода команд
 	{
-		if(!(args = ft_split(str_args, ' ')))
+		if(!(parse = ft_split(input, ' ')))
 			return (free_args(&g_env) +
-					free_str(&str_args) +
+					free_str(&input) +
 					ft_printf("%s\n", strerror(errno)));
+		minishell(parse);
 		getcwd(homepath, 1024);
-		minishell(args);
 		ft_printf("%sminishell%s:%s~%s%s$ ", GREEN, RESET, BLUE, homepath, RESET);
-		free_str(&str_args);
-		free_args(&args);
-		str_args = NULL;
+		free_str(&input);
+		free_args(&parse);
+		input = NULL;
 	}
-	free_str(&str_args);
-	free_args(&args);
+	free_str(&input);
+	free_args(&parse);
 	free_args(&g_env);
 }

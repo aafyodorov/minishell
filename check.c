@@ -14,8 +14,8 @@ int	check_func(char *str)
 	i = 0;
 	while (i < 7)
 		if (!ft_strcmp(funcs_str[i++], str))
-			return (1);
-	return (0);
+			return (i - 1);
+	return (-1);
 }
 
 int	check_args(char *str)
