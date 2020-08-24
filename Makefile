@@ -21,7 +21,7 @@ HEADERDIR = ./
 
 SRC = free.c\
 	  check.c\
-	  env.c
+	  ft_env.c
 
 SRCDIR = ./
 
