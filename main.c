@@ -81,15 +81,15 @@ char*		start_fork(char *func, char **args, char *ret)
 														ft_exit};
 
 	pid = fork();
-	if (pid > 0)	
-		wait(0);
-	else if (pid == 0)
+	if (pid == 0)
 	{
 		if ((i = check_func(func)) >= 0)
 			funcs[i](args, g_env, ret);
 		else
 			execve(func, args, g_env);
 	}
+	else if (pid > 0)	
+		wait(0);
 	else
 	{
 		ft_printf("%s\n", strerror(errno));
@@ -144,6 +144,7 @@ int		main(int argc, char **argv, char **envp)
 	char		homepath[1024];
 
 	get_envs(envp);																// записываем список переменных среды, прищедших через envp в глобальную переменную 
+	// g_env = envp;
 	memset(homepath, 0, 1024);
 	getcwd(homepath, 1024);														// записываем в homepath путь текущей директории
 	ft_printf("%sminishell%s:%s~%s%s$ ", GREEN, RESET, BLUE, homepath, RESET);
