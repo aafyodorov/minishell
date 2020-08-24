@@ -19,7 +19,6 @@ void		get_envs(char **envp);
 
 int			free_str(char **str);
 int			free_args(char ***args);
-int			free_env(t_env	*env);
 
 int			check_func(char *str);
 int			check_args(char *str);
