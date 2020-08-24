@@ -6,7 +6,7 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:05:20 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/23 20:00:05 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/08/24 23:40:02 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ const char		*stub(const char *start, t_list **list);
 
 const char	*got_backslash(const char *start, t_list **list);
 const char	*got_literal(const char *start,  t_list **list);
+const char	*got_unit_delimiter(const char *start,  t_list **list);
+const char	*got_double_delimiter(const char *start,  t_list **list);
 const char	*got_sing_bracket(const char *start, t_list **list);
 const char	*got_space(const char *start, t_list **list);
 t_list		*parser(const char *str);
@@ -38,16 +40,16 @@ typedef struct {
 
 static t_delims	g_delims[DELIM_NUM] = {
 		(t_delims){.key = 0, .data = "\\", .func = got_backslash},
-		(t_delims){.key = 1, .data = "$", .func = stub},
-		(t_delims){.key = 2, .data = "<", .func = stub},
-		(t_delims){.key = 3, .data = ">", .func = stub},
-		(t_delims){.key = 4, .data = "|", .func = stub},
-		(t_delims){.key = 5, .data = " ", .func = got_space},
-		(t_delims){.key = 6, .data = ";", .func = stub},
-		(t_delims){.key = 7, .data = "\"", .func = stub},
-		(t_delims){.key = 8, .data = "\'", .func = got_sing_bracket},
+		(t_delims){.key = 1, .data = " ", .func = got_space},
+		(t_delims){.key = 2, .data = "$", .func = stub},
+		(t_delims){.key = 3, .data = ">>", .func = got_double_delimiter},
+		(t_delims){.key = 4, .data = "<", .func = got_unit_delimiter},
+		(t_delims){.key = 5, .data = ">", .func = got_unit_delimiter},
+		(t_delims){.key = 6, .data = "|", .func = got_unit_delimiter},
+		(t_delims){.key = 7, .data = ";", .func = got_unit_delimiter},
+		(t_delims){.key = 8, .data = "\"", .func = stub},
+		(t_delims){.key = 9, .data = "\'", .func = got_sing_bracket},
 		//(t_delims){.key = , .data = "", .func = stub},
-		(t_delims){.key = 9, .data = ">>", .func = stub},
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 18:36:47 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/23 19:48:30 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/08/24 23:40:02 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			is_delim(const char *str)
 	while (++i < DELIM_NUM)
 	{
 		ptr = str;
-		if (!ft_strncmp(ptr, g_delims[i].data, i == DELIM_NUM - 1 ? 2 : 1))
+		if (!ft_strncmp(ptr, g_delims[i].data, i == 3 ? 2 : 1))
 			return (i);
 	}
 	return (-1);
