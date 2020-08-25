@@ -27,7 +27,8 @@ SRC = free.c\
 	  ft_echo.c\
 	  ft_exit.c\
 	  ft_unset.c\
-	  ft_export.c
+	  ft_export.c\
+	  utils.c
 
 SRCDIR = ./
 

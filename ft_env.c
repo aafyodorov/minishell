@@ -6,12 +6,13 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:48 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/25 02:18:07 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/25 02:44:07 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "libftprintf.h"
+#include "minishell.h"
 
 int		ft_env(char **args, char **env, char *ret)
 {
@@ -30,9 +31,7 @@ char	**get_envs(char **envp)
 	char		**res;
 	int			i;
 
-	i = 0;
-	while (envp[i])
-		i++;
+	i = ft_strlenbuf(envp);
 	res = (char **)malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	while (envp[i])

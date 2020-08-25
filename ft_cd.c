@@ -2,15 +2,14 @@
 #include <errno.h>
 #include "libft.h"
 #include "libftprintf.h"
+#include "minishell.h"
 
 int	ft_cd(char **args, char **env, char *ret)
 {
 	int			i;
 	char		tmp[1024];
 
-	i = 0;
-	while (args[i])
-		i++;
+	i = ft_strlenbuf(args);
 	if (i > 1)
 		return (ft_printf("cd: слишком много аргументов\n"));
 	if (i == 0)

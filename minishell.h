@@ -3,6 +3,7 @@
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <errno.h>
@@ -24,6 +25,7 @@ int			ft_env(char **args, char **env, char *ret);
 int			ft_exit(char **args, char **env, char *ret);
 
 char		**get_envs(char **envp);
+int			ft_strlenbuf(char **buf);
 
 int			free_str(char **str);
 int			free_args(char ***args);
