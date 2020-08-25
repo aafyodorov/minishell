@@ -1,7 +1,23 @@
 #include "libftprintf.h"
 #include "minishell.h"
 
-int	ft_unset(char **args, char **env, char *ret)
+static void	delete_var(char ***env, int j)
+{
+
+	if (j == ft_strlenbuf(*env) - 1)
+	{
+		free((*env)[j]);
+		(*env)[j] = NULL;
+	}
+	else
+	{
+		free((*env)[j]);
+		(*env)[j] = (*env)[ft_strlenbuf(*env) - 1];
+		(*env)[ft_strlenbuf(*env) - 1] = NULL;
+	}
+}
+
+int			ft_unset(char **args, char **env, char *ret)
 {
 	int		i;
 	int		j;
@@ -16,19 +32,7 @@ int	ft_unset(char **args, char **env, char *ret)
 		while (env[j])
 		{
 			if (!ft_strncmp(args[i], env[j], len))
-			{
-				if (j == ft_strlenbuf(env) - 1)
-				{
-					free(env[j]);
-					env[j] = NULL;
-				}
-				else
-				{
-					free(env[j]);
-					env[j] = env[ft_strlenbuf(env) - 1];
-					env[ft_strlenbuf(env) - 1] = NULL;
-				}
-			}
+				delete_var(&env, j);
 			j++;
 		}
 		i++;
