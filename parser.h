@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:05:20 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/24 23:40:02 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/08/25 14:42:20 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_list		*create_node(const char *data, size_t len);
 int			push_node(t_list **list, t_list *new_node);
 int			is_delim(const char *str);
 
-typedef struct {
+typedef struct
+{
 	int			key;
 	char		data[3];
 	const char	*(*func) (const char *, t_list **);

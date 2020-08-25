@@ -28,7 +28,11 @@ SRC = free.c\
 	  ft_exit.c\
 	  ft_unset.c\
 	  ft_export.c\
-	  utils.c
+	  utils.c\
+	  parser.c\
+	  delimiters_1.c\
+	  delimiters_2.c\
+	  parser_utils.c\
 
 SRCDIR = ./
 
