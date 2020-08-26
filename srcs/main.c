@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/26 07:02:35 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/26 15:19:17 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char*		start_fork(char *func, char **args, char *ret, char **env)
 	{
 		change_underscores(func, args, env);
 		if ((i = check_func(func)) >= 0)
-			funcs[i](args, env, ret);
+			funcs[i](&args[1], env, ret);
 		else
 		{
 			null = (char **)ft_calloc(sizeof(char *), 2);
