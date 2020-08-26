@@ -16,6 +16,8 @@
 #define BLUE "\033[1;34m"
 #define RESET "\033[0m"
 
+int			g_exit_status;
+
 int			ft_echo(char **args, char **env, char *ret);
 int			ft_cd(char **args, char **env, char *ret);
 int			ft_pwd(char **args, char **env, char *ret);
