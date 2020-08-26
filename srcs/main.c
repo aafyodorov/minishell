@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/26 04:33:11 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/26 07:02:35 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char*		start_fork(char *func, char **args, char *ret, char **env)
 {
 	int			i;
 	pid_t		pid;
+	char		**null;
 	int			(*funcs[7])(char **, char **, char *) = {ft_echo,
 														ft_cd,
 														ft_pwd,
@@ -37,7 +38,12 @@ char*		start_fork(char *func, char **args, char *ret, char **env)
 		if ((i = check_func(func)) >= 0)
 			funcs[i](args, env, ret);
 		else
-			execve(func, args, env);
+		{
+			null = (char **)ft_calloc(sizeof(char *), 2);
+			null[0] = " ";
+			func = add_path(func, env);
+			execve(func, (args = args[0] ? args : null), env);
+		}
 	}
 	else if (pid > 0)	
 		wait(0);

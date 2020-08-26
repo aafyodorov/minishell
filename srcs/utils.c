@@ -1,6 +1,10 @@
 #include "libft.h"
 #include "minishell.h"
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 int		ft_strlenbuf(char **buf)
 {
 	int	i;

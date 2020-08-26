@@ -6,6 +6,7 @@
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <dirent.h>
 #include <errno.h>
 #include "parser.h"
 #include "libftprintf.h"
@@ -27,6 +28,7 @@ int			ft_strlenbuf(char **buf);
 char		**get_envs(char **envp);
 char	 	**get_args_str(char **parse, int i);
 void		change_underscores(char *func, char **args, char **env);
+char		*add_path(char *func, char **env);
 
 int			free_str(char **str);
 int			free_args(char ***args);
