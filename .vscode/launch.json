@@ -21,7 +21,7 @@
 			"name": "(gdb) Запустить",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/minishell",
+			"program": "${workspaceFolder}/1234/minishell",
 			"args": [],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}/",

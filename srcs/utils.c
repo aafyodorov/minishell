@@ -20,12 +20,11 @@ char 	**get_args_str(char **parse, int i)					// получаем массив �
 	int		j;
 	char	**args;
 
-	j = i + 1;
+	j = i;
 	while ((parse[j] && !check_operator(parse[j])))
 		j++;
-	args = (char **)malloc(sizeof(char *) * j);
+	args = (char **)malloc(sizeof(char *) * (j + 1));
 	j = 0;
-	i++;
 	while ((parse[i] && !check_operator(parse[i])))
 		args[j++] = ft_strdup(parse[i++]);
 	args[j] = NULL;
