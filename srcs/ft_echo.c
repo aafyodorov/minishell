@@ -1,3 +1,6 @@
+#include "libft.h"
+#include "libftprintf.h"
+
 int	ft_echo(char **args, char **env, char *ret)
 {
 	int			i;

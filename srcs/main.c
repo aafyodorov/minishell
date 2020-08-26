@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/25 02:14:51 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/26 04:33:11 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char*		start_fork(char *func, char **args, char *ret, char **env)
 	pid = fork();
 	if (pid == 0)
 	{
+		change_underscores(func, args, env);
 		if ((i = check_func(func)) >= 0)
 			funcs[i](args, env, ret);
 		else
@@ -46,23 +47,6 @@ char*		start_fork(char *func, char **args, char *ret, char **env)
 		return (NULL);
 	}
 	return (NULL);
-}
-
-char 	**get_args_str(char **parse, int i)					// получаем массив строк - аргументы функции
-{
-	int		j;
-	char	**args;
-
-	j = i + 1;
-	while ((parse[j] && !check_operator(parse[j])))
-		j++;
-	args = (char **)malloc(sizeof(char *) * j);
-	j = 0;
-	i++;
-	while ((parse[i] && !check_operator(parse[i])))
-		args[j++] = ft_strdup(parse[i++]);
-	args[j] = NULL;
-	return (args);
 }
 
 void	minishell(char **parse, char **env)
@@ -84,7 +68,7 @@ void	minishell(char **parse, char **env)
 			free_args(&args);
 		}
 		else if (check_operator(parse[i]))
-			return;									///////////////////////////добавить_функцию//////////////////////////////
+			i++;									///////////////////////////добавить_функцию//////////////////////////////
 	}
 }
 

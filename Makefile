@@ -17,9 +17,9 @@ LIBFTHEADERDIR = ./libft/includes/
 
 NAME = libminishell.a
 HEADER = minishell.h
-HEADERDIR = ./
+HEADERDIR = ./includes/
 
-SRC = free.c\
+SRCS = free.c\
 	  check.c\
 	  ft_cd.c\
 	  ft_pwd.c\
@@ -32,22 +32,27 @@ SRC = free.c\
 	  parser.c\
 	  delimiters_1.c\
 	  delimiters_2.c\
-	  parser_utils.c\
+	  parser_utils.c
+SRCDIR = ./srcs/
+SRC = $(addprefix $(SRCDIR), $(SRCS))
 
-SRCDIR = ./
-
-OBJS = $(SRC:.c=.o)
+OBJS = $(SRCS:.c=.o)
 OBJDIR = ./objects/
 OBJ = $(addprefix $(OBJDIR), $(OBJS))
 
 DEP = $(OBJ:.o=.d)
 
+MINISHELL = minishell
+MAIN = $(SRCDIR)main.c
+
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): $(LIBFT) $(OBJ) $(MAIN)
 	cp $(LIBFTDIR)$(LIBFT) $(NAME)
 	$(AR) $(NAME) $(OBJ)
-	@echo "$(PURPLE)  Library $(NAME) created  $(B&W)"
+#	@echo "$(PURPLE)  Library $(NAME) created  $(B&W)"
+	@gcc $(MAIN) -I$(HEADERDIR) -I$(LIBFTHEADERDIR) -L./ -lminishell -o $(MINISHELL) -g
+	@echo "$(PURPLE)  Minishell created  $(B&W)"
 
 -include $(DEP)
 
@@ -59,12 +64,9 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 $(LIBFT):
 	@$(MAKE) -C $(LIBFTDIR)
 
-test: $(NAME)
-	gcc main.c -I$(HEADERDIR) -I$(LIBFTHEADERDIR) -L./ -lminishell -o $@ -g
-
 clean:
 	@$(MAKE) clean -C $(LIBFTDIR)
-	@$(RM) $(OBJDIR)
+	@$(RM) $(OBJDIR) $(NAME)
 
 fclean:
 	@$(MAKE) fclean -C $(LIBFTDIR)

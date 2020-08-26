@@ -3,6 +3,7 @@
 
 static void	delete_var(char ***env, int j)
 {
+	char	*tmp;
 
 	if (j == ft_strlenbuf(*env) - 1)
 	{
@@ -11,10 +12,27 @@ static void	delete_var(char ***env, int j)
 	}
 	else
 	{
+		tmp = (*env)[j];
+		while ((*env)[j])
+		{
+			(*env)[j] = (*env)[j + 1];
+			j++;
+		}
 		free((*env)[j]);
-		(*env)[j] = (*env)[ft_strlenbuf(*env) - 1];
-		(*env)[ft_strlenbuf(*env) - 1] = NULL;
 	}
+}
+
+void		change_underscores(char *func, char **args, char **env)
+{
+	int		i;
+	char	*tmp;
+
+	tmp = args[0] ? args[ft_strlenbuf(args) - 1] : func;
+	i = 0;
+	while (ft_strncmp(env[i], "_=", 2))
+		i++;
+	free(env[i]);
+	env[i] = ft_strjoin("_=", tmp);
 }
 
 int			ft_unset(char **args, char **env, char *ret)
@@ -25,6 +43,11 @@ int			ft_unset(char **args, char **env, char *ret)
 	char	*tmp;
 
 	i = 0;
+	if (!ft_strncmp(args[i], "_", 1))
+	{
+		change_underscores("env", args, env);
+		return (0);
+	}
 	while (args[i])
 	{
 		j = 0;

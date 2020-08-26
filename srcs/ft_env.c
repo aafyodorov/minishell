@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:48 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/25 02:44:07 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/26 03:51:51 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**get_envs(char **envp)
 	int			i;
 
 	i = ft_strlenbuf(envp);
-	res = (char **)malloc(sizeof(char *) * (i + 1));
+	res = (char **)ft_calloc(sizeof(char *), i + 100);
 	i = 0;
 	while (envp[i])
 	{
@@ -40,6 +40,5 @@ char	**get_envs(char **envp)
 		ft_strcpy(res[i], envp[i]);
 		i++;
 	}
-	res[i] = NULL;
 	return (res);
 }

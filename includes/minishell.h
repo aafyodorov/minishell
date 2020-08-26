@@ -15,8 +15,6 @@
 #define BLUE "\033[1;34m"
 #define RESET "\033[0m"
 
-char		**g_env;
-
 int			ft_echo(char **args, char **env, char *ret);
 int			ft_cd(char **args, char **env, char *ret);
 int			ft_pwd(char **args, char **env, char *ret);
@@ -25,8 +23,10 @@ int			ft_unset(char **args, char **env, char *ret);
 int			ft_env(char **args, char **env, char *ret);
 int			ft_exit(char **args, char **env, char *ret);
 
-char		**get_envs(char **envp);
 int			ft_strlenbuf(char **buf);
+char		**get_envs(char **envp);
+char	 	**get_args_str(char **parse, int i);
+void		change_underscores(char *func, char **args, char **env);
 
 int			free_str(char **str);
 int			free_args(char ***args);
