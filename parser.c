@@ -6,7 +6,7 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/28 14:46:44 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/08/28 14:46:47 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ t_list			*parser(const char *str)
 	list = NULL;
 	if (!rec_parser(str, &list, ""))//temp
 		return (NULL);
+	ft_lstreverse(&list);
 	return (list);
-	//reverse list!
 }
