@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delimiters_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 23:35:53 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/28 15:08:40 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/08/28 21:52:31 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ const char	*got_dollar(const char *start, t_list **list, const char *params)
 	len = (ptr - start == 1) ? 1 : ptr - start -1;
 	node = create_node(data, len, flag);
 	if (ptr - start != 1)
-		set_flag(node, 2u | get_flag(node));
+		set_flag_parser(node, 2u | get_flag_parser(node));
 	if (push_node(list, node))
 		return (NULL);
 	return (ptr);
@@ -65,7 +65,7 @@ const char	*got_dollar(const char *start, t_list **list, const char *params)
 			ptr++;
 		flag = (*ptr && *ptr != *params) ? 1 : 0;
 		node = create_node(start + 1, ptr - start - 1, flag);
-		set_flag(node, 2u | get_flag(node));
+		set_flag_parser(node, 2u | get_flag_parser(node));
 	}
 	if (push_node(list, node))
 		return (NULL);

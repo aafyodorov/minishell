@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/28 15:17:35 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/08/28 21:46:45 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,26 @@ const char		*rec_parser(const char *str, t_list **list, char *eot)
 	}
 	str += (*str == *eot && *eot) ? 1 : 0;
 	return (str);
+}
+
+void			ft_lstreverse(t_list **list)
+{
+	t_list		*tmp1;
+	t_list		*tmp2;
+	t_list		*head;
+
+	head = NULL;
+	while (*list)
+	{
+		tmp1 = *list;
+		while (tmp1->next)
+			tmp1 = tmp1->next;
+		tmp2 = head;
+		head = tmp1->next;
+		head->next = tmp2;
+		tmp1->next=NULL;
+	}
+	*list = head;
 }
 
 t_list			*parser(const char *str)

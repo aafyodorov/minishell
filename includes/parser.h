@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:05:20 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/28 17:44:27 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/28 21:51:15 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define PARSER_H
 
 # include "libft.h"
-# include "arr_buf.h"
-#include <stdio.h> //delete
 
 # define DELIM_NUM 11
 
@@ -35,8 +33,8 @@ t_list		*create_node(const char *data, size_t len, unsigned flag);
 int			push_node(t_list **list, t_list *new_node);
 int			is_delim(const char *str, const char *eot);
 char		**set_params(int key, char *eot);
-void		set_flag(t_list *node, unsigned flag);
-unsigned	get_flag(t_list *node);
+void		set_flag_parser(t_list *node, unsigned flag);
+unsigned	get_flag_parser(t_list *node);
 char		*get_str(t_list *node);
 const char	*rec_parser(const char *str, t_list **list, char *eot);
 char		*get_var(const char *str);
