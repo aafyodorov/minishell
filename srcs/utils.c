@@ -18,14 +18,19 @@ int		ft_strlenbuf(char **buf)
 char 	**get_args_str(char **parse, int i)					// получаем массив строк - аргументы функции
 {
 	int		j;
+	int		len;
 	char	**args;
 
 	j = i;
-	while ((parse[j] && !check_operator(parse[j])))
+	len = 0;
+	while ((parse[j] && !is_redirect(parse[j])))
+	{
+		len++;
 		j++;
-	args = (char **)malloc(sizeof(char *) * (j + 1));
+	}
+	args = (char **)malloc(sizeof(char *) * (len + 1));
 	j = 0;
-	while ((parse[i] && !check_operator(parse[i])))
+	while ((parse[i] && j < len))
 		args[j++] = ft_strdup(parse[i++]);
 	args[j] = NULL;
 	return (args);

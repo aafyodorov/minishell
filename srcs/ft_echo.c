@@ -20,7 +20,7 @@ static char	*substitution(char *buf, char *args, char **env)
 	return (buf);
 }
 
-int			ft_echo(char **args, char **env, char *ret)
+int			ft_echo(char **args, char **env)
 {
 	int		i;
 	int		j;
@@ -34,7 +34,7 @@ int			ft_echo(char **args, char **env, char *ret)
 	{
 		if (!ft_strcmp(args[i], "$?"))
 			ft_printf("%i", g_exit_status);
-		else if (args[i][0] == '$')
+		else if (args[i][0] == '$')					//////// ??????? договориться о символе
 			ft_printf("%s", substitution(subst, args[i], env));
 		else
 			ft_printf("%s", args[i]);

@@ -6,13 +6,13 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:56 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/25 01:58:17 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/27 05:27:55 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	check_func(char *str)
+int	is_func(char *str)
 {
 	const char	*funcs_str[7] = {"echo",
 								"cd",
@@ -30,7 +30,7 @@ int	check_func(char *str)
 	return (-1);
 }
 
-int	check_operator(char *str)
+int	is_redirect(char *str)
 {
 	return (!ft_strcmp(str, ";") || !ft_strcmp(str, "|") ||
 			!ft_strcmp(str, ">") || !ft_strcmp(str, ">>") ||

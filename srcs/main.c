@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/26 15:19:17 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/27 18:41:57 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,63 +18,67 @@
 #include "libftprintf.h"
 #include "libft.h"
 
-char*		start_fork(char *func, char **args, char *ret, char **env)
+void	check_redirect(char **parse, int i)
 {
-	int			i;
-	pid_t		pid;
-	char		**null;
-	int			(*funcs[7])(char **, char **, char *) = {ft_echo,
-														ft_cd,
-														ft_pwd,
-														ft_export,
-														ft_unset,
-														ft_env,
-														ft_exit};
+	while (parse[i] && !is_redirect(parse[i]))
+		i++;
+	if (!parse[i])
+		return ;
+	else if (!ft_strcmp(parse[i], ">"))
+		close_stdin_stdout(parse[i + 1]);	
+}
 
-	pid = fork();
-	if (pid == 0)
-	{
-		change_underscores(func, args, env);
-		if ((i = check_func(func)) >= 0)
-			funcs[i](&args[1], env, ret);
-		else
-		{
-			null = (char **)ft_calloc(sizeof(char *), 2);
-			null[0] = " ";
-			func = add_path(func, env);
-			execve(func, (args = args[0] ? args : null), env);
-		}
-	}
-	else if (pid > 0)	
-		wait(0);
+void	child_process(char **parse, char **env, int i)
+{
+	int		j;
+	char	**args;
+	int		(*funcs[7])(char **, char **) = {ft_echo,
+											ft_cd,
+											ft_pwd,
+											ft_export,
+											ft_unset,
+											ft_env,
+											ft_exit};
+
+	args = get_args_str(parse, i);
+	change_underscores(args[0], args, env);
+	check_redirect(parse, i);
+	if ((j = is_func(args[0])) >= 0)
+		funcs[j](&args[1], env);
 	else
 	{
-		ft_printf("%s\n", strerror(errno));
-		return (NULL);
+		args[0] = add_path(args[0], env);
+		if (execve(args[0], args, env) == -1)
+			ft_printf("%s\n", strerror(errno));
 	}
-	return (NULL);
+	if (g_fd[4])
+		open_stdin_stdout();
 }
 
 void	minishell(char **parse, char **env)
 {
 	int		i;
-	char	**args;
-	char	*ret;
+	int		j;
+	pid_t	pid;
 
 	i = 0;
-	ret = NULL;
+	ft_bzero(&g_fd, sizeof(int) * 5);
 	while (parse[i])
 	{
-		if (!check_operator(parse[i]))
+		// pipe(g_pipe);
+		pid = fork();
+		if (pid == 0)
+			child_process(parse, env, i);
+		else if (pid > 0)	
+			wait(0);
+		else
 		{
-			args = get_args_str(parse, i);
-			ret = start_fork(parse[i], args, ret, env);
-			while (parse[i] && !check_operator(parse[i]))
-				i++;
-			free_args(&args);
+			ft_printf("%s\n", strerror(errno));
+			g_exit_status = errno;
 		}
-		else if (check_operator(parse[i]))
-			i++;									///////////////////////////добавить_функцию//////////////////////////////
+		while (parse[i] && !is_redirect(parse[i]))
+			i++;
+		i += parse[i] ? 1 : 0;
 	}
 }
 
@@ -91,6 +95,7 @@ int		main(int argc, char **argv, char **envp)
 	ft_printf("%sminishell%s:%s~%s%s$ ", GREEN, RESET, BLUE, homepath, RESET);
 	input = NULL;
 	parse = NULL;
+	signal_handler();
 	while ((get_next_line(0, &input) != -1))									// бесконечный цикл для ввода команд
 	{
 		if(!(parse = ft_split(input, ' ')))

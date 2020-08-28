@@ -26,7 +26,7 @@ static void	change_oldpwd(char **env)
 		env[ft_strlenbuf(env)] = ft_strjoin("OLDPWD=", getcwd(buf, 1024));
 }
 
-int			ft_cd(char **args, char **env, char *ret)
+int			ft_cd(char **args, char **env)
 {
 	int			i;
 	char		tmp[1024];
