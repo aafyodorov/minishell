@@ -6,29 +6,11 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 18:36:47 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/28 14:46:44 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/08/28 15:16:32 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-void		set_flag(t_list *node, unsigned flag)
-{
-	unsigned	**cont;
-
-	cont = node->content;
-	cont[0][0] = flag;
-}
-
-unsigned	get_flag(t_list *node)
-{
-	return (((unsigned **)(node->content))[0][0]);
-}
-
-char		*get_str(t_list *node)
-{
-	return (((char **)(node->content))[1]);
-}
 
 t_list		*create_node(const char *data, size_t len, unsigned flag)
 {
@@ -61,7 +43,7 @@ int		push_node(t_list **list, t_list *new_node)
 		*list = new_node;
 	else
 		ft_lstadd_front(list, new_node);
-	printf("%s\t%d\n", get_str(new_node), get_flag(new_node));
+	//printf("%s\t%d\n", get_str(new_node), get_flag(new_node));
 	return (0);
 }
 
@@ -86,18 +68,6 @@ int			is_delim(const char *str, const char *eot)
 	return (i);
 }
 
-char		**set_params(int key, char *eot)
-{
-	char	**params;
-
-	if (key != 2)
-		return (NULL);
-	if (!(params = ft_alloc_rect_mem(sizeof(char), 1, 1)))
-		return (NULL);
-	ft_strlcpy(params[0], eot, 2);
-	return (params);
-}
-
 //TODO Handle as much as can special variables
 char		*get_var(const char *str)
 {
@@ -106,7 +76,7 @@ char		*get_var(const char *str)
 		while (*str && ft_isdigit(*str))
 			str++;
 	}
-	else if (ft_strchr("?-", *str))
+	else if (ft_strchr("?", *str))
 		str++;
 	else
 	{

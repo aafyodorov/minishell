@@ -6,20 +6,11 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:43:51 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/28 14:54:48 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/08/28 15:16:32 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-//TODO delete this func
-const char	*stub(const char *start, t_list **list, const char *params)
-{
-	params = NULL;
-	list = NULL;
-	start = NULL;
-	return (NULL);
-}
 
 const char	*got_backslash(const char *start, t_list **list, const char *params)
 {
@@ -49,7 +40,6 @@ const char	*got_space(const char *start, t_list **list, const char *params)
 }
 
 //Todo handle single '
-//TODO check sing quotes in double
 const char	*got_sing_quote(const char *start, t_list **list, const char *params)
 {
 	t_list		*node;
