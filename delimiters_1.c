@@ -6,7 +6,7 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:43:51 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/28 15:16:32 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/08/29 13:19:14 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,14 @@ const char	*got_literal(const char *start,  t_list **list, const char *params)
 	unsigned	flag;
 
 	next = start;
-	while (*next != *params && is_delim(next, params) == -1)
+	while (*next != '\003' && *next != *params && is_delim(next, params) == -1)
 		next++;
 	flag = (*params && *next && *next != *params) ? 1 : 0;
 	node = create_node(start, next - start, flag);
 	if (push_node(list, node))
 		return (NULL);
+	next += *next == '\003' ? 1 : 0;
+
 	return (next);
 }
 
