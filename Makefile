@@ -36,7 +36,8 @@ SRCS = free.c\
 	  execve.c\
 	  signal.c\
 	  close_open.c\
-	  flags_parser.c
+	  flags_parser.c\
+	  ft_lstreverse.c
 SRCDIR = ./srcs/
 SRC = $(addprefix $(SRCDIR), $(SRCS))
 

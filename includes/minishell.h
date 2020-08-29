@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 06:08:05 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/27 06:20:01 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/29 03:03:29 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			ft_exit(char **args, char **env);
 
 int			ft_strlenbuf(char **buf);
 char		**get_envs(char **envp);
-char		**get_args_str(char **parse, int i);
+char		**get_args_str(t_list *parse, char **env);
 void		change_underscores(char *func, char **args, char **env);
 char		*add_path(char *func, char **env);
 
@@ -57,6 +57,6 @@ int			free_args(char ***args);
 
 int			is_func(char *str);
 int			is_redirect(char *str);
-void		check_redirect(char **parse, int i);
+void		check_redirect(t_list *parse);
 
 #endif

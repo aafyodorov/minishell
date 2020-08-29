@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:05:20 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/28 21:51:15 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/29 00:00:09 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define DELIM_NUM 11
 
 //TODO del this
-const char		*stub(const char *start, t_list **list, const char *params);
+const char	*stub(const char *start, t_list **list, const char *params);
 
 const char	*got_dollar(const char *start, t_list **list, const char *params);
 const char	*got_backslash(const char *start, t_list **list, const char *params);
@@ -38,6 +38,7 @@ unsigned	get_flag_parser(t_list *node);
 char		*get_str(t_list *node);
 const char	*rec_parser(const char *str, t_list **list, char *eot);
 char		*get_var(const char *str);
+void		ft_lstreverse(t_list **list);
 
 typedef struct
 {

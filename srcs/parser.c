@@ -6,15 +6,15 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/28 21:46:45 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/29 02:35:23 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //TODO check Norm libft!!!
 
 #include "parser.h"
-
-#include <stdio.h>
+#include "libft.h"
+#include "minishell.h"
 
 const char		*get_next_part(const char *str, int *key, t_list **list, char *eot)
 {
@@ -49,24 +49,36 @@ const char		*rec_parser(const char *str, t_list **list, char *eot)
 	return (str);
 }
 
-void			ft_lstreverse(t_list **list)
+static void	ft_delspace(t_list **list)				//удаляет листы с контентом " ", кроме тех, где команда echo
 {
-	t_list		*tmp1;
-	t_list		*tmp2;
-	t_list		*head;
+	int		flag;
+	t_list *prev;
+	t_list *curr;
 
-	head = NULL;
-	while (*list)
+	flag = 0;
+	prev = NULL;
+	curr = *list;
+	while (curr)
 	{
-		tmp1 = *list;
-		while (tmp1->next)
-			tmp1 = tmp1->next;
-		tmp2 = head;
-		head = tmp1->next;
-		head->next = tmp2;
-		tmp1->next=NULL;
+		if ((!prev || is_redirect(get_str(prev))) &&
+			!ft_strcmp(get_str(curr), "echo"))
+			flag = 1;
+		if (is_redirect(get_str(curr)))
+			flag = 0;
+		if ((!flag || (prev && !ft_strcmp(get_str(prev), "echo"))) &&
+			!ft_strcmp(get_str(curr), " "))
+		{
+			prev->next = curr->next;
+			free(curr);
+			curr = curr->next;
+		}
+		else
+		{
+			prev = curr;
+			curr = curr->next;
+		}
+		
 	}
-	*list = head;
 }
 
 t_list			*parser(const char *str)
@@ -78,5 +90,6 @@ t_list			*parser(const char *str)
 	if (!rec_parser(str, &list, ""))//temp
 		return (NULL);
 	ft_lstreverse(&list);
+	ft_delspace(&list);
 	return (list);
 }

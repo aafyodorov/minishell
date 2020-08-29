@@ -2,45 +2,21 @@
 #include "libftprintf.h"
 #include "minishell.h"
 
-static char	*substitution(char *buf, char *args, char **env)
-{
-	int		i;
-	char	tmp[1024];
-	int		len;
-
-	i = 0;
-	ft_strcpy(tmp, &args[1]);
-	len = ft_strlen(tmp);
-	while (env[i])
-	{
-		if (!ft_strncmp(tmp, env[i], len) && env[i][len] == '=')
-			buf = ft_strcpy(buf, &env[i][len + 1]);
-		i++;
-	}
-	return (buf);
-}
-
 int			ft_echo(char **args, char **env)
 {
 	int		i;
-	int		j;
-	char	subst[4048];
+	int		flag;
 
 	i = 0;
-	ft_bzero(subst, 4048);
+	flag = 0;
 	if (!ft_strcmp(args[0], "-n"))
-		i++;
-	while (args[i])
 	{
-		if (!ft_strcmp(args[i], "$?"))
-			ft_printf("%i", g_exit_status);
-		else if (args[i][0] == '$')					//////// ??????? договориться о символе
-			ft_printf("%s", substitution(subst, args[i], env));
-		else
-			ft_printf("%s", args[i]);
+		flag = 1;
 		i++;
 	}
-	if (ft_strcmp(args[0], "-n"))
+	while (args[i])
+		ft_printf("%s", args[i++]);
+	if (!flag)
 		ft_printf("\n");
 	return (0);
 }
