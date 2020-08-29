@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:05:20 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/29 00:00:09 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/29 18:54:32 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char		*get_str(t_list *node);
 const char	*rec_parser(const char *str, t_list **list, char *eot);
 char		*get_var(const char *str);
 void		ft_lstreverse(t_list **list);
+void		ft_delspaces(t_list **list);
 
 typedef struct
 {
