@@ -37,8 +37,6 @@ static char*	ft_strdup_arg(char *str, unsigned flag, char **env)
 	i = 0;
 	if (!ft_strcmp(str, "?") && flag == 2)
 		arg = ft_itoa(g_exit_status);
-	else if (flag == 0)
-		arg = strdup(str);
 	else if (flag & 2)
 	{
 		while (env[i])
@@ -48,6 +46,8 @@ static char*	ft_strdup_arg(char *str, unsigned flag, char **env)
 			i++;
 		}	
 	}
+	else
+		arg = strdup(str);
 	return (arg);
 }
 

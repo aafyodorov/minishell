@@ -5,7 +5,7 @@ static void	skip_spaces(t_list **list)
 {
 	t_list	*tmp;
 
-	while (!ft_strcmp(get_str(*list), " "))
+	while (*list && !ft_strcmp(get_str(*list), " "))
 	{
 		tmp = *list;
 		*list = (*list)->next;
