@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:05:20 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/29 18:54:32 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/31 19:18:07 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define PARSER_H
 
 # include "libft.h"
+#include "minishell.h"
 
 # define DELIM_NUM 11
 
-//TODO del this
-const char	*stub(const char *start, t_list **list, const char *params);
+t_list		*g_loc_vars;
 
 const char	*got_dollar(const char *start, t_list **list, const char *params);
 const char	*got_backslash(const char *start, t_list **list, const char *params);

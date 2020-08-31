@@ -6,17 +6,14 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/31 18:05:59 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/08/31 18:27:44 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //TODO check Norm libft!!!
 
 #include "parser.h"
-#include "libft.h"
-#include "minishell.h"
 
-#include <stdio.h>
 const char		*get_next_part(const char *str, int *key, t_list **list, char *eot)
 {
 	const char	*ptr;

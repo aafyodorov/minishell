@@ -6,7 +6,7 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:57:46 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/30 00:38:31 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/08/31 20:44:37 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_list		*find_elem(t_list *list, char *key)
 }
 
 
-int			add_var_to_list(t_list **list, char **cont, int create, int *del)
+int			add_var_to_list(t_list **list, char **cont, int create)
 {
 	t_list		*tmp_node;
 	char		**tmp_cont;
@@ -66,41 +66,41 @@ int			add_var_to_list(t_list **list, char **cont, int create, int *del)
 	if ((tmp_node = find_elem(*list, cont[0])))
 	{
 		free(((char **)(tmp_node->content))[1]);
-		((char **)(tmp_node->content))[1] = cont[1];
-		*del = 1;
+		if (! (((char **)(tmp_node->content))[1] = ft_strdup(cont[1])))
+			return (1);
 	}
 	else if (create)
 	{
 		if (!(tmp_cont = ft_calloc(2, sizeof(void*))))
 			return (1);
-		*del = 0;
-		tmp_cont[0] = cont[0];
-		tmp_cont[1] = cont[1];
+		if (!(tmp_cont[0] = ft_strdup(cont[0])) ||
+			!(tmp_cont[1] = ft_strdup(cont[1])))
+		{
+			del_var_cont(tmp_cont);
+			return (1);
+		}
 		if (!*list)
 			*list = ft_lstnew(tmp_cont);
 		else
 			ft_lstadd_front(list, ft_lstnew(tmp_cont));
 	}
-	return (1);
+	return (0);
 }
 
 char		*got_var(char *start, char *eq_sign, char *params, t_list **env)
 {
 	char		*end;
 	char		*cont[2];
-	int			del;
 
 	end = eq_sign;
 	while (*end && is_delim(end, params) < 0)
 		end++;
 	if (cr_var_cont(start, eq_sign, end, (char **)cont))
 		return (NULL);
-	add_var_to_list(env, cont, 0, &del);
-	add_var_to_list(&g_loc_vars, cont, 1, &del);
-	if (del)
-	{
-		free(cont[0]);
-		//cont[0] = NULL;
-	}
+	if (add_var_to_list(env, cont, 0) ||
+			add_var_to_list(&g_loc_vars, cont, 1))
+		return (NULL);
+	free(cont[0]);
+	free(cont[1]);
 	return (end);
 }
