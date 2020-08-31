@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:05:20 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/29 00:00:09 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/30 00:26:58 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 
 # define DELIM_NUM 11
 
-//TODO del this
-const char	*stub(const char *start, t_list **list, const char *params);
+t_list	*g_loc_vars;
 
 const char	*got_dollar(const char *start, t_list **list, const char *params);
 const char	*got_backslash(const char *start, t_list **list, const char *params);
@@ -32,14 +31,16 @@ t_list		*parser(const char *str);
 t_list		*create_node(const char *data, size_t len, unsigned flag);
 int			push_node(t_list **list, t_list *new_node);
 int			is_delim(const char *str, const char *eot);
-char		**set_params(int key, char *eot);
 void		set_flag_parser(t_list *node, unsigned flag);
 unsigned	get_flag_parser(t_list *node);
 char		*get_str(t_list *node);
 const char	*rec_parser(const char *str, t_list **list, char *eot);
 char		*get_var(const char *str);
 void		ft_lstreverse(t_list **list);
-
+void		del_var_cont(void *content);
+char		*got_var(char *start, char *eq_sign, char *params, t_list **env);
+int			cr_var_cont(const char *start, const char *eq_sign,
+						   const char *end, char **content);//change to static and del from here
 typedef struct
 {
 	int			key;

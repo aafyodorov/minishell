@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/29 02:35:23 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/29 14:42:23 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "libft.h"
 #include "minishell.h"
 
+#include <stdio.h>
 const char		*get_next_part(const char *str, int *key, t_list **list, char *eot)
 {
 	const char	*ptr;
@@ -49,7 +50,7 @@ const char		*rec_parser(const char *str, t_list **list, char *eot)
 	return (str);
 }
 
-static void	ft_delspace(t_list **list)				//удаляет листы с контентом " ", кроме тех, где команда echo
+static void	ft_delspace(t_list **list)
 {
 	int		flag;
 	t_list *prev;
@@ -58,19 +59,22 @@ static void	ft_delspace(t_list **list)				//удаляет листы с кон�
 	flag = 0;
 	prev = NULL;
 	curr = *list;
+
+
 	while (curr)
 	{
 		if ((!prev || is_redirect(get_str(prev))) &&
 			!ft_strcmp(get_str(curr), "echo"))
 			flag = 1;
-		if (is_redirect(get_str(curr)))
+		if (curr->content && is_redirect(get_str(curr)))
 			flag = 0;
 		if ((!flag || (prev && !ft_strcmp(get_str(prev), "echo"))) &&
 			!ft_strcmp(get_str(curr), " "))
 		{
 			prev->next = curr->next;
 			free(curr);
-			curr = curr->next;
+			curr = NULL;
+			curr = prev->next;
 		}
 		else
 		{
