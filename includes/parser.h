@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:05:20 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/31 19:18:07 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/01 15:41:39 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include "minishell.h"
 
 # define DELIM_NUM 11
-
-t_list		*g_loc_vars;
 
 const char	*got_dollar(const char *start, t_list **list, const char *params);
 const char	*got_backslash(const char *start, t_list **list, const char *params);

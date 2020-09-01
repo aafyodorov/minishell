@@ -22,20 +22,20 @@ static void	delete_var(char ***env, int j)
 	}
 }
 
-void		change_underscores(char *func, char **args, char **env)
+void		change_underscores(char *func, char **args)
 {
 	int		i;
 	char	*tmp;
 
 	tmp = args[0] ? args[ft_strlenbuf(args) - 1] : func;
 	i = 0;
-	while (ft_strncmp(env[i], "_=", 2))
+	while (ft_strncmp(g_env_vars[i], "_=", 2))
 		i++;
-	free(env[i]);
-	env[i] = ft_strjoin("_=", tmp);
+	free(g_env_vars[i]);
+	g_env_vars[i] = ft_strjoin("_=", tmp);
 }
 
-int			ft_unset(char **args, char **env)
+int			ft_unset(char **args)
 {
 	int		i;
 	int		j;
@@ -45,17 +45,17 @@ int			ft_unset(char **args, char **env)
 	i = 0;
 	if (!ft_strncmp(args[i], "_", 1))
 	{
-		change_underscores("env", args, env);
+		change_underscores("env", args);
 		return (0);
 	}
 	while (args[i])
 	{
 		j = 0;
 		len = ft_strlen(args[i]);
-		while (env[j])
+		while (g_env_vars[j])
 		{
-			if (!ft_strncmp(args[i], env[j], len))
-				delete_var(&env, j);
+			if (!ft_strncmp(args[i], g_env_vars[j], len))
+				delete_var(&g_env_vars, j);
 			j++;
 		}
 		i++;

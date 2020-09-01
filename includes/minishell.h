@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 06:08:05 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/29 03:03:29 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/01 15:29:42 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,22 @@
 int			g_pipe[2];
 int			g_fd[5];
 int			g_exit_status;
+char		**g_env_vars;
+t_list		*g_loc_vars;
 
-int			ft_echo(char **args, char **env);
-int			ft_cd(char **args, char **env);
-int			ft_pwd(char **args, char **env);
-int			ft_export(char **args, char **env);
-int			ft_unset(char **args, char **env);
-int			ft_env(char **args, char **env);
-int			ft_exit(char **args, char **env);
+int			ft_echo(char **args);
+int			ft_cd(char **args);
+int			ft_pwd(char **args);
+int			ft_export(char **args);
+int			ft_unset(char **args);
+int			ft_env(char **args);
+int			ft_exit(char **args);
 
 int			ft_strlenbuf(char **buf);
-char		**get_envs(char **envp);
-char		**get_args_str(t_list *parse, char **env);
-void		change_underscores(char *func, char **args, char **env);
-char		*add_path(char *func, char **env);
+void		get_envs(char **envp, char ***g_env_vars);
+char		**get_args_str(t_list *parse);
+void		change_underscores(char *func, char **args);
+char		*add_path(char *func);
 
 void		close_stdin_stdout(char *file);
 void		open_stdin_stdout(void);

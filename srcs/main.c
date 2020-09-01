@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/29 02:57:00 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/01 15:30:55 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,34 +29,34 @@ void	check_redirect(t_list *parse)
 		close_stdin_stdout(get_str(parse->next->content));	
 }
 
-void	child_process(t_list *parse, char **env, int i)
+void	child_process(t_list *parse, int i)
 {
 	int		j;
 	char	**args;
-	int		(*funcs[7])(char **, char **) = {ft_echo,
-											ft_cd,
-											ft_pwd,
-											ft_export,
-											ft_unset,
-											ft_env,
-											ft_exit};
+	int		(*funcs[7])(char **) = {ft_echo,
+									ft_cd,
+									ft_pwd,
+									ft_export,
+									ft_unset,
+									ft_env,
+									ft_exit};
 
-	args = get_args_str(parse, env);
-	change_underscores(args[0], args, env);
+	args = get_args_str(parse);
+	change_underscores(args[0], args);
 	check_redirect(parse);
 	if ((j = is_func(args[0])) >= 0)
-		funcs[j](&args[1], env);
+		funcs[j](&args[1]);
 	else
 	{
-		args[0] = add_path(args[0], env);
-		if (execve(args[0], args, env) == -1)
+		args[0] = add_path(args[0]);
+		if (execve(args[0], args, g_env_vars) == -1)
 			ft_printf("%s\n", strerror(errno));
 	}
 	if (g_fd[4])
 		open_stdin_stdout();
 }
 
-void	minishell(t_list *parse, char **env)
+void	minishell(t_list *parse)
 {
 	int		i;
 	int		j;
@@ -69,7 +69,7 @@ void	minishell(t_list *parse, char **env)
 		// pipe(g_pipe);
 		pid = fork();
 		if (pid == 0)
-			child_process(parse, env, i);
+			child_process(parse, i);
 		else if (pid > 0)	
 			wait(0);
 		else
@@ -88,10 +88,9 @@ int		main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_list		*parse;
-	char		**env;
 	char		homepath[1024];
 
-	env = get_envs(envp);
+	get_envs(envp, &g_env_vars);
 	memset(homepath, 0, 1024);
 	getcwd(homepath, 1024);														// записываем в homepath путь текущей директории
 	ft_printf("%sminishell%s:%s~%s%s$ ", GREEN, RESET, BLUE, homepath, RESET);
@@ -100,7 +99,7 @@ int		main(int argc, char **argv, char **envp)
 	while ((get_next_line(0, &input) != -1))									// бесконечный цикл для ввода команд
 	{
 		parse = parser(input);
-		minishell(parse, env);
+		minishell(parse);
 		getcwd(homepath, 1024);
 		ft_printf("%sminishell%s:%s~%s%s$ ", GREEN, RESET, BLUE, homepath, RESET);
 		free_str(&input);
@@ -109,5 +108,5 @@ int		main(int argc, char **argv, char **envp)
 	}
 	free_str(&input);
 	ft_lstclear(&parse, free);
-	free_args(&env);
+	free_args(&g_env_vars);
 }

@@ -2,7 +2,7 @@
 #include "libftprintf.h"
 #include "minishell.h"
 
-int			ft_echo(char **args, char **env)
+int			ft_echo(char **args)
 {
 	int		i;
 	int		flag;

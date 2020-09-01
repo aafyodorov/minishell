@@ -51,7 +51,7 @@ static char*	ft_strdup_arg(char *str, unsigned flag, char **env)
 	return (arg);
 }
 
-char 			**get_args_str(t_list *parse, char **env)					// получаем массив строк - аргументы функции
+char 			**get_args_str(t_list *parse)					// получаем массив строк - аргументы функции
 {
 	int		i;
 	int		len;
@@ -66,7 +66,7 @@ char 			**get_args_str(t_list *parse, char **env)					// получаем мас
 	{
 		tmp1 = args[i];
 		tmp2 = ft_strdup_arg(get_str(parse),
-							get_flag_parser(parse), env);
+							get_flag_parser(parse), g_env_vars);
 		if (!get_flag_parser(parse))
 			args[i++] = ft_strdup(tmp2);
 		else

@@ -40,7 +40,7 @@ static int	check_file(char *path, char *file)
 	return (0);
 }
 
-char		*add_path(char *func, char **env)
+char		*add_path(char *func)
 {
 	int				i;
 	char			*ret;
@@ -51,10 +51,10 @@ char		*add_path(char *func, char **env)
 		return (func);
 	i = -1;
 	paths = (char **)ft_calloc(sizeof(char *), 20);
-	while (env[++i])
+	while (g_env_vars[++i])
 	{
-		if (!ft_strncmp(env[i], "PATH=", 5))
-			paths = ft_split(&env[i][5], ':');
+		if (!ft_strncmp(g_env_vars[i], "PATH=", 5))
+			paths = ft_split(&g_env_vars[i][5], ':');
 	}
 	i = -1;
 	while (paths[++i])

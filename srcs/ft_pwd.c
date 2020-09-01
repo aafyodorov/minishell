@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include "libftprintf.h"
 
-int	ft_pwd(char **args, char **env)
+int	ft_pwd(char **args)
 {
 	char		homepath[1024];
 

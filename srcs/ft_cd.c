@@ -4,7 +4,7 @@
 #include "libftprintf.h"
 #include "minishell.h"
 
-static void	change_oldpwd(char **env)
+static void	change_oldpwd(void)
 {
 	int			i;
 	int			flag;
@@ -12,21 +12,21 @@ static void	change_oldpwd(char **env)
 
 	i = 0;
 	flag = 0;
-	while (env[i])
+	while (g_env_vars[i])
 	{
-		if (!ft_strncmp(env[i], "OLDPWD", 6))
+		if (!ft_strncmp(g_env_vars[i], "OLDPWD", 6))
 		{
-			free(env[i]);
-			env[i] = ft_strjoin("OLDPWD=", getcwd(buf, 1024));
+			free(g_env_vars[i]);
+			g_env_vars[i] = ft_strjoin("OLDPWD=", getcwd(buf, 1024));
 			flag = 1;
 		}
 		i++;
 	}
 	if (!flag)
-		env[ft_strlenbuf(env)] = ft_strjoin("OLDPWD=", getcwd(buf, 1024));
+		g_env_vars[ft_strlenbuf(g_env_vars)] = ft_strjoin("OLDPWD=", getcwd(buf, 1024));
 }
 
-int			ft_cd(char **args, char **env)
+int			ft_cd(char **args)
 {
 	int			i;
 	char		tmp[1024];
@@ -34,12 +34,12 @@ int			ft_cd(char **args, char **env)
 	i = ft_strlenbuf(args);
 	if (i > 1)
 		return (ft_printf("cd: слишком много аргументов\n"));
-	change_oldpwd(env);
+	change_oldpwd();
 	if (i == 0)
 	{
-		while (ft_strncmp("HOME=", env[i], 5))
+		while (ft_strncmp("HOME=", g_env_vars[i], 5))
 			i++;
-		ft_strcpy(tmp, &env[i][5]);
+		ft_strcpy(tmp, &g_env_vars[i][5]);
 		chdir(tmp);
 		return (0);
 	}
