@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delimiters_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:43:51 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/31 21:00:23 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/01 17:49:42 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,15 @@ const char	*got_sing_quote(const char *start, t_list **list, const char *params)
 
 const char	*got_literal(const char *start,  t_list **list, const char *params)
 {
-	const char	*next;
+	char		*next;
 	t_list		*node;
 	unsigned	flag;
 
-	next = start;
+	next = (char *)start;
 	while (*next != '\003' && *next != *params && is_delim(next, params) == -1)
 	{
 		if (*next == '=')
-			return (got_var(start, next, params));
+			return (got_var((char *)start, next, (char *)params));
 		next++;
 	}
 	flag = (*params && *next && *next != *params) ? 1 : 0;

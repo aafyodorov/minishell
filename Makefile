@@ -38,7 +38,8 @@ SRCS = free.c\
 	  close_open.c\
 	  flags_parser.c\
 	  ft_lstreverse.c\
-	  parser_del_spaces.c
+	  parser_del_spaces.c\
+	  variables.c
 SRCDIR = ./srcs/
 SRC = $(addprefix $(SRCDIR), $(SRCS))
 

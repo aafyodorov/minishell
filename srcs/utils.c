@@ -43,6 +43,8 @@ static char*	ft_strdup_arg(char *str, unsigned flag, char **env)
 		{
 			if (!ft_strncmp(str, env[i], len) && env[i][len] == '=')
 				return (arg = ft_strdup(&env[i][len + 1]));
+			if (find_elem(g_loc_vars, str))
+				return (arg = ft_strdup(get_str(find_elem(g_loc_vars, str))));
 			i++;
 		}	
 	}

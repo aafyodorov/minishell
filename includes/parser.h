@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:05:20 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/01 15:41:39 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/01 18:07:05 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ char		*get_var(const char *str);
 void		ft_lstreverse(t_list **list);
 void		ft_delspaces(t_list **list);
 void		del_var_cont(void *content);
-char		*got_var(char *start, char *eq_sign, char *params, t_list **env);
+char		*got_var(char *start, char *eq_sign, char *params);
 int			cr_var_cont(const char *start, const char *eq_sign,
 						   const char *end, char **content);//change to static and del from here
+t_list		*find_elem(t_list *list, char *key);
 
 typedef struct
 {

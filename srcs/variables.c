@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:57:46 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/31 20:44:37 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/01 17:50:54 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,27 @@ int			add_var_to_list(t_list **list, char **cont, int create)
 	return (0);
 }
 
-char		*got_var(char *start, char *eq_sign, char *params, t_list **env)
+int			check_var_in_env(char **var_list, char **str)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (var_list[i])
+	{
+		if (!ft_strncmp(var_list[i], str[0], ft_strlen(str[0])) &&
+			var_list[i][ft_strlen(str[0])] == '=')
+		{
+			tmp = ft_strjoin(str[0]," ");
+			var_list[i] = ft_strjoin(tmp, str[1]);
+			return (0);
+		}
+		i++;
+	}
+	return (0);
+}
+
+char		*got_var(char *start, char *eq_sign, char *params)
 {
 	char		*end;
 	char		*cont[2];
@@ -97,7 +117,7 @@ char		*got_var(char *start, char *eq_sign, char *params, t_list **env)
 		end++;
 	if (cr_var_cont(start, eq_sign, end, (char **)cont))
 		return (NULL);
-	if (add_var_to_list(env, cont, 0) ||
+	if (check_var_in_env(g_env_vars, cont) ||
 			add_var_to_list(&g_loc_vars, cont, 1))
 		return (NULL);
 	free(cont[0]);

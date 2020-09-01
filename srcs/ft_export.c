@@ -18,14 +18,20 @@ static char	*find_env_var(char **var_list, char *str)
 
 static char	*find_loc_var(t_list *var_list, char *str)
 {
-	char	*content;
+	char	**content;
+	char	*tmp;
+	char	*exp;
 
 	while (var_list)
 	{
 		content = var_list->content;
-		if (!ft_strncmp(content, str, ft_strlen(str)) &&
-			content[ft_strlen(str)] == '=')
-			return (var_list->content);
+		if (!ft_strcmp(content[0], str))
+		{
+			tmp = ft_strjoin(content[0], "=");
+			exp = ft_strjoin(tmp, content[1]);
+			free(tmp);
+			return (exp);
+		}
 		var_list = var_list->next;
 	}
 	return (NULL);
@@ -46,7 +52,7 @@ int				ft_export(char **args)
 			continue;
 		tmp = find_loc_var(g_loc_vars, args[i]);
 		if (tmp)
-			g_env_vars[ft_strlenbuf(g_env_vars)] = ft_strdup(tmp);
+			g_env_vars[ft_strlenbuf(g_env_vars)] = tmp;
 	}
 	return (0);
 }
