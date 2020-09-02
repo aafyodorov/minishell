@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 06:08:05 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/01 15:29:42 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/03 00:24:00 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@
 # include "parser.h"
 # include "libftprintf.h"
 # include "libft.h"
+# include "arr_buf.h"
 
 # define GREEN "\033[1;32m"
 # define BLUE "\033[1;34m"
 # define RESET "\033[0m"
 
+#include <stdio.h>
 int			g_pipe[2];
 int			g_fd[5];
 int			g_exit_status;
@@ -60,5 +62,9 @@ int			free_args(char ***args);
 int			is_func(char *str);
 int			is_redirect(char *str);
 void		check_redirect(t_list *parse);
+
+void		ctrl_d(void);
+int			show_prompt();
+int			read_stdin(t_buf *buf, char **input);
 
 #endif
