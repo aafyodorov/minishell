@@ -6,37 +6,37 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 00:10:55 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/03 00:22:18 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/03 01:00:34 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <limits.h>
 
 int		show_prompt()
 {
-	static int	size = 1024;
-	unsigned	iter;
-	char		homepath[size];
+	char		*homepath;
+	int			size;
 
-	iter = 0;
-	while (!getcwd(homepath, size))
+	homepath = NULL;
+	size = 256;
+	while (!(homepath = getcwd(NULL, size)))
 	{
-		iter++;
 		size *= 2;
-		if (iter > 15)
+		if (size >= INT_MAX / 2)
 		{
-			ft_putendl_fd("Go to hell with yours super long string!", 2);
+			ft_putendl_fd("Error! No memory for path to directory!", 2);
 			return (1);
 		}
 	}
 	ft_printf("%sminishell%s:%s~%s%s$ ", GREEN, RESET, BLUE, homepath,
 		RESET);
+	free(homepath);
 	return (0);
 }
 
 int		read_stdin(t_buf *buf, char **input)
 {
-	static int		isFirstCall = 0;
 	char			ch;
 	int 			read_b;
 
