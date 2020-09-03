@@ -29,17 +29,20 @@ SRCS = free.c\
 	  ft_unset.c\
 	  ft_export.c\
 	  utils.c\
+	  utils_2.c\
 	  parser.c\
 	  delimiters_1.c\
 	  delimiters_2.c\
 	  parser_utils.c\
 	  execve.c\
 	  signal.c\
-	  close_open.c\
+	  fd.c\
 	  flags_parser.c\
 	  ft_lstreverse.c\
 	  parser_del_spaces.c\
-	  variables.c
+	  variables.c\
+	  arr_buf.c\
+	  redirect.c
 SRCDIR = ./srcs/
 SRC = $(addprefix $(SRCDIR), $(SRCS))
 

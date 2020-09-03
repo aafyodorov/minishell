@@ -3,6 +3,13 @@
 #include <fcntl.h>
 #include "minishell.h"
 
+/**
+ * fd[0] - for save stdin
+ * fd[1] - for save stdout
+ * fd[2] - 
+ * fd[3] - 
+**/
+
 void	close_stdin_stdout(char *file)
 {
 	g_fd[0] = dup(0);

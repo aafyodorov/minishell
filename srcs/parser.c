@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/31 18:27:44 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/03 22:37:19 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,41 +47,6 @@ const char		*rec_parser(const char *str, t_list **list, char *eot)
 	return (str);
 }
 
-static void	ft_delspace(t_list **list)
-{
-	int		flag;
-	t_list *prev;
-	t_list *curr;
-
-	flag = 0;
-	prev = NULL;
-	curr = *list;
-
-
-	while (curr)
-	{
-		if ((!prev || is_redirect(get_str(prev))) &&
-			!ft_strcmp(get_str(curr), "echo"))
-			flag = 1;
-		if (curr->content && is_redirect(get_str(curr)))
-			flag = 0;
-		if ((!flag || (prev && !ft_strcmp(get_str(prev), "echo"))) &&
-			!ft_strcmp(get_str(curr), " "))
-		{
-			prev->next = curr->next;
-			free(curr);
-			curr = NULL;
-			curr = prev->next;
-		}
-		else
-		{
-			prev = curr;
-			curr = curr->next;
-		}
-		
-	}
-}
-
 t_list			*parser(const char *str)
 {
 
@@ -91,6 +56,6 @@ t_list			*parser(const char *str)
 	if (!rec_parser(str, &list, ""))//temp
 		return (NULL);
 	ft_lstreverse(&list);
-	ft_delspace(&list);
+	ft_delspaces(&list);
 	return (list);
 }
