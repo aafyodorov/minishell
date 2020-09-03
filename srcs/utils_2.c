@@ -6,7 +6,7 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 00:10:55 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/03 01:00:34 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/03 23:23:58 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ int		read_stdin(t_buf *buf, char **input)
 			return (1);
 		read_b = 1;
 	}
+	if (!*input && ch == 10)
+		read_b = -1;
 	return (read_b);
 }
