@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/01 15:30:55 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/02 01:00:42 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_redirect(t_list *parse)
 	if (!parse)
 		return ;
 	else if (!ft_strcmp(get_str(parse), ">"))
-		close_stdin_stdout(get_str(parse->next->content));	
+		close_stdin_stdout(get_str(parse->next));	
 }
 
 void	child_process(t_list *parse, int i)
@@ -56,6 +56,23 @@ void	child_process(t_list *parse, int i)
 		open_stdin_stdout();
 }
 
+/**
+ * 0 - not redirect
+ * 1 - ;
+ * 2 - |
+ * 3 - >
+ * 4 - >>
+ * 5 - <
+**/
+void	check_redirect2(t_list *parse)
+{
+	while (parse && !is_redirect(get_str(parse)))
+		parse = parse->next;
+	if (parse && !ft_strcmp)
+		// pipe(g_pipe);
+}
+
+
 void	minishell(t_list *parse)
 {
 	int		i;
@@ -66,7 +83,7 @@ void	minishell(t_list *parse)
 	ft_bzero(&g_fd, sizeof(int) * 5);
 	while (parse)
 	{
-		// pipe(g_pipe);
+		check_redirect2(parse);
 		pid = fork();
 		if (pid == 0)
 			child_process(parse, i);

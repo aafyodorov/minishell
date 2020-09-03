@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:56 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/27 05:27:55 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/03 13:22:30 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,15 @@ int	is_func(char *str)
 
 int	is_redirect(char *str)
 {
-	return (!ft_strcmp(str, ";") || !ft_strcmp(str, "|") ||
-			!ft_strcmp(str, ">") || !ft_strcmp(str, ">>") ||
-			!ft_strcmp(str, "<"));
+	int			i;
+	const char	*redirects[6] = {" ", ";", "|", ">", ">>", "<"};
+
+
+	i = 0;
+	while (++i < 6)
+	{
+		if (!ft_strcmp(redirects[i], str))
+			return (i);
+	}
+	return (0);
 }
