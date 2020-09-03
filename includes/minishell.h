@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 06:08:05 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/03 00:24:00 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/03 22:13:09 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@
 # include "libftprintf.h"
 # include "libft.h"
 # include "arr_buf.h"
+# include "redirect.h"
 
 # define GREEN "\033[1;32m"
 # define BLUE "\033[1;34m"
 # define RESET "\033[0m"
 
-#include <stdio.h>
-int			g_pipe[2];
-int			g_fd[5];
+# include <stdio.h>  // удалить
+
 int			g_exit_status;
 char		**g_env_vars;
 t_list		*g_loc_vars;
@@ -50,9 +50,6 @@ void		get_envs(char **envp, char ***g_env_vars);
 char		**get_args_str(t_list *parse);
 void		change_underscores(char *func, char **args);
 char		*add_path(char *func);
-
-void		close_stdin_stdout(char *file);
-void		open_stdin_stdout(void);
 
 void		signal_handler(void);
 

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/03 00:41:11 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/04 01:01:20 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include "minishell.h"
 #include "libftprintf.h"
 #include "libft.h"
+#include "minishell.h"
 #include "parser.h"
 
-void	check_redirect(t_list *parse)
-{
-	while (parse && !is_redirect(get_str(parse)))
-		parse = parse->next;
-	if (!parse)
-		return ;
-	else if (!ft_strcmp(get_str(parse), ">"))
-		close_stdin_stdout(get_str(parse->next->content));	
-}
+// void	check_redirect(t_list *parse)
+// {
+// 	while (parse && !is_redirect(get_str(parse)))
+// 		parse = parse->next;
+// 	if (!parse)
+// 		return ;
+// 	else if (!ft_strcmp(get_str(parse), ">"))
+// 		close_stdin_stdout(get_str(parse->next));	
+// }
 
-void	child_process(t_list *parse, int i)
+void	child_process(t_list *parse)
 {
-	int		j;
-	char	**args;
-	int		(*funcs[7])(char **) = {ft_echo,
+	int			j;
+	char		**args;
+	const int	(*funcs[7])(char **) = {ft_echo,
 									ft_cd,
 									ft_pwd,
 									ft_export,
@@ -58,18 +58,16 @@ void	child_process(t_list *parse, int i)
 
 void	minishell(t_list *parse)
 {
-	int		i;
-	int		j;
-	pid_t	pid;
+	int			j;
+	pid_t		pid;
 
-	i = 0;
 	ft_bzero(&g_fd, sizeof(int) * 5);
 	while (parse)
 	{
-		// pipe(g_pipe);
+		// check_redirect2(parse);
 		pid = fork();
 		if (pid == 0)
-			child_process(parse, i);
+			child_process(parse);
 		else if (pid > 0)	
 			wait(0);
 		else

@@ -30,8 +30,7 @@ void		ft_delspaces(t_list **list)
 			flag = 1;
 		if (curr && is_redirect(get_str(curr)))
 			flag = 0;
-		if ((!flag || (prev && !ft_strcmp(get_str(prev), "echo"))) && curr &&
-			!ft_strcmp(get_str(curr), " "))
+		if (curr && !ft_strcmp(get_str(curr), " ") && (!flag || (!ft_strcmp(get_str(prev), "echo") || !ft_strcmp(get_str(prev), "-n"))))
 		{
 			prev->next = curr->next;
 			free(curr);
