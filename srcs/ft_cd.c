@@ -35,7 +35,7 @@ int			ft_cd(char **args)
 	if (i > 1)
 		return (ft_printf("cd: слишком много аргументов\n"));
 	change_oldpwd();
-	if (i == 0)
+	if (i == 0 || !ft_strcmp(args[0], "~"))
 	{
 		while (ft_strncmp("HOME=", g_env_vars[i], 5))
 			i++;

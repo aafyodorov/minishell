@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/04 01:01:20 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/05 23:39:26 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,14 @@ void	child_process(t_list *parse)
 	{
 		args[0] = add_path(args[0]);
 		if (execve(args[0], args, g_env_vars) == -1)
+		{
 			ft_printf("%s\n", strerror(errno));
+			exit(1);
+		}
 	}
 	if (g_fd[4])
 		open_stdin_stdout();
+	//exit(0);
 }
 
 void	minishell(t_list *parse)
@@ -64,12 +68,22 @@ void	minishell(t_list *parse)
 	ft_bzero(&g_fd, sizeof(int) * 5);
 	while (parse)
 	{
-		// check_redirect2(parse);
+		// pipe(g_pipe);
+		if (!ft_strcmp(get_str(parse), "cd"))
+		{
+			chdir("/bin");
+		parse = parse->next;
+		}
 		pid = fork();
 		if (pid == 0)
-			child_process(parse);
-		else if (pid > 0)	
+		{
+			child_process(parse, i);
+			zzz = 1;
+		}
+		else if (pid > 0)
+		{
 			wait(0);
+		}
 		else
 		{
 			ft_printf("%s\n", strerror(errno));
@@ -82,46 +96,47 @@ void	minishell(t_list *parse)
 	}
 }
 
-//TODO change while to while(1)
-//TODO handle ~
-int		loop_read(char *input, t_list **parse)
+//TODO clean function
+int		loop_read()
 {
 	int 		read_b;
 	t_buf		buf;
+	char		*input;
+	t_list		*parse;
 
+	int			a = 0;
+	parse = NULL;
 	init_buf(&buf);
-	while (read_b == read_b + 1 - 1)									// бесконечный цикл для ввода команд
+	while (1)
 	{
+		printf("%d\n", getpid());//del
+		input = NULL;
 		if (show_prompt())
 			return (1);
-		if ((read_b = read_stdin(&buf, &input)))
+		if ((read_b = read_stdin(&buf, &input)) && buf.buf[0] != 10)
+		//if (get_next_line(0, &input))
 		{
 			if(flush_buf(&buf, &input))
 				return (1);
-			*parse = parser(input);
-			minishell(*parse);
-			//show_prompt();										<- Old pos
-			free_str(&input);
-			ft_lstclear(parse, free);
-			input = NULL;
+			parse = parser(input);
+			minishell(parse);
+			free(input);
+			//free_str(&input);
+			ft_lstclear(&parse, free);
 		}
-		else if (!read_b)
+		else //if (!read_b && !buf.i)
 			ctrl_d();
 	}
-	return (0);
 }
 
 int		main(int argc, char **argv, char **envp)
 {
-	char		*input;
-	t_list		*parse;
 
-	argc = 0;
 	*argv = NULL;
-	input = NULL;
+	argc = 0;
 	get_envs(envp, &g_env_vars);
 	signal_handler();
-	//show_prompt();												<- Old pos
-	loop_read(input, &parse);
-	free_str(&input);
+	if (!loop_read())
+		ft_putendl_fd("Error.\n", 2);
+	ctrl_d();
 }

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/03 22:37:19 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/05 23:39:03 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,8 @@ const char		*rec_parser(const char *str, t_list **list, char *eot)
 	str += (*str == *eot && *eot) ? 1 : 0;
 	return (str);
 }
-
-t_list			*parser(const char *str)
+static void	ft_delspace(t_list **list)
 {
-
-	t_list		*list;
 
 	list = NULL;
 	if (!rec_parser(str, &list, ""))//temp

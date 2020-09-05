@@ -6,7 +6,11 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 06:08:05 by pdemocri          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/09/03 22:13:09 by pdemocri         ###   ########.fr       */
+=======
+/*   Updated: 2020/09/05 21:18:03 by fgavin           ###   ########.fr       */
+>>>>>>> efb9d790cb3514f45f7ea73a595808ccd40a6a3c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +40,7 @@
 int			g_exit_status;
 char		**g_env_vars;
 t_list		*g_loc_vars;
+static int 		zzz = 0;
 
 int			ft_echo(char **args);
 int			ft_cd(char **args);
@@ -63,5 +68,6 @@ void		check_redirect(t_list *parse);
 void		ctrl_d(void);
 int			show_prompt();
 int			read_stdin(t_buf *buf, char **input);
+int		loop_read();
 
 #endif
