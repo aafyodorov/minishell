@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/05 17:48:44 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/05 21:43:03 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,14 @@ void	child_process(t_list *parse, int i)
 	{
 		args[0] = add_path(args[0]);
 		if (execve(args[0], args, g_env_vars) == -1)
+		{
 			ft_printf("%s\n", strerror(errno));
+			exit(1);
+		}
 	}
 	if (g_fd[4])
 		open_stdin_stdout();
+	//exit(0);
 }
 
 void	minishell(t_list *parse)
@@ -67,11 +71,21 @@ void	minishell(t_list *parse)
 	while (parse)
 	{
 		// pipe(g_pipe);
+		if (!ft_strcmp(get_str(parse), "cd"))
+		{
+			chdir("/bin");
+		parse = parse->next;
+		}
 		pid = fork();
 		if (pid == 0)
+		{
 			child_process(parse, i);
-		else if (pid > 0)	
+			zzz = 1;
+		}
+		else if (pid > 0)
+		{
 			wait(0);
+		}
 		else
 		{
 			ft_printf("%s\n", strerror(errno));
@@ -84,8 +98,7 @@ void	minishell(t_list *parse)
 	}
 }
 
-//TODO change while to while(1)
-//TODO handle ~
+//TODO clean function
 int		loop_read()
 {
 	int 		read_b;
@@ -93,14 +106,17 @@ int		loop_read()
 	char		*input;
 	t_list		*parse;
 
+	int			a = 0;
 	parse = NULL;
 	init_buf(&buf);
 	while (1)
 	{
+		printf("%d\n", getpid());//del
 		input = NULL;
 		if (show_prompt())
 			return (1);
 		if ((read_b = read_stdin(&buf, &input)) && buf.buf[0] != 10)
+		//if (get_next_line(0, &input))
 		{
 			if(flush_buf(&buf, &input))
 				return (1);

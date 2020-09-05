@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 06:08:05 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/05 16:52:53 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/05 21:18:03 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int						g_fd[5];
 int						g_exit_status;
 char		**g_env_vars;
 t_list		*g_loc_vars;
+static int 		zzz = 0;
 
 int			ft_echo(char **args);
 int			ft_cd(char **args);
