@@ -32,6 +32,7 @@ int			flush_buf(t_buf *buf, char **str)
 		return (1);
 	}
 	buf->i = 0;
+	buf->buf[0] = 0;//sdfsdf
 	free(*str);
 	*str = tmp;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/05 16:54:25 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/05 17:48:44 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,24 +93,24 @@ int		loop_read()
 	char		*input;
 	t_list		*parse;
 
-	input = NULL;
 	parse = NULL;
 	init_buf(&buf);
 	while (1)
 	{
+		input = NULL;
 		if (show_prompt())
 			return (1);
-		if ((read_b = read_stdin(&buf, &input)))
+		if ((read_b = read_stdin(&buf, &input)) && buf.buf[0] != 10)
 		{
 			if(flush_buf(&buf, &input))
 				return (1);
 			parse = parser(input);
 			minishell(parse);
-			free_str(&input);
+			free(input);
+			//free_str(&input);
 			ft_lstclear(&parse, free);
-			input = NULL;
 		}
-		else if (!read_b && !buf.i)
+		else //if (!read_b && !buf.i)
 			ctrl_d();
 	}
 }
@@ -122,7 +122,6 @@ int		main(int argc, char **argv, char **envp)
 	argc = 0;
 	get_envs(envp, &g_env_vars);
 	signal_handler();
-	//show_prompt();												<- Old pos
 	if (!loop_read())
 		ft_putendl_fd("Error.\n", 2);
 	ctrl_d();

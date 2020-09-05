@@ -69,7 +69,7 @@ static void	ft_delspace(t_list **list)
 			!ft_strcmp(get_str(curr), " "))
 		{
 			prev->next = curr->next;
-			del_var_cont(curr->content);
+			free(curr->content);
 			free(curr);
 			curr = NULL;
 			curr = prev->next;
