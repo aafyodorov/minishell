@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/05 23:39:26 by pdemocri         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <errno.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -77,13 +65,11 @@ void	minishell(t_list *parse)
 		pid = fork();
 		if (pid == 0)
 		{
-			child_process(parse, i);
+			child_process(parse);
 			zzz = 1;
 		}
 		else if (pid > 0)
-		{
 			wait(0);
-		}
 		else
 		{
 			ft_printf("%s\n", strerror(errno));
