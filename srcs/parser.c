@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/31 18:27:44 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/04 23:07:48 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static void	ft_delspace(t_list **list)
 			!ft_strcmp(get_str(curr), " "))
 		{
 			prev->next = curr->next;
+			del_var_cont(curr->content);
 			free(curr);
 			curr = NULL;
 			curr = prev->next;

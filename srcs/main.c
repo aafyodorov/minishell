@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/03 00:41:11 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/05 16:54:25 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	child_process(t_list *parse, int i)
 void	minishell(t_list *parse)
 {
 	int		i;
-	int		j;
+	//int		j;
 	pid_t	pid;
 
 	i = 0;
@@ -86,13 +86,17 @@ void	minishell(t_list *parse)
 
 //TODO change while to while(1)
 //TODO handle ~
-int		loop_read(char *input, t_list **parse)
+int		loop_read()
 {
 	int 		read_b;
 	t_buf		buf;
+	char		*input;
+	t_list		*parse;
 
+	input = NULL;
+	parse = NULL;
 	init_buf(&buf);
-	while (read_b == read_b + 1 - 1)									// бесконечный цикл для ввода команд
+	while (1)
 	{
 		if (show_prompt())
 			return (1);
@@ -100,30 +104,26 @@ int		loop_read(char *input, t_list **parse)
 		{
 			if(flush_buf(&buf, &input))
 				return (1);
-			*parse = parser(input);
-			minishell(*parse);
-			//show_prompt();										<- Old pos
+			parse = parser(input);
+			minishell(parse);
 			free_str(&input);
-			ft_lstclear(parse, free);
+			ft_lstclear(&parse, free);
 			input = NULL;
 		}
-		else if (!read_b)
+		else if (!read_b && !buf.i)
 			ctrl_d();
 	}
-	return (0);
 }
 
 int		main(int argc, char **argv, char **envp)
 {
-	char		*input;
-	t_list		*parse;
 
-	argc = 0;
 	*argv = NULL;
-	input = NULL;
+	argc = 0;
 	get_envs(envp, &g_env_vars);
 	signal_handler();
 	//show_prompt();												<- Old pos
-	loop_read(input, &parse);
-	free_str(&input);
+	if (!loop_read())
+		ft_putendl_fd("Error.\n", 2);
+	ctrl_d();
 }

@@ -20,6 +20,8 @@ void		ft_lstreverse(t_list **list)
 
 	prev = NULL;
 	cur = *list;
+	if (*list && !(*list)->next)
+		return;
 	while (cur)
 	{
 		next = cur->next;

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 06:08:05 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/03 00:24:00 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/05 16:52:53 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@
 # define RESET "\033[0m"
 
 #include <stdio.h>
-int			g_pipe[2];
-int			g_fd[5];
-int			g_exit_status;
+int						g_pipe[2];
+int						g_fd[5];
+int						g_exit_status;
 char		**g_env_vars;
 t_list		*g_loc_vars;
 
@@ -66,5 +66,6 @@ void		check_redirect(t_list *parse);
 void		ctrl_d(void);
 int			show_prompt();
 int			read_stdin(t_buf *buf, char **input);
+int		loop_read();
 
 #endif
