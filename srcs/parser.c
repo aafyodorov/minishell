@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/09 01:46:48 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/09 01:48:19 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ const char		*get_next_part(const char *str, int *key, t_list **list, char *eot)
 	return (ptr);
 }
 
-//TODO write test when add_node() return 1 (check mem leaks)
 const char		*rec_parser(const char *str, t_list **list, char *eot)
 {
 	const char	*ptr;
@@ -89,7 +88,7 @@ t_list			*parser(const char *str)
 	t_list		*list;
 
 	list = NULL;
-	if (!rec_parser(str, &list, ""))//temp
+	if (!rec_parser(str, &list, ""))
 		return (NULL);
 	ft_lstreverse(&list);
 	ft_delspace(&list);

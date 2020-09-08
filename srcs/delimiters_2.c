@@ -44,7 +44,6 @@ const char	*got_dollar(const char *start, t_list **list, const char *params)
 	return (ptr);
 }
 
-//TODO Handle incorrect quotes
 const char	*got_double_quotes(const char *start, t_list **list, const char *params)
 {
 	params = NULL;

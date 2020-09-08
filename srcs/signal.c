@@ -28,5 +28,5 @@ void	signal_handler(void)
 {
 	if (signal(SIGINT, ctrl_c) == SIG_ERR)
 		g_exit_status = errno;
-		signal(SIGQUIT, ctrl_b);
+	signal(SIGQUIT, ctrl_b);
 }
