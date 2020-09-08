@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:56 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/27 05:27:55 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/08 17:39:51 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	is_func(char *str)
 {
-	const char	*funcs_str[7] = {"echo",
+	const char	*funcs_str[8] = {NULL,
+								"echo",
 								"cd",
 								"pwd",
 								"export",
@@ -24,15 +25,22 @@ int	is_func(char *str)
 	int			i;
 
 	i = 0;
-	while (i < 7)
-		if (!ft_strcmp(funcs_str[i++], str))
-			return (i - 1);
-	return (-1);
+	while (++i < 8)
+		if (!ft_strcmp(funcs_str[i], str))
+			return (i);
+	return (0);
 }
 
 int	is_redirect(char *str)
 {
-	return (!ft_strcmp(str, ";") || !ft_strcmp(str, "|") ||
-			!ft_strcmp(str, ">") || !ft_strcmp(str, ">>") ||
-			!ft_strcmp(str, "<"));
+	int			i;
+	const char	redir[6][3] = {"", ";", "|", ">", ">>", "<"};
+
+	i = 0;
+	while (++i < 6)
+	{
+		if (!ft_strcmp(str, redir[i]))
+			return (i);
+	}
+	return (0);
 }

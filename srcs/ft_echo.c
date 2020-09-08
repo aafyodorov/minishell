@@ -18,5 +18,5 @@ int			ft_echo(char **args)
 		ft_printf("%s", args[i++]);
 	if (!flag)
 		ft_printf("\n");
-	return (0);
+	// exit(0);
 }

@@ -7,5 +7,5 @@ int	ft_pwd(char **args)
 
 	getcwd(homepath, 1024);
 	ft_printf("%s\n", homepath);
-	return (0);
+	// exit(0);
 }

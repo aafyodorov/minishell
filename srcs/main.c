@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/05 21:43:03 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/08 17:42:24 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,48 @@
 #include "libftprintf.h"
 #include "libft.h"
 #include "parser.h"
+#include "redirect.h"
 
-void	check_redirect(t_list *parse)
+void	child_process(char **args)
 {
-	while (parse && !is_redirect(get_str(parse)))
-		parse = parse->next;
-	if (!parse)
-		return ;
-	else if (!ft_strcmp(get_str(parse), ">"))
-		close_stdin_stdout(get_str(parse->next->content));	
+	g_fork_flag = 1;
+	change_underscores(args[0], args);
+	args[0] = add_path(args[0]);
+	if (execve(args[0], args, g_env_vars) == -1)
+	{
+		ft_printf("%s\n", strerror(errno));
+		g_exit_status = errno;
+		g_fork_flag = 0;
+		exit(1);
+	}
+	// if (g_fd[4]) 
+	// 	open_stdin_stdout();
+	//exit(0);
 }
 
-void	child_process(t_list *parse, int i)
+int		start_fork(char **args)
+{	
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+		child_process(args);
+	else if (pid > 0)
+		wait(0);
+	else
+	{
+		ft_printf("%s\n", strerror(errno));
+		g_exit_status = errno;
+	}
+	g_fork_flag = 0;
+}
+
+void	minishell(t_list *parse)
 {
-	int		j;
+	int		i;
 	char	**args;
-	int		(*funcs[7])(char **) = {ft_echo,
+	int		(*funcs[8])(char **) = {NULL,
+									ft_echo,
 									ft_cd,
 									ft_pwd,
 									ft_export,
@@ -41,56 +67,15 @@ void	child_process(t_list *parse, int i)
 									ft_env,
 									ft_exit};
 
-	args = get_args_str(parse);
-	change_underscores(args[0], args);
-	check_redirect(parse);
-	if ((j = is_func(args[0])) >= 0)
-		funcs[j](&args[1]);
-	else
-	{
-		args[0] = add_path(args[0]);
-		if (execve(args[0], args, g_env_vars) == -1)
-		{
-			ft_printf("%s\n", strerror(errno));
-			exit(1);
-		}
-	}
-	if (g_fd[4])
-		open_stdin_stdout();
-	//exit(0);
-}
-
-void	minishell(t_list *parse)
-{
-	int		i;
-	//int		j;
-	pid_t	pid;
-
 	i = 0;
-	ft_bzero(&g_fd, sizeof(int) * 5);
 	while (parse)
 	{
-		// pipe(g_pipe);
-		if (!ft_strcmp(get_str(parse), "cd"))
-		{
-			chdir("/bin");
-		parse = parse->next;
-		}
-		pid = fork();
-		if (pid == 0)
-		{
-			child_process(parse, i);
-			zzz = 1;
-		}
-		else if (pid > 0)
-		{
-			wait(0);
-		}
+		args = get_args_str(parse);
+		change_underscores(args[0], args);
+		if ((i = is_func(args[0])))
+			funcs[i](&args[1]);
 		else
-		{
-			ft_printf("%s\n", strerror(errno));
-			g_exit_status = errno;
-		}
+			start_fork(args);
 		while (parse && !is_redirect(get_str(parse)))
 			parse = parse->next;
 		if (parse)
@@ -121,7 +106,9 @@ int		loop_read()
 			if(flush_buf(&buf, &input))
 				return (1);
 			parse = parser(input);
+			open_fd(parse, &g_fd_head, &g_fd_list);
 			minishell(parse);
+			// close_fd(&g_fd_head);
 			free(input);
 			//free_str(&input);
 			ft_lstclear(&parse, free);

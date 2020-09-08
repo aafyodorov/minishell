@@ -9,7 +9,7 @@ void	ctrl_c(int sig)
 
 void	ctrl_b(int sig)
 {
-	if (zzz)
+	if (g_fork_flag)
 		exit(0);
 	else
 		write(0, "\b\b  \b\b", 6);
