@@ -40,6 +40,7 @@ int		read_stdin(t_buf *buf, char **input)
 	char			ch;
 	int 			read_b;
 
+	ch = 0;
 	read_b = 0;
 	while (read(0, &ch, 1) && ch != 10)
 	{

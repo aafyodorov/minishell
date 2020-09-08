@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/09 01:01:08 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/09 01:24:49 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	minishell(t_list *parse)
 			parse = parse->next;
 		if (parse)
 			parse = parse->next;
+		free_args(&args);
 	}
 }
 
