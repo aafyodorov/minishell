@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/08 17:42:24 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/09 01:01:08 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	minishell(t_list *parse)
 									ft_env,
 									ft_exit};
 
-	i = 0;
+	//i = 0;
 	while (parse)
 	{
 		args = get_args_str(parse);

@@ -12,11 +12,11 @@
 
 static int	check_file_current_dir(char *str)
 {
-	struct stat		*stats;
+	struct stat		stats;
 
-	if (stat(str, stats))
+	if (stat(str, &stats))
 		return (0);
-	if (!S_ISREG(stats->st_mode))
+	if (!S_ISREG(stats.st_mode))
 		return (0);
 	return (1);
 }
