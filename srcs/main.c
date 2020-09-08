@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/09 01:24:49 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/09 01:26:05 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	child_process(char **args)
 }
 
 int		start_fork(char **args)
-{	
+{
 	pid_t	pid;
 
 	pid = fork();
@@ -50,8 +50,10 @@ int		start_fork(char **args)
 	{
 		ft_printf("%s\n", strerror(errno));
 		g_exit_status = errno;
+		return (errno);
 	}
 	g_fork_flag = 0;
+	return (0);
 }
 
 void	minishell(t_list *parse)
@@ -87,7 +89,7 @@ void	minishell(t_list *parse)
 //TODO clean function
 int		loop_read()
 {
-	int 		read_b;
+	//int 		read_b;
 	t_buf		buf;
 	char		*input;
 	t_list		*parse;
@@ -101,7 +103,7 @@ int		loop_read()
 		input = NULL;
 		if (show_prompt())
 			return (1);
-		if ((read_b = read_stdin(&buf, &input)) && buf.buf[0] != 10)
+		if ((/*read_b =*/ read_stdin(&buf, &input)) && buf.buf[0] != 10)
 		//if (get_next_line(0, &input))
 		{
 			if(flush_buf(&buf, &input))

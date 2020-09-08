@@ -12,7 +12,6 @@
 
 #include "arr_buf.h"
 
-#include <stdio.h>
 void		init_buf(t_buf *buf)
 {
 	ft_bzero(buf->buf, BUF_SIZE);
@@ -32,7 +31,7 @@ int			flush_buf(t_buf *buf, char **str)
 		return (1);
 	}
 	buf->i = 0;
-	buf->buf[0] = 0;//sdfsdf
+	buf->buf[0] = 0;
 	free(*str);
 	*str = tmp;
 	return (0);

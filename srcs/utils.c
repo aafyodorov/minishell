@@ -1,6 +1,6 @@
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
+//#include <sys/types.h>
+//#include <sys/stat.h>
+//#include <unistd.h>
 #include "libft.h"
 #include "minishell.h"
 #include "parser.h"
@@ -37,14 +37,14 @@ static char*	ft_strdup_arg(char *str, unsigned flag, char **env)
 	i = 0;
 	if (!ft_strcmp(str, "?") && flag == 2)
 		arg = ft_itoa(g_exit_status);
-	else if (flag & 2)
+	else if (flag & 2u)
 	{
 		while (env[i])
 		{
 			if (!ft_strncmp(str, env[i], len) && env[i][len] == '=')
-				return (arg = ft_strdup(&env[i][len + 1]));
+				return (ft_strdup(&env[i][len + 1]));
 			if (find_elem(g_loc_vars, str))
-				return (arg = ft_strdup(get_str(find_elem(g_loc_vars, str))));
+				return (ft_strdup(get_str(find_elem(g_loc_vars, str))));
 			i++;
 		}	
 	}
@@ -73,7 +73,8 @@ char 			**get_args_str(t_list *parse)					// получаем массив ст�
 			args[i++] = ft_strdup(tmp2);
 		else
 			args[i++] = ft_strjoin(tmp1 ? tmp1 : "", tmp2);
-		free_str(&tmp1) + free_str(&tmp2);
+		free_str(&tmp1);
+		free_str(&tmp2);
 		parse = parse->next;
 	}
 	return (args);

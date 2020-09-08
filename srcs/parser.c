@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/09 01:07:01 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/09 01:46:48 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ const char		*rec_parser(const char *str, t_list **list, char *eot)
 	{
 		ptr = NULL;
 		key = -1;
-		if (!(ptr = get_next_part(str, &key, list, eot)))
+		if ((ptr = get_next_part(str, &key, list, eot)))
 		{
 			ft_lstclear(list, free);
 			return (NULL);

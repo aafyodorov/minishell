@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:43:51 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/09 01:01:08 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/09 01:46:48 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ const char	*got_space(const char *start, t_list **list, const char *params)
 	return (start);
 }
 
-//Todo handle single '
 const char	*got_sing_quote(const char *start, t_list **list, const char *params)
 {
 	t_list		*node;
@@ -68,7 +67,7 @@ const char	*got_literal(const char *start,  t_list **list, const char *params)
 	unsigned	flag;
 
 	next = (char *)start;
-	while (*next != '\003' && *next != *params && is_delim(next, params) == -1)
+	while (*next != *params && is_delim(next, params) == -1)
 	{
 		if (*next == '=')
 			return (got_var((char *)start, next, (char *)params));
