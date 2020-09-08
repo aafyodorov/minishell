@@ -9,13 +9,16 @@ int			ft_echo(char **args)
 
 	i = 0;
 	flag = 0;
-	if (!ft_strcmp(args[0], "-n"))
+	if (*args)
 	{
-		flag = 1;
-		i++;
+		if (!ft_strcmp(args[0], "-n"))
+		{
+			flag = 1;
+			i++;
+		}
+		while (args[i])
+			ft_printf("%s", args[i++]);
 	}
-	while (args[i])
-		ft_printf("%s", args[i++]);
 	if (!flag)
 		ft_printf("\n");
 	// exit(0);

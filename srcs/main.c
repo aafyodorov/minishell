@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/08 17:42:24 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/08 19:35:11 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	minishell(t_list *parse)
 	{
 		args = get_args_str(parse);
 		change_underscores(args[0], args);
+		check_redirect(&parse);
 		if ((i = is_func(args[0])))
 			funcs[i](&args[1]);
 		else
