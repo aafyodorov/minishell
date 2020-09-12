@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*   variables_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/25 12:31:06 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/09 01:01:08 by fgavin           ###   ########.fr       */
+/*   Created: 2020/09/12 03:05:53 by fgavin            #+#    #+#             */
+/*   Updated: 2020/09/12 03:06:41 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "parser.h"
 
-char	*ft_strncat(char *dst, const char *src, size_t n)
+void		del_var_cont(void *content)
 {
-	unsigned int i;
-	unsigned int j;
+	char	**cont;
 
-	i = 0;
-	j = 0;
-	while (dst[i])
-		i++;
-	while (src[j] && j < n)
-	{
-		dst[i] = src[j];
-		i++;
-		j++;
-	}
-	dst[i] = '\0';
-	return (dst);
+	cont = content;
+	free(cont[0]);
+	cont[0] = NULL;
+	free(cont[1]);
+	cont[1] = NULL;
+	free(cont);
 }

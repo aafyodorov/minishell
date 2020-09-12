@@ -6,13 +6,16 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/09/12 22:03:44 by pdemocri         ###   ########.fr       */
+=======
+/*   Updated: 2020/09/09 01:26:05 by fgavin           ###   ########.fr       */
+>>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <unistd.h>
-#include <sys/types.h>
 #include <sys/wait.h>
 #include <bits/waitstatus.h>
 #include "minishell.h"
@@ -34,6 +37,7 @@ void	child_process(char **args)
 	change_underscores(args[0], args);
 	args[0] = add_path(args[0]);
 	if (execve(args[0], args, g_env_vars) == -1)
+<<<<<<< HEAD
 		exit(print_error("Command not found", 127));
 	exit(0);
 }
@@ -42,12 +46,29 @@ int		start_fork(char **args, t_list *parse)
 {
 	int			status;
 	pid_t		pid;
+=======
+	{
+		ft_printf("%s\n", strerror(errno));
+		g_exit_status = errno;
+		g_fork_flag = 0;
+		exit(1);
+	}
+	// if (g_fd[4])
+	// 	open_stdin_stdout();
+	//exit(0);
+}
+
+int		start_fork(char **args)
+{
+	pid_t	pid;
+>>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
 
 	pid = fork();
 	if (pid == 0)
 		child_process(args);
 	else if (pid > 0)
 	{
+<<<<<<< HEAD
 		if (g_pipe_next == 2)
 		{
 			dup2(g_pipe[0], 0);
@@ -55,12 +76,18 @@ int		start_fork(char **args, t_list *parse)
 		}
 		wait(&status);
 		g_exit_status = WEXITSTATUS(status);
+=======
+		ft_printf("%s\n", strerror(errno));
+		g_exit_status = errno;
+		return (errno);
+>>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
 	}
 	else
 		g_exit_status = print_error(strerror(errno), 1);
 	g_pipe_prev = g_pipe_next;
 	g_pipe_next = 0;
 	g_fork_flag = 0;
+	return (0);
 }
 
 int		self_funcs(char **args, int i)
@@ -74,6 +101,7 @@ int		self_funcs(char **args, int i)
 									ft_env,
 									ft_exit};
 
+<<<<<<< HEAD
 	if (g_pipe_next == 2)
 	{
 		dup2(g_pipe[0], 0);
@@ -91,6 +119,9 @@ void	minishell(t_list *parse)
 	i = 0;
 	error = 0;
 	save_stdin_stdout();
+=======
+	//i = 0;
+>>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
 	while (parse)
 	{
 		args = get_args_str(parse);
@@ -104,17 +135,28 @@ void	minishell(t_list *parse)
 			parse = parse->next;
 		if (parse)
 			parse = parse->next;
+<<<<<<< HEAD
 		open_stdin_stdout();
+=======
+		free_args(&args);
+>>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
 	}
 }
 
 //TODO clean function
 int		loop_read(void)
 {
+<<<<<<< HEAD
 	int				read_b;
 	t_buf			buf;
 	char			*input;
 	t_list			*parse;
+=======
+	//int 		read_b;
+	t_buf		buf;
+	char		*input;
+	t_list		*parse;
+>>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
 
 	parse = NULL;
 	init_buf(&buf);
@@ -124,7 +166,7 @@ int		loop_read(void)
 		input = NULL;
 		if (show_prompt())
 			return (1);
-		if ((read_b = read_stdin(&buf, &input)) && buf.buf[0] != 10)
+		if ((/*read_b =*/ read_stdin(&buf, &input)) && buf.buf[0] != 10)
 		//if (get_next_line(0, &input))
 		{
 			if (flush_buf(&buf, &input))

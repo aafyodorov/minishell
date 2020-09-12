@@ -6,7 +6,7 @@
 /*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/25 11:50:04 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/04/25 12:05:59 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/09 01:01:08 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *str)
 	char	*copy;
 
 	i = ft_strlen(str);
-	copy = (char *)malloc((i + 1) * sizeof(char));
+	copy = (char *)ft_calloc((i + 1), sizeof(char));
 	if (copy == NULL)
 		return (NULL);
 	i = 0;

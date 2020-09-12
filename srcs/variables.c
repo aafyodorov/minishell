@@ -6,12 +6,17 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:57:46 by fgavin            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/09/12 21:46:00 by pdemocri         ###   ########.fr       */
+=======
+/*   Updated: 2020/09/12 03:06:41 by fgavin           ###   ########.fr       */
+>>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+<<<<<<< HEAD
 void		del_var_cont(void *content)
 {
 	char	**cont;
@@ -24,6 +29,8 @@ void		del_var_cont(void *content)
 	free(cont);
 }
 
+=======
+>>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
 int			cr_var_cont(const char *start, const char *eq_sign,
 	const char *end, char **content)
 {
@@ -116,7 +123,7 @@ char		*got_var(char *start, char *eq_sign, char *params)
 	if (cr_var_cont(start, eq_sign, end, (char **)cont))
 		return (NULL);
 	if (check_var_in_env(g_env_vars, cont) ||
-			add_var_to_list(&g_loc_vars, cont, 1))
+		add_var_to_list(&g_loc_vars, cont, 1))
 		return (NULL);
 	free(cont[0]);
 	free(cont[1]);

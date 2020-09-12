@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 14:55:38 by fgavin            #+#    #+#             */
-/*   Updated: 2020/08/31 18:27:26 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/09 01:01:08 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		ft_lstreverse(t_list **list)
 	prev = NULL;
 	cur = *list;
 	if (*list && !(*list)->next)
-		return;
+		return ;
 	while (cur)
 	{
 		next = cur->next;

@@ -2,7 +2,7 @@
 # define PARSER_H
 
 # include "libft.h"
-#include "minishell.h"
+# include "minishell.h"
 
 # define DELIM_NUM 11
 
@@ -29,7 +29,7 @@ void		ft_delspaces(t_list **list);
 void		del_var_cont(void *content);
 char		*got_var(char *start, char *eq_sign, char *params);
 int			cr_var_cont(const char *start, const char *eq_sign,
-						   const char *end, char **content);//change to static and del from here
+						   const char *end, char **content);
 t_list		*find_elem(t_list *list, char *key);
 
 typedef struct
@@ -41,17 +41,17 @@ typedef struct
 }				t_delims;
 
 static const t_delims	g_delims[DELIM_NUM] = {
-		(t_delims){.key = 0, .ign_q = 0, .data = "\\", .func = got_backslash},
-		(t_delims){.key = 1, .ign_q = 0, .data = " ", .func = got_space},
-		(t_delims){.key = 2, .ign_q = 1, .data = "$", .func = got_dollar},
-		(t_delims){.key = 3, .ign_q = 0, .data = ">>", .func = got_double_delimiter},
-		(t_delims){.key = 4, .ign_q = 0, .data = "<>", .func = got_double_delimiter},
-		(t_delims){.key = 5, .ign_q = 0, .data = "<", .func = got_unit_delimiter},
-		(t_delims){.key = 6, .ign_q = 0, .data = ">", .func = got_unit_delimiter},
-		(t_delims){.key = 7, .ign_q = 0, .data = "|", .func = got_unit_delimiter},
-		(t_delims){.key = 8, .ign_q = 0, .data = ";", .func = got_unit_delimiter},
-		(t_delims){.key = 9, .ign_q = 0, .data = "\"", .func = got_double_quotes},
-		(t_delims){.key = 10, .ign_q = 0, .data = "\'", .func = got_sing_quote},
+		(t_delims){.ign_q = 0, .data = "\\", .func = got_backslash},
+		(t_delims){.ign_q = 0, .data = " ", .func = got_space},
+		(t_delims){.ign_q = 1, .data = "$", .func = got_dollar},
+		(t_delims){.ign_q = 0, .data = ">>", .func = got_double_delimiter},
+		(t_delims){.ign_q = 0, .data = "<>", .func = got_double_delimiter},
+		(t_delims){.ign_q = 0, .data = "<", .func = got_unit_delimiter},
+		(t_delims){.ign_q = 0, .data = ">", .func = got_unit_delimiter},
+		(t_delims){.ign_q = 0, .data = "|", .func = got_unit_delimiter},
+		(t_delims){.ign_q = 0, .data = ";", .func = got_unit_delimiter},
+		(t_delims){.ign_q = 0, .data = "\"", .func = got_double_quotes},
+		(t_delims){.ign_q = 0, .data = "\'", .func = got_sing_quote},
 		//(t_delims){.key = , .ign_q = , .data = "", .func = stub},
 };
 

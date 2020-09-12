@@ -1,22 +1,28 @@
-#include <sys/types.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execve.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/12 02:42:01 by fgavin            #+#    #+#             */
+/*   Updated: 2020/09/12 02:43:45 by fgavin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sys/stat.h>
-#include <unistd.h>
 #include <dirent.h>
 #include "libft.h"
-#include "libftprintf.h"
 #include "minishell.h"
-
-
 #include <string.h>
-
 
 static int	check_file_current_dir(char *str)
 {
-	struct stat		*stats;
+	struct stat		stats;
 
-	if (stat(str, stats))
+	if (stat(str, &stats))
 		return (0);
-	if (!S_ISREG(stats->st_mode))
+	if (!S_ISREG(stats.st_mode))
 		return (0);
 	return (1);
 }
