@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 18:36:47 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/04 23:04:41 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/09 15:32:07 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int			is_delim(const char *str, const char *eot)
 	while (++i < DELIM_NUM)
 	{
 		ptr = str;
-		if (!ft_strncmp(ptr, g_delims[i].data, i == 3 ? 2 : 1))
+		if (!ft_strncmp(ptr, g_delims[i].data, (i == 3 || i == 4) ? 2 : 1))
 			break ;
 	}
 	if (i == DELIM_NUM)

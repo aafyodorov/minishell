@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/08 19:35:11 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/12 20:06:42 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <bits/waitstatus.h>
 #include "minishell.h"
 #include "libftprintf.h"
 #include "libft.h"
@@ -22,6 +23,8 @@
 
 void	child_process(char **args)
 {
+	pid_t	child;
+
 	g_fork_flag = 1;
 	change_underscores(args[0], args);
 	args[0] = add_path(args[0]);
@@ -32,32 +35,45 @@ void	child_process(char **args)
 		g_fork_flag = 0;
 		exit(1);
 	}
-	// if (g_fd[4]) 
-	// 	open_stdin_stdout();
-	//exit(0);
 }
 
-int		start_fork(char **args)
+int		start_fork(char **args, t_list *parse)
 {	
+	int		status;
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == 0)
+	{
+		if (g_pipe_next == 2)
+		{
+			dup2(g_pipe[1], 1);
+			close(g_pipe[0]);
+		}
 		child_process(args);
+	}
 	else if (pid > 0)
-		wait(0);
+	{
+		if (g_pipe_next == 2)
+		{
+			dup2(g_pipe[0], 0);
+			close(g_pipe[1]);
+		}
+		wait(&status);
+		g_exit_status = WEXITSTATUS(status);
+	}
 	else
 	{
 		ft_printf("%s\n", strerror(errno));
 		g_exit_status = errno;
 	}
+	g_pipe_prev = g_pipe_next;
+	g_pipe_next = 0;
 	g_fork_flag = 0;
 }
 
-void	minishell(t_list *parse)
+int		self_funcs(char **args, int i)
 {
-	int		i;
-	char	**args;
 	int		(*funcs[8])(char **) = {NULL,
 									ft_echo,
 									ft_cd,
@@ -67,20 +83,33 @@ void	minishell(t_list *parse)
 									ft_env,
 									ft_exit};
 
+	funcs[i](&args[1]);
+}
+
+void	minishell(t_list *parse)
+{
+	int		i;
+	int		error;
+	char	**args;
+
 	i = 0;
+	error = 0;
+	save_stdin_stdout();
 	while (parse)
 	{
 		args = get_args_str(parse);
 		change_underscores(args[0], args);
-		check_redirect(&parse);
-		if ((i = is_func(args[0])))
-			funcs[i](&args[1]);
-		else
-			start_fork(args);
+		// if (!g_pipe_next)
+		error = check_redirect(&parse);
+		if (!error && (i = is_func(args[0])))
+			g_exit_status = self_funcs(args, i);
+		else if (!error)
+			start_fork(args, parse);
 		while (parse && !is_redirect(get_str(parse)))
 			parse = parse->next;
 		if (parse)
 			parse = parse->next;
+		open_stdin_stdout();
 	}
 }
 
@@ -107,11 +136,8 @@ int		loop_read()
 			if(flush_buf(&buf, &input))
 				return (1);
 			parse = parser(input);
-			open_fd(parse, &g_fd_head, &g_fd_list);
 			minishell(parse);
-			// close_fd(&g_fd_head);
 			free(input);
-			//free_str(&input);
 			ft_lstclear(&parse, free);
 		}
 		else //if (!read_b && !buf.i)

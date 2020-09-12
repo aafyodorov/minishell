@@ -4,6 +4,7 @@
 #include "libft.h"
 #include "minishell.h"
 #include "parser.h"
+#include "redirect.h"
 
 int				ft_strlenbuf(char **buf)
 {
@@ -62,7 +63,7 @@ char 			**get_args_str(t_list *parse)					// получаем массив ст�
 	char	*tmp2;
 
 	len = str_args_len(parse);
-	args = (char **)ft_calloc(len + 1, sizeof(char *));
+	args = (char **)ft_calloc(len + 10, sizeof(char *));
 	i = 0;
 	while ((parse && i < len))
 	{
@@ -76,5 +77,11 @@ char 			**get_args_str(t_list *parse)					// получаем массив ст�
 		free_str(&tmp1) + free_str(&tmp2);
 		parse = parse->next;
 	}
+	// if (g_pipe_prev == 2)
+	// {
+	// 	args[ft_strlenbuf(args)] = get_args_from_pipe();
+	// 	dup2(g_fd[0], g_pipe[0]);
+	// 	dup2(g_fd[1], g_pipe[1]);
+	// }
 	return (args);
 }

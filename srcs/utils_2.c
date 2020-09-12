@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 00:10:55 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/05 21:50:34 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/12 20:12:15 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,10 @@ int		read_stdin(t_buf *buf, char **input)
 	if (!*input && ch == 10)
 		read_b = -1;
 	return (read_b);
+}
+
+int		print_error(char *message, int exit_code)
+{
+	ft_printf("%s\n", message);
+	return (exit_code);
 }

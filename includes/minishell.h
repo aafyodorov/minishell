@@ -47,11 +47,12 @@ int			free_args(char ***args);
 
 int			is_func(char *str);
 int			is_redirect(char *str);
-void		check_redirect(t_list **parse);
+int			check_redirect(t_list **parse);
 
 void		ctrl_d(void);
 int			show_prompt();
 int			read_stdin(t_buf *buf, char **input);
 int			loop_read();
+int			print_error(char *message, int exit_code);
 
 #endif
