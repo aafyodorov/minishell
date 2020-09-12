@@ -6,13 +6,13 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 18:36:47 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/09 01:01:08 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/12 02:59:59 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_list		*create_node(const char *data, size_t len, unsigned flag)
+t_list			*create_node(const char *data, size_t len, unsigned flag)
 {
 	t_list		*node;
 	char		**n_data;
@@ -35,7 +35,7 @@ t_list		*create_node(const char *data, size_t len, unsigned flag)
 	return (node);
 }
 
-int		push_node(t_list **list, t_list *new_node)
+int				push_node(t_list **list, t_list *new_node)
 {
 	if (!new_node)
 		return (1);
@@ -43,11 +43,10 @@ int		push_node(t_list **list, t_list *new_node)
 		*list = new_node;
 	else
 		ft_lstadd_front(list, new_node);
-	//printf("%s\t%d\n", get_str(new_node), get_flag(new_node));
 	return (0);
 }
 
-int			is_delim(const char *str, const char *eot)
+int				is_delim(const char *str, const char *eot)
 {
 	int			i;
 	const char	*ptr;
@@ -68,8 +67,7 @@ int			is_delim(const char *str, const char *eot)
 	return (i);
 }
 
-//TODO Handle as much as can special variables
-char		*get_var(const char *str)
+char			*get_var(const char *str)
 {
 	if (ft_isdigit(*str))
 	{

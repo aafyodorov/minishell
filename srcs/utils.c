@@ -1,6 +1,15 @@
-//#include <sys/types.h>
-//#include <sys/stat.h>
-//#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/12 03:01:42 by fgavin            #+#    #+#             */
+/*   Updated: 2020/09/12 03:02:40 by fgavin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "minishell.h"
 #include "parser.h"
@@ -28,7 +37,7 @@ static int		str_args_len(t_list *parse)
 	return (len);
 }
 
-static char*	ft_strdup_arg(char *str, unsigned flag, char **env)
+static char		*ft_strdup_arg(char *str, unsigned flag, char **env)
 {
 	int			i;
 	const int	len = ft_strlen(str);
@@ -46,20 +55,20 @@ static char*	ft_strdup_arg(char *str, unsigned flag, char **env)
 			if (find_elem(g_loc_vars, str))
 				return (ft_strdup(get_str(find_elem(g_loc_vars, str))));
 			i++;
-		}	
+		}
 	}
 	else
 		arg = strdup(str);
 	return (arg);
 }
 
-char 			**get_args_str(t_list *parse)					// получаем массив строк - аргументы функции
+char			**get_args_str(t_list *parse)
 {
-	int		i;
-	int		len;
-	char	**args;
-	char	*tmp1;
-	char	*tmp2;
+	int			i;
+	int			len;
+	char		**args;
+	char		*tmp1;
+	char		*tmp2;
 
 	len = str_args_len(parse);
 	args = (char **)ft_calloc(len + 1, sizeof(char *));

@@ -41,6 +41,7 @@ SRCS = free.c\
 	  ft_lstreverse.c\
 	  parser_del_spaces.c\
 	  variables.c\
+	  variables_2.c\
 	  arr_buf.c\
 	  redirect.c
 SRCDIR = ./srcs/

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/12 02:50:10 by fgavin            #+#    #+#             */
+/*   Updated: 2020/09/12 02:50:12 by fgavin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "parser.h"
 
@@ -37,7 +49,7 @@ static char	*find_loc_var(t_list *var_list, char *str)
 	return (NULL);
 }
 
-int				ft_export(char **args)
+int			ft_export(char **args)
 {
 	int		i;
 	char	*exp;

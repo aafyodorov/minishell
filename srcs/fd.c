@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/12 02:44:12 by fgavin            #+#    #+#             */
+/*   Updated: 2020/09/12 02:44:40 by fgavin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
 #include "minishell.h"
 #include "redirect.h"
@@ -41,9 +52,11 @@ void	open_fd(t_list *parse, t_fd **fd_head, t_fd **fd_list)
 		if (i == 3 || i == 4 || i == 5)
 		{
 			if (i == 3 && parse->next)
-				fd = open(get_str(parse->next), O_RDONLY | O_TRUNC | O_CREAT, 0777);
+				fd = open(get_str(parse->next), O_RDONLY |
+				O_TRUNC | O_CREAT, 0777);
 			if (i == 4 && parse->next)
-				fd = open(get_str(parse->next), O_RDONLY | O_APPEND | O_CREAT, 0777);
+				fd = open(get_str(parse->next), O_RDONLY |
+				O_APPEND | O_CREAT, 0777);
 			if (i == 5 && parse->next)
 				fd = open(get_str(parse->next), O_WRONLY, 0777);
 			if (!*fd_head)

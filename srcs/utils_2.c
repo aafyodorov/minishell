@@ -6,14 +6,14 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 00:10:55 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/09 01:01:08 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/12 03:03:22 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <limits.h>
 
-int		show_prompt()
+int		show_prompt(void)
 {
 	char		*homepath;
 	int			size;
@@ -38,7 +38,7 @@ int		show_prompt()
 int		read_stdin(t_buf *buf, char **input)
 {
 	char			ch;
-	int 			read_b;
+	int				read_b;
 
 	ch = 0;
 	read_b = 0;

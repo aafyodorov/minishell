@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:43:51 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/09 01:46:48 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/12 02:39:51 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ const char	*got_space(const char *start, t_list **list, const char *params)
 	node = create_node(" ", 1, flag);
 	if (push_node(list, node))
 		return (NULL);
-
 	return (start);
 }
 
-const char	*got_sing_quote(const char *start, t_list **list, const char *params)
+const char	*got_sing_quote(const char *start, t_list **list,
+		const char *params)
 {
 	t_list		*node;
 	const char	*next;
@@ -60,7 +60,7 @@ const char	*got_sing_quote(const char *start, t_list **list, const char *params)
 	return (next);
 }
 
-const char	*got_literal(const char *start,  t_list **list, const char *params)
+const char	*got_literal(const char *start, t_list **list, const char *params)
 {
 	char		*next;
 	t_list		*node;
@@ -78,11 +78,11 @@ const char	*got_literal(const char *start,  t_list **list, const char *params)
 	if (push_node(list, node))
 		return (NULL);
 	next += *next == '\003' ? 1 : 0;
-
 	return (next);
 }
 
-const char	*got_unit_delimiter(const char *start,  t_list **list, const char *params)
+const char	*got_unit_delimiter(const char *start, t_list **list,
+		const char *params)
 {
 	t_list		*node;
 	unsigned	flag;

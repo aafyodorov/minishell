@@ -12,7 +12,6 @@
 
 #include <errno.h>
 #include <unistd.h>
-#include <sys/types.h>
 #include <sys/wait.h>
 #include "minishell.h"
 #include "libftprintf.h"
@@ -32,7 +31,7 @@ void	child_process(char **args)
 		g_fork_flag = 0;
 		exit(1);
 	}
-	// if (g_fd[4]) 
+	// if (g_fd[4])
 	// 	open_stdin_stdout();
 	//exit(0);
 }

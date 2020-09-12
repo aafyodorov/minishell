@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/09 01:48:19 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/12 02:55:44 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 #include "parser.h"
 
-const char		*get_next_part(const char *str, int *key, t_list **list, char *eot)
+const char		*get_next_part(const char *str, int *key, t_list **list,
+		char *eot)
 {
 	const char	*ptr;
 
 	*key = is_delim(str, eot);
 	ptr = NULL;
-		if (*key != -1)
-			ptr = g_delims[*key].func(str, list, eot);
-		else
-			ptr = got_literal(str, list,eot);
+	if (*key != -1)
+		ptr = g_delims[*key].func(str, list, eot);
+	else
+		ptr = got_literal(str, list, eot);
 	return (ptr);
 }
 
@@ -31,6 +32,7 @@ const char		*rec_parser(const char *str, t_list **list, char *eot)
 {
 	const char	*ptr;
 	int			key;
+
 	while (*str != *eot)
 	{
 		ptr = NULL;
@@ -46,17 +48,15 @@ const char		*rec_parser(const char *str, t_list **list, char *eot)
 	return (str);
 }
 
-static void	ft_delspace(t_list **list)
+static void		ft_delspace(t_list **list)
 {
-	int		flag;
-	t_list *prev;
-	t_list *curr;
+	int			flag;
+	t_list		*prev;
+	t_list		*curr;
 
 	flag = 0;
 	prev = NULL;
 	curr = *list;
-
-
 	while (curr)
 	{
 		if ((!prev || is_redirect(get_str(prev))) &&
@@ -78,13 +78,11 @@ static void	ft_delspace(t_list **list)
 			prev = curr;
 			curr = curr->next;
 		}
-		
 	}
 }
 
 t_list			*parser(const char *str)
 {
-
 	t_list		*list;
 
 	list = NULL;

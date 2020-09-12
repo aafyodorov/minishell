@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_del_spaces.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/12 02:56:57 by fgavin            #+#    #+#             */
+/*   Updated: 2020/09/12 02:56:58 by fgavin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "minishell.h"
 
@@ -16,8 +28,8 @@ static void	skip_spaces(t_list **list)
 void		ft_delspaces(t_list **list)
 {
 	int		flag;
-	t_list *prev;
-	t_list *curr;
+	t_list	*prev;
+	t_list	*curr;
 
 	skip_spaces(list);
 	flag = 0;
