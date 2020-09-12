@@ -6,13 +6,12 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:57:46 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/01 17:50:54 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/12 21:46:00 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-#include <stdio.h>
 void		del_var_cont(void *content)
 {
 	char	**cont;
@@ -57,7 +56,6 @@ t_list		*find_elem(t_list *list, char *key)
 	return (NULL);
 }
 
-
 int			add_var_to_list(t_list **list, char **cont, int create)
 {
 	t_list		*tmp_node;
@@ -66,7 +64,7 @@ int			add_var_to_list(t_list **list, char **cont, int create)
 	if ((tmp_node = find_elem(*list, cont[0])))
 	{
 		free(((char **)(tmp_node->content))[1]);
-		if (! (((char **)(tmp_node->content))[1] = ft_strdup(cont[1])))
+		if (!(((char **)(tmp_node->content))[1] = ft_strdup(cont[1])))
 			return (1);
 	}
 	else if (create)
@@ -98,7 +96,7 @@ int			check_var_in_env(char **var_list, char **str)
 		if (!ft_strncmp(var_list[i], str[0], ft_strlen(str[0])) &&
 			var_list[i][ft_strlen(str[0])] == '=')
 		{
-			tmp = ft_strjoin(str[0]," ");
+			tmp = ft_strjoin(str[0], " ");
 			var_list[i] = ft_strjoin(tmp, str[1]);
 			return (0);
 		}

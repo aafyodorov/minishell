@@ -6,13 +6,13 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 18:36:47 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/09 15:32:07 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/12 22:04:15 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_list		*create_node(const char *data, size_t len, unsigned flag)
+t_list	*create_node(const char *data, size_t len, unsigned flag)
 {
 	t_list		*node;
 	char		**n_data;
@@ -47,7 +47,7 @@ int		push_node(t_list **list, t_list *new_node)
 	return (0);
 }
 
-int			is_delim(const char *str, const char *eot)
+int		is_delim(const char *str, const char *eot)
 {
 	int			i;
 	const char	*ptr;
@@ -69,7 +69,7 @@ int			is_delim(const char *str, const char *eot)
 }
 
 //TODO Handle as much as can special variables
-char		*get_var(const char *str)
+char	*get_var(const char *str)
 {
 	if (ft_isdigit(*str))
 	{
