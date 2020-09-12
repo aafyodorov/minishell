@@ -5,3 +5,5 @@ int	ft_exit(char **args)
 	ft_printf("exit\n");
 	return (0);
 }
+
+/////////////////// реализовать работу функции

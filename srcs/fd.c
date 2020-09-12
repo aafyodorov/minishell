@@ -98,39 +98,10 @@ void	save_stdin_stdout(void)
 
 }
 
-int		close_stdin(void)
-{
-	// g_fd[0] = dup(0);
-	close(0);
-	// dup2(g_pipe[0], 0);
-	return (0);
-}
-
-int		open_stdin(void)
-{
-	dup2(g_fd[0], g_pipe[0]);
-	// close(g_fd[0]);
-	return (0);
-}
-
-int		close_stdout(void)
-{
-	// g_fd[1] = dup(1);
-	close(1);
-	// dup2(g_pipe[1], 1);
-	return (0);
-}
-
-int		open_stdout(void)
-{
-	dup2(g_fd[1], g_pipe[1]);
-	// close(g_fd[1]);
-	return (0);
-}
-
 int		open_stdin_stdout(void)
 {
 	// if (g_pipe_next >= 3) //????????????
-		open_stdout();
+	dup2(g_fd[1], 1);
+	// dup2(g_fd[0], 0);
 	return (0);
 }

@@ -32,7 +32,8 @@ void		change_underscores(char *func, char **args)
 	while (ft_strncmp(g_env_vars[i], "_=", 2))
 		i++;
 	free(g_env_vars[i]);
-	g_env_vars[i] = ft_strjoin("_=", tmp);
+	if (!(g_env_vars[i] = ft_strjoin("_=", tmp)))
+		print_error(strerror(errno), 1);
 }
 
 int			ft_unset(char **args) //////////не работает!!!

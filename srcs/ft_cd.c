@@ -7,12 +7,11 @@
 static int	change_oldpwd(void)
 {
 	int			i;
-	int			flag;
+	int			len;
 	char		buf[1024];
 
 	i = 0;
-	flag = 0;
-	while (g_env_vars[i] && !flag)
+	while (g_env_vars[i])
 	{
 		if (!ft_strncmp(g_env_vars[i], "OLDPWD", 6))
 		{
@@ -22,9 +21,9 @@ static int	change_oldpwd(void)
 		}
 		i++;
 	}
-	if (!flag)
-		g_env_vars[ft_strlenbuf(g_env_vars)] = ft_strjoin("OLDPWD=", getcwd(buf, 1024));
-	return (g_env_vars[i] == NULL);
+	len = ft_strlenbuf(g_env_vars);
+	g_env_vars[len] = ft_strjoin("OLDPWD=", getcwd(buf, 1024));
+	return (g_env_vars[len] == NULL);
 }
 
 int			ft_cd(char **args)
@@ -42,7 +41,6 @@ int			ft_cd(char **args)
 		while (ft_strncmp("HOME=", g_env_vars[i], 5))
 			i++;
 		ft_strcpy(tmp, &g_env_vars[i][5]);
-		chdir(tmp);
 		return (!chdir(tmp) ? 0 : print_error(strerror(errno), 1));
 	}
 	return (!chdir(args[0]) ? 0 : print_error(strerror(errno), 1));

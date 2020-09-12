@@ -27,8 +27,12 @@ static char	*find_loc_var(t_list *var_list, char *str)
 		content = var_list->content;
 		if (!ft_strcmp(content[0], str))
 		{
-			tmp = ft_strjoin(content[0], "=");
-			exp = ft_strjoin(tmp, content[1]);
+			if (!(tmp = ft_strjoin(content[0], "=")) ||
+				!(exp = ft_strjoin(tmp, content[1])))
+			{
+				print_error(strerror(errno), 1);
+				return (NULL);
+			}
 			free(tmp);
 			return (exp);
 		}

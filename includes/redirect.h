@@ -16,8 +16,6 @@ int				g_fd[2];
 int				g_pipe[2];
 int				g_pipe_prev;
 int				g_pipe_next;
-//		g_pipe_prev - previous redirect
-
 
 /**
 **	1 - ; 
@@ -30,12 +28,6 @@ int				g_pipe_next;
 int		next_redirect(t_list *parse);
 
 void	save_stdin_stdout(void);
-
-int		close_stdin(void);
-int		open_stdin(void);
-int		close_stdout(void);
-int		open_stdout(void);
-
 int		open_stdin_stdout(void);
 
 int		redirect_1(t_list *parse);

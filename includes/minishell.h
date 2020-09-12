@@ -35,7 +35,7 @@ int			ft_env(char **args);
 int			ft_exit(char **args);
 
 int			ft_strlenbuf(char **buf);
-void		get_envs(char **envp, char ***g_env_vars);
+int			get_envs(char **envp, char ***g_env_vars);
 char		**get_args_str(t_list *parse);
 void		change_underscores(char *func, char **args);
 char		*add_path(char *func);
