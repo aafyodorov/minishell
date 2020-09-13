@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:48 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/12 22:09:40 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/13 23:44:46 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,5 @@ int	get_envs(char **envp, char ***g_env_vars)
 		ft_strcpy((*g_env_vars)[i], envp[i]);
 		i++;
 	}
-<<<<<<< HEAD
 	return (0);
 }
-=======
-}
->>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343

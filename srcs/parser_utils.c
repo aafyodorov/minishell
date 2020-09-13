@@ -6,21 +6,13 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 18:36:47 by fgavin            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/09/12 22:04:15 by pdemocri         ###   ########.fr       */
-=======
-/*   Updated: 2020/09/12 02:59:59 by fgavin           ###   ########.fr       */
->>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
+/*   Updated: 2020/09/13 23:43:24 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-<<<<<<< HEAD
-t_list	*create_node(const char *data, size_t len, unsigned flag)
-=======
 t_list			*create_node(const char *data, size_t len, unsigned flag)
->>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
 {
 	t_list		*node;
 	char		**n_data;
@@ -54,11 +46,7 @@ int				push_node(t_list **list, t_list *new_node)
 	return (0);
 }
 
-<<<<<<< HEAD
-int		is_delim(const char *str, const char *eot)
-=======
 int				is_delim(const char *str, const char *eot)
->>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
 {
 	int			i;
 	const char	*ptr;
@@ -79,12 +67,7 @@ int				is_delim(const char *str, const char *eot)
 	return (i);
 }
 
-<<<<<<< HEAD
-//TODO Handle as much as can special variables
-char	*get_var(const char *str)
-=======
 char			*get_var(const char *str)
->>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
 {
 	if (ft_isdigit(*str))
 	{

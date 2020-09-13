@@ -3,7 +3,6 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:07:22 by pdemocri          #+#    #+#             */
@@ -14,15 +13,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-=======
-/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/12 03:01:42 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/12 03:02:40 by fgavin           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
->>>>>>> 41af8fc1cc432629be1c3ff6fb5f00e3112c0343
 #include "libft.h"
 #include "minishell.h"
 #include "parser.h"
