@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:07:22 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/14 00:41:24 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/14 21:18:05 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static char		*ft_strdup_arg(char *str, unsigned flag, char **env)
 
 	i = 0;
 	if (!ft_strcmp(str, "?") && flag == 2)
-		arg = ft_itoa(g_exit_status);
-	else if (flag & 2u)
+		return (ft_itoa(g_exit_status));
+	if (flag & 2u)
 	{
 		while (env[i])
 		{
@@ -60,10 +60,9 @@ static char		*ft_strdup_arg(char *str, unsigned flag, char **env)
 				return (ft_strdup(get_str(find_elem(g_loc_vars, str))));
 			i++;
 		}
+		return (ft_strdup(""));
 	}
-	else
-		arg = strdup(str);
-	return (arg);
+	return (strdup(str));
 }
 
 char			**get_args_str(t_list *parse)
