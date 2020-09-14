@@ -6,16 +6,16 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:40 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/13 23:40:34 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/14 23:08:08 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include "minishell.h"
 
 int	ft_exit(char **args)
 {
-	ft_printf("exit\n");
-	return (0);
+	ctrl_d();
 }
 
 /////////////////// реализовать работу функции

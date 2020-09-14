@@ -4,7 +4,7 @@
 # include "libft.h"
 # include "minishell.h"
 
-# define DELIM_NUM 12
+# define DELIM_NUM 11
 
 const char	*got_dollar(const char *start, t_list **list, const char *params);
 const char	*got_backslash(const char *start, t_list **list, const char *params);
@@ -43,7 +43,7 @@ typedef struct
 static const t_delims	g_delims[DELIM_NUM] = {
 		(t_delims){.ign_q = 0, .data = "\\", .func = got_backslash},
 		(t_delims){.ign_q = 0, .data = " ", .func = got_space},
-		(t_delims){.ign_q = 0, .data = "\t", .func = got_space},
+		// (t_delims){.ign_q = 0, .data = "\t", .func = got_space},
 		(t_delims){.ign_q = 1, .data = "$", .func = got_dollar},
 		(t_delims){.ign_q = 0, .data = ">>", .func = got_double_delimiter},
 		(t_delims){.ign_q = 0, .data = "<>", .func = got_double_delimiter},
