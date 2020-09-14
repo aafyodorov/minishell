@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/13 23:15:54 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/14 14:31:53 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@ const char		*rec_parser(const char *str, t_list **list, char *eot)
 	return (str);
 }
 
+static void		del_lead_spaces(t_list **list) {
+	t_list		*tmp;
+	while (*list && !(ft_strcmp(get_str(*list), " ")))
+	{
+		tmp = (*list)->next;
+		free((*list)->content);
+		free(*list);
+		*list = tmp;
+	}
+}
+
 static void		ft_delspace(t_list **list)
 {
 	int			flag;
@@ -56,6 +67,7 @@ static void		ft_delspace(t_list **list)
 
 	flag = 0;
 	prev = NULL;
+	del_lead_spaces(list);
 	curr = *list;
 	while (curr)
 	{
@@ -89,6 +101,21 @@ t_list			*parser(const char *str)
 	if (!rec_parser(str, &list, ""))
 		return (NULL);
 	ft_lstreverse(&list);
+
+
+			t_list *t_list = list;
+			while(t_list) {
+				printf("'%s'\t", get_str(t_list));
+				t_list = t_list->next;
+			}
+			printf("\n________________\n");
+
 	ft_delspace(&list);
+	t_list = list;
+	while(t_list) {
+		printf("'%s'\t", get_str(t_list));
+		t_list = t_list->next;
+	}
+	printf("\n________________\n");
 	return (list);
 }
