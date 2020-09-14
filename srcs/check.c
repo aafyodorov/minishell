@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:56 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/13 23:16:19 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/14 00:56:10 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		check_redirect(t_list **parse)
 		*parse = (*parse)->next;
 	}
 	if (!pipe_status)
-		open_stdin_stdout();
+		g_exit_status = open_stdin_stdout();
 	g_pipe_next = pipe_status;
 	return (g_exit_status);
 }

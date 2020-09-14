@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/13 23:47:28 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/14 00:26:47 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	minishell(t_list *parse)
 
 	i = 0;
 	error = 0;
-	save_stdin_stdout();
+	save_stdin_stdout(); // возможно вынести отсюда в main
 	while (parse)
 	{
 		args = get_args_str(parse);
