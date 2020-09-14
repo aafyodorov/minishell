@@ -1,17 +1,6 @@
 #ifndef REDIRECT_H
 # define REDIRECT_H
 
-#define	BUF_REDIR 10
-
-// typedef struct	s_fd
-// {
-// 	int			fd;
-// 	struct s_fd	*next;
-	
-// }				t_fd;
-
-// t_fd			*g_fd_list;
-// t_fd			*g_fd_head;
 int				g_fd[2];
 int				g_pipe[2];
 int				g_pipe_prev;
