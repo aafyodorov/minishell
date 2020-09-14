@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/14 14:31:53 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/14 14:52:32 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,30 @@ static void		ft_delspace(t_list **list)
 	}
 }
 
+static void		del_redirect_spaces(t_list **list)
+{
+	t_list		*tmp;
+	t_list		*start;
+
+	start = *list;
+	while (*list)
+	{
+		//printf("%s\n", get_str(*list));
+		if (is_redirect(get_str(*list)) && (*list)->next &&
+			!ft_strcmp(get_str((*list)->next), " ") &&
+			!(get_flag_parser((*list)->next) & 1u))
+		{
+			tmp = (*list)->next->next;
+			free((*list)->next->content);
+			free((*list)->next);
+			(*list)->next = tmp;
+		}
+		else
+			*list = (*list)->next;
+	}
+	*list = start;
+}
+
 t_list			*parser(const char *str)
 {
 	t_list		*list;
@@ -100,22 +124,24 @@ t_list			*parser(const char *str)
 	list = NULL;
 	if (!rec_parser(str, &list, ""))
 		return (NULL);
+
+	t_list *t_list = list;
+//	while(t_list) {
+//		printf("'%s'\t", get_str(t_list));
+//		t_list = t_list->next;
+//	}
+//	printf("\n________________\n");
+
+	del_redirect_spaces(&list);
+
+//	t_list = list;
+//	while(t_list) {
+//		printf("'%s'\t", get_str(t_list));
+//		t_list = t_list->next;
+//	}
+//	printf("\n________________\n");
+
 	ft_lstreverse(&list);
-
-
-			t_list *t_list = list;
-			while(t_list) {
-				printf("'%s'\t", get_str(t_list));
-				t_list = t_list->next;
-			}
-			printf("\n________________\n");
-
 	ft_delspace(&list);
-	t_list = list;
-	while(t_list) {
-		printf("'%s'\t", get_str(t_list));
-		t_list = t_list->next;
-	}
-	printf("\n________________\n");
 	return (list);
 }
