@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:07:22 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 23:54:51 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 01:44:33 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char			**get_args_str(t_list *parse)
 			args[i++] = ft_strdup(tmp2);
 		else
 			args[i++] = ft_strjoin(tmp1 ? tmp1 : "", tmp2);
-		if ((get_flag_parser(parse) & 8u) && parse->next && is_redirect(get_str(parse->next)))
+		if ((get_flag_parser(parse) & 8u) && (!parse->next || (parse->next && is_redirect(get_str(parse->next)))))
 			args[i++] = ft_strdup(" ");
 		free_str(&tmp1);
 		free_str(&tmp2);

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:34 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 21:05:12 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 00:45:17 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ int			show_prompt();
 int			read_stdin(t_buf *buf, char **input);
 int			loop_read();
 int			print_error(char *message, int exit_code);
+int			find_env_var(char **var_list, char *str);
 
 #endif

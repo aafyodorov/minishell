@@ -71,5 +71,5 @@ char		*add_path(char *func)
 		}
 	}
 	free_args(&paths);
-	return (NULL);
+	return (ft_strdup(""));
 }

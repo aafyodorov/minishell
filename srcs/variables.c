@@ -6,7 +6,7 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:57:46 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/15 23:31:15 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 01:16:43 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ int			check_var_in_env(char **var_list, char **str)
 		if (!ft_strncmp(var_list[i], str[0], ft_strlen(str[0])) &&
 			var_list[i][ft_strlen(str[0])] == '=')
 		{
-			tmp = ft_strjoin(str[0], " ");
+			tmp = ft_strjoin(str[0], "=");
 			var_list[i] = ft_strjoin(tmp, str[1]);
+			free(tmp);
 			return (0);
 		}
 		i++;
@@ -97,13 +98,22 @@ int			check_var_in_env(char **var_list, char **str)
 int			add_var_to_env(char **cont)
 {
 	int			i;
+	int			idx;
 
 	i = -1;
-	while (++i < ENV_LENGTH && g_env_vars[i])
-		;
-	if (i == ENV_LENGTH)
-		return (1);
-	if (!(g_env_vars[i] = ft_strjoin(cont[0],
+	if ((idx = find_env_var(g_env_vars, cont[0])) != -1)
+		//return (0);
+		free(g_env_vars[idx]);
+	else
+	{
+		while (++i < ENV_LENGTH && g_env_vars[i])
+			;
+		//printf("%d\t%s\n", i, g_env_vars[i] ? g_env_vars[i] : "null");
+		if (i == ENV_LENGTH)
+			return (1);
+		idx = i;
+	}
+	if (!(g_env_vars[idx] = ft_strjoin(cont[0],
 	ft_strjoin("=", cont[1]))))
 		return (1);
 	return (0);
@@ -123,7 +133,7 @@ char		*got_var(const char *start, const char *eq_sign, const char *params,
 		end++;
 	if (cr_var_cont(start, eq_sign, end, (char **)cont))
 		return (NULL);
-	if ((get_flag_parser(head) & 4u) != 0) {
+	if (head && (get_flag_parser(head) & 4u) != 0) {
 		err_flg = add_var_to_env(cont) ? 1 : 0;
 		tmp = head;
 		while (tmp && ft_strcmp(get_str(tmp), "export"))

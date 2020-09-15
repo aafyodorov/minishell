@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 21:11:30 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 02:07:22 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int		child_process(char **args)
 	change_underscores(args[0], args);
 	args[0] = add_path(args[0]);
 	if (execve(args[0], args, g_env_vars) == -1)
+	{
+		free_args(&args);
 		exit(print_error("Command not found", 127));
+	}
 	exit(0);
 }
 
@@ -101,6 +104,7 @@ void	minishell(t_list *parse)
 			parse = parse->next;
 		if (parse)
 			parse = parse->next;
+		free_args(&args);
 		open_stdin_stdout();
 	}
 }
