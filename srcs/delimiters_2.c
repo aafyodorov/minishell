@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 23:35:53 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/12 02:40:50 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/15 17:38:36 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ const char	*got_dollar(const char *start, t_list **list, const char *params)
 const char	*got_double_quotes(const char *start, t_list **list,
 		const char *params)
 {
-	params = NULL;
+	if ((params = NULL))
+		return (NULL);
 	return (rec_parser(start + 1, list, "\""));
 }

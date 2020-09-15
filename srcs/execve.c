@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 02:42:01 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/12 02:43:45 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/15 18:20:18 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,18 @@ char		*add_path(char *func)
 	if (check_file_current_dir(func))
 		return (func);
 	i = -1;
-	paths = (char **)ft_calloc(sizeof(char *), 20);
-	while (g_env_vars[++i])
-	{
+	paths = NULL;
+	while (g_env_vars[++i] && !paths)
 		if (!ft_strncmp(g_env_vars[i], "PATH=", 5))
 			paths = ft_split(&g_env_vars[i][5], ':');
-	}
 	i = -1;
-	while (paths[++i])
+	while (paths && paths[++i])
 	{
 		if ((check_file(paths[i], func)))
 		{
 			tmp = ft_strjoin("/", func);
 			ret = ft_strjoin(paths[i], tmp);
-			free(tmp);
-			return (free_args(&paths) + ret);
+			return (ret + free_args(&paths) + free_str(&tmp));
 		}
 	}
 	free_args(&paths);

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:52 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/13 23:41:56 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:02:36 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int	ft_pwd(char **args)
 {
 	char		homepath[1024];
 
+	if ((args = NULL))
+		return (0);
 	if (!getcwd(homepath, 1024))
-		return (print_error(strerror(errno),1));
+		return (print_error(strerror(errno), 1));
 	ft_printf("%s\n", homepath);
 	return (0);
 }

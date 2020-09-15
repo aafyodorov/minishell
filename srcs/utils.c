@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:07:22 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/14 21:18:05 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:21:11 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static char		*ft_strdup_arg(char *str, unsigned flag, char **env)
 {
 	int			i;
 	const int	len = ft_strlen(str);
-	char		*arg;
 
 	i = 0;
 	if (!ft_strcmp(str, "?") && flag == 2)
@@ -89,11 +88,5 @@ char			**get_args_str(t_list *parse)
 		free_str(&tmp2);
 		parse = parse->next;
 	}
-	// if (g_pipe_prev == 2)
-	// {
-	// 	args[ft_strlenbuf(args)] = get_args_from_pipe();
-	// 	dup2(g_fd[0], g_pipe[0]);
-	// 	dup2(g_fd[1], g_pipe[1]);
-	// }
 	return (args);
 }

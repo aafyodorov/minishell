@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:57 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/12 22:05:59 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:09:38 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	delete_var(char ***env, int j)
 			(*env)[j] = (*env)[j + 1];
 			j++;
 		}
-		free((*env)[j]);
+		free(tmp);
 	}
 }
 
@@ -48,12 +48,11 @@ void		change_underscores(char *func, char **args)
 		print_error(strerror(errno), 1);
 }
 
-int			ft_unset(char **args) //////////не работает!!!
+int			ft_unset(char **args)
 {
 	int		i;
 	int		j;
 	int		len;
-	char	*tmp;
 
 	i = 0;
 	if (!ft_strncmp(args[i], "_", 1))

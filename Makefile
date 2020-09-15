@@ -6,8 +6,8 @@ GREEN = \033[0;32m
 PURPLE = \033[0;35m
 
 CC = gcc
-# FLAGS = -Wall -Werror -Wextra -ggdb
-FLAGS = -g
+FLAGS = -Wall -Werror -Wextra -g
+# FLAGS = -g
 AR = ar rs
 RM = rm -rf
 
@@ -62,7 +62,7 @@ $(NAME): $(LIBFT) $(OBJ) $(MAIN)
 	cp $(LIBFTDIR)$(LIBFT) $(NAME)
 	$(AR) $(NAME) $(OBJ)
 #	@echo "$(PURPLE)  Library $(NAME) created  $(B&W)"
-	@gcc $(MAIN) -I$(HEADERDIR) -I$(LIBFTHEADERDIR) -L./ -lminishell -o $(MINISHELL) -g
+	@gcc $(MAIN) -I$(HEADERDIR) -I$(LIBFTHEADERDIR) -L./ -lminishell -o $(MINISHELL) $(FLAGS)
 	@echo "$(PURPLE)  Minishell created  $(B&W)"
 
 -include $(DEP)
@@ -81,7 +81,7 @@ clean:
 
 fclean:
 	@$(MAKE) fclean -C $(LIBFTDIR)
-	@$(RM) $(OBJDIR) $(NAME) ./tests test
+	@$(RM) $(OBJDIR) $(NAME) $(MINISHELL)
 	@echo "$(RED)  Library $(NAME) deleted  $(B&W)"
 
 re: fclean all
