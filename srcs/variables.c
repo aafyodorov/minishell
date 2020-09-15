@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
+/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:57:46 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/13 23:44:25 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/15 23:31:15 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+#include <stdio.h>
 int			cr_var_cont(const char *start, const char *eq_sign,
 	const char *end, char **content)
 {
@@ -93,20 +94,50 @@ int			check_var_in_env(char **var_list, char **str)
 	return (0);
 }
 
-char		*got_var(char *start, char *eq_sign, char *params)
+int			add_var_to_env(char **cont)
 {
-	char		*end;
-	char		*cont[2];
+	int			i;
 
+	i = -1;
+	while (++i < ENV_LENGTH && g_env_vars[i])
+		;
+	if (i == ENV_LENGTH)
+		return (1);
+	if (!(g_env_vars[i] = ft_strjoin(cont[0],
+	ft_strjoin("=", cont[1]))))
+		return (1);
+	return (0);
+}
+
+char		*got_var(const char *start, const char *eq_sign, const char *params,
+	t_list *head)
+{
+	const char	*end;
+	char		*cont[2];
+	int			err_flg;
+	t_list		*tmp;
+
+	err_flg = 0;
 	end = eq_sign;
 	while (*end && is_delim(end, params) < 0)
 		end++;
 	if (cr_var_cont(start, eq_sign, end, (char **)cont))
 		return (NULL);
-	if (check_var_in_env(g_env_vars, cont) ||
-		add_var_to_list(&g_loc_vars, cont, 1))
-		return (NULL);
+	if ((get_flag_parser(head) & 4u) != 0) {
+		err_flg = add_var_to_env(cont) ? 1 : 0;
+		tmp = head;
+		while (tmp && ft_strcmp(get_str(tmp), "export"))
+			tmp = tmp->next;
+		if (tmp) {
+			set_flag_parser(tmp, get_flag_parser(tmp) | 8u);
+		//ft_printf("in got_var flag: '%d'\t data: '%s'\n", get_flag_parser(tmp), get_str(tmp));
+		}
+	}
+	else
+		check_var_in_env(g_env_vars, cont);
+	if (!err_flg && add_var_to_list(&g_loc_vars, cont, 1))
+		err_flg = 1;
 	free(cont[0]);
 	free(cont[1]);
-	return (end);
+	return (err_flg ? NULL : (char *)end);
 }

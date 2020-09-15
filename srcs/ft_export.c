@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:46 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 03:33:18 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/15 23:56:13 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int			ft_export(char **args)
 
 	exp = NULL;
 	i = -1;
-	if (!args[0])
+	if (!args[0] || (args[0] && !ft_strcmp(args[0], " ")))
 		return (print_env());
 	while (args[++i])
 	{

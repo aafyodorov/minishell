@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:34 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 17:58:23 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/15 21:05:12 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define BLUE "\033[1;34m"
 # define RESET "\033[0m"
 
+# define ENV_LENGTH 100
+
 int			g_exit_status;
 char		**g_env_vars;
 t_list		*g_loc_vars;
@@ -45,7 +47,7 @@ int			ft_env(char **args);
 int			ft_exit(char **args);
 
 int			ft_strlenbuf(char **buf);
-int			get_envs(char **envp, char ***g_env_vars);
+int			get_envs(char **envp, char ***g_env_varsz);
 char		**get_args_str(t_list *parse);
 void		change_underscores(char *func, char **args);
 char		*add_path(char *func);
