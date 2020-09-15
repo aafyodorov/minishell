@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 18:42:17 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:44:58 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ void	minishell(t_list *parse)
 			parse = parse->next;
 		if (parse)
 			parse = parse->next;
-		open_stdin_stdout();
+		if (open_stdin_stdout())
+			break ;
 	}
 }
 
@@ -135,11 +136,18 @@ int		loop_read(void)
 
 int		main(int argc, char **argv, char **envp)
 {
+<<<<<<< HEAD
 	if (argc > 1 || argv[1])
 		return (ft_putendl_fd("Error. Invalid arguments\n", 2));
 	if (get_envs(envp, &g_env_vars))
 		print_error(strerror(errno), 1);
 	save_stdin_stdout();
+=======
+	*argv = NULL;
+	argc = 0;
+	g_exit_status = get_envs(envp, &g_env_vars);
+	g_exit_status = save_stdin_stdout();
+>>>>>>> 8ac25586dd68fe01be4fbb9966ced4184e7f68e8
 	signal_handler();
 	if (!loop_read())
 		ft_putendl_fd("Error\n", 2);

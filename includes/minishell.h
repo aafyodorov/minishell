@@ -5,8 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2020/09/15 17:57:34 by pdemocri          #+#    #+#             */
 /*   Updated: 2020/09/15 17:58:23 by pdemocri         ###   ########.fr       */
+=======
+/*   Created: 2020/09/15 05:05:18 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/09/15 05:08:35 by pdemocri         ###   ########.fr       */
+>>>>>>> 8ac25586dd68fe01be4fbb9966ced4184e7f68e8
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +37,9 @@
 # define RESET "\033[0m"
 
 int			g_exit_status;
+int			g_fork_flag;
 char		**g_env_vars;
 t_list		*g_loc_vars;
-int			g_fork_flag;
 
 int			ft_echo(char **args);
 int			ft_cd(char **args);

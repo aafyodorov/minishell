@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 00:10:55 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/15 18:04:54 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:44:50 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int		read_stdin(t_buf *buf, char **input)
 int		print_error(char *message, int exit_code)
 {
 	ft_printf("%s\n", message);
+	g_exit_status = exit_code;
 	return (exit_code);
 }
