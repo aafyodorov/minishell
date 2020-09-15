@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/15 05:05:18 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/09/15 05:08:35 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -20,9 +32,9 @@
 # define RESET "\033[0m"
 
 int			g_exit_status;
+int			g_fork_flag;
 char		**g_env_vars;
 t_list		*g_loc_vars;
-static int 	g_fork_flag = 0;
 
 int			ft_echo(char **args);
 int			ft_cd(char **args);

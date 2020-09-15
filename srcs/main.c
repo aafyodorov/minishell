@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 04:37:16 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/15 05:24:35 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ void	minishell(t_list *parse)
 			parse = parse->next;
 		if (parse)
 			parse = parse->next;
-		open_stdin_stdout();
+		if (open_stdin_stdout())
+			break ;
 	}
 }
 
@@ -142,9 +143,8 @@ int		main(int argc, char **argv, char **envp)
 {
 	*argv = NULL;
 	argc = 0;
-	if (get_envs(envp, &g_env_vars))
-		print_error(strerror(errno), 1);
-	save_stdin_stdout(); // возможно вынести отсюда в main
+	g_exit_status = get_envs(envp, &g_env_vars);
+	g_exit_status = save_stdin_stdout();
 	signal_handler();
 	if (!loop_read())
 		ft_putendl_fd("Error.\n", 2);
