@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 21:40:24 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/14 23:49:25 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/15 04:32:51 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	save_stdin_stdout(void)
 int		open_stdin_stdout(void)
 {
 	dup2(g_fd[1], 1);
-	// dup2(g_fd[0], 0); ////////// ???
+	if (g_pipe_prev != 2)
+		dup2(g_fd[0], 0);
 	return (0);
 }

@@ -19,8 +19,6 @@
 # define BLUE "\033[1;34m"
 # define RESET "\033[0m"
 
-# include <stdio.h>  // удалить
-
 int			g_exit_status;
 char		**g_env_vars;
 t_list		*g_loc_vars;

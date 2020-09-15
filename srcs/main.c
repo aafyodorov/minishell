@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 00:42:08 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/15 04:37:16 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	minishell(t_list *parse)
 
 	i = 0;
 	error = 0;
-	save_stdin_stdout(); // возможно вынести отсюда в main
 	while (parse)
 	{
 		args = get_args_str(parse);
@@ -108,6 +107,7 @@ void	minishell(t_list *parse)
 }
 
 //TODO clean function
+#include <stdio.h>
 int		loop_read(void)
 {
 	//int 		read_b;
@@ -144,6 +144,7 @@ int		main(int argc, char **argv, char **envp)
 	argc = 0;
 	if (get_envs(envp, &g_env_vars))
 		print_error(strerror(errno), 1);
+	save_stdin_stdout(); // возможно вынести отсюда в main
 	signal_handler();
 	if (!loop_read())
 		ft_putendl_fd("Error.\n", 2);

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:00:44 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/15 00:52:31 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/15 04:36:34 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ void	ctrl_b(int sig)
 	if (!g_fork_flag)
 		write(0, "\b\b  \b\b", 6);
 }
-
+#include <stdio.h>
 void	ctrl_d(void)
 {
-	ft_printf("%i\n", g_pipe_next);
 	free_args(&g_env_vars);
 	ft_lstclear(&g_loc_vars, del_var_cont);
 	printf("In ctrl_D\n");
