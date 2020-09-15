@@ -45,7 +45,7 @@ static const t_delims	g_delims[DELIM_NUM] = {
 		(t_delims){.ign_q = 0, .data = " ", .func = got_space},
 		(t_delims){.ign_q = 0, .data = "\t", .func = got_space},
 		(t_delims){.ign_q = 1, .data = "$", .func = got_dollar},
-		(t_delims){.ign_q = 0, .data = "<>", .func = got_double_delimiter},
+		(t_delims){.ign_q = 0, .data = ">>", .func = got_double_delimiter},
 		(t_delims){.ign_q = 0, .data = "<", .func = got_unit_delimiter},
 		(t_delims){.ign_q = 0, .data = ">", .func = got_unit_delimiter},
 		(t_delims){.ign_q = 0, .data = "|", .func = got_unit_delimiter},
