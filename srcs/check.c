@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:56 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 03:24:23 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/18 05:45:33 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,21 @@
 
 int		is_func(char *str)
 {
-	const char	*funcs_str[8] = {NULL,
+	const char	*funcs_str[9] = {NULL,
 								"echo",
 								"cd",
 								"pwd",
 								"export",
 								"unset",
 								"env",
-								"exit"};
+								"exit",
+								" "};
 	int			i;
 
+	if (!str)
+		return (8);
 	i = 0;
-	while (++i < 8)
+	while (++i < 9)
 		if (!ft_strcmp(funcs_str[i], str))
 			return (i);
 	return (0);

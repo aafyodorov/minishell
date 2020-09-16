@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/16 04:04:13 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 04:04:15 by pdemocri         ###   ########.fr       */
+/*   Created: 2020/09/15 17:57:34 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/09/18 05:35:05 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@
 # define ENV_LENGTH 100
 
 int			g_exit_status;
-int			g_fork_flag;
 char		**g_env_vars;
 t_list		*g_loc_vars;
+int			g_fork_flag;
+int			g_prompt;
 
 static int	(*g_funcs_red[6])(t_list *) = {
 	NULL,
@@ -53,6 +54,7 @@ int			ft_export(char **args);
 int			ft_unset(char **args);
 int			ft_env(char **args);
 int			ft_exit(char **args);
+int			ft_empty(char **args);
 
 int			ft_strlenbuf(char **buf);
 int			get_envs(char **envp, char ***g_env_varsz);
@@ -76,7 +78,7 @@ int			loop_read();
 int			print_error(char *message, int exit_code);
 int			find_env_var(char **var_list, char *str);
 
-static int	(*g_funcs[8])(char **) = {
+static int	(*g_funcs[9])(char **) = {
 	NULL,
 	ft_echo,
 	ft_cd,
@@ -84,6 +86,7 @@ static int	(*g_funcs[8])(char **) = {
 	ft_export,
 	ft_unset,
 	ft_env,
-	ft_exit};
+	ft_exit,
+	ft_empty};
 
 #endif

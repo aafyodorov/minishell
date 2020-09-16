@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 00:10:55 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/16 04:02:22 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/18 05:34:39 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,14 @@ int		read_stdin(t_buf *buf, char **input)
 {
 	char			ch;
 	int				read_b;
+	int				readed;
 
 	ch = 0;
 	read_b = 0;
-	while (read(0, &ch, 1) && ch != 10)
+	while (((readed = read(0, &ch, 1)) && ch != 10) || (!readed && buf->i))
 	{
+		if ((!readed && buf->i))
+			continue;
 		if (add_to_buf(buf, ch, input))
 			return (1);
 		read_b = 1;
@@ -56,6 +59,11 @@ int		read_stdin(t_buf *buf, char **input)
 int		print_error(char *message, int exit_code)
 {
 	ft_printf("%s\n", message);
-	g_exit_status = exit_code;
 	return (exit_code);
+}
+
+int		ft_empty(char **args)
+{
+	(void)args;
+	return (0);
 }
