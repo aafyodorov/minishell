@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:34 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 21:05:12 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 22:33:51 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 #include "libftprintf.h"
 #include "minishell.h"
 
-int			ft_echo(char **args)
+int			ft_echo(char **args, unsigned flag)
 {
 	int		i;
-	int		flag;
 
 	i = 0;
 	flag = 0;
@@ -29,7 +28,7 @@ int			ft_echo(char **args)
 			i++;
 		}
 		while (args[i])
-			ft_printf("%s", args[i++]);
+			ft_printf("%s ", args[i++]);
 	}
 	if (!flag)
 		ft_printf("\n");

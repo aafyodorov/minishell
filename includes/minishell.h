@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:34 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 05:27:30 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 22:41:31 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ static int	(*g_funcs_red[6])(t_list *) = {
 	redirect_4,
 	redirect_5};
 
-int			ft_echo(char **args);
-int			ft_cd(char **args);
-int			ft_pwd(char **args);
-int			ft_export(char **args);
-int			ft_unset(char **args);
-int			ft_env(char **args);
-int			ft_exit(char **args);
+int			ft_echo(char **args, unsigned flag);
+int			ft_cd(char **args, unsigned flag);
+int			ft_pwd(char **args, unsigned flag);
+int			ft_export(char **args, unsigned flag);
+int			ft_unset(char **args, unsigned flag);
+int			ft_env(char **args, unsigned flag);
+int			ft_exit(char **args, unsigned flag);
 
 int			ft_strlenbuf(char **buf);
 int			get_envs(char **envp, char ***g_env_varsz);
@@ -77,7 +77,7 @@ int			loop_read();
 int			print_error(char *message, int exit_code);
 int			find_env_var(char **var_list, char *str);
 
-static int	(*g_funcs[8])(char **) = {
+static int	(*g_funcs[8])(char **, unsigned) = {
 	NULL,
 	ft_echo,
 	ft_cd,

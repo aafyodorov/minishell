@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:46 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 01:31:17 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 22:41:31 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,13 @@ static char	*find_loc_var(t_list *var_list, char *str)
 	return (NULL);
 }
 
-int			ft_export(char **args)
+int			ft_export(char **args, unsigned flag)
 {
 	int		i;
 	int		exp;
 	char	*tmp;
 
+	(void)flag;
 	i = -1;
 	if (!args[0])
 		return (print_env());

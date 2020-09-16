@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:57 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 21:05:12 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 22:42:29 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,13 @@ void		change_underscores(char *func, char **args)
 		print_error(strerror(errno), 1);
 }
 
-int			ft_unset(char **args)
+int			ft_unset(char **args, unsigned flag)
 {
 	int		i;
 	int		j;
 	int		len;
 
+	(void)flag;
 	i = 0;
 	if (!ft_strncmp(args[i], "_", 1))
 	{
