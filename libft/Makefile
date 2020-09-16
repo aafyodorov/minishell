@@ -135,6 +135,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJ_B) $(OBJ_PRINTF)
 	@$(AR) $(NAME) $(OBJ) $(OBJ_B) $(OBJ_PRINTF)
+	@touch .crutch
 	@echo "$(PURPLE)  Library $(NAME) created  $(B&W)"
 
 -include $(DEP) $(DEP_B)
@@ -164,7 +165,7 @@ test: $(NAME)
 	$(CC) main.c -L. -lft -I$(HEADER) -o test $(FLAGS)
 
 clean:
-	@$(RM) $(OBJDIR) libft.so
+	@$(RM) $(OBJDIR) libft.so .crutch
 	@echo "$(RED)  Object files deleted  $(B&W)"
 
 fclean: clean

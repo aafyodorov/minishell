@@ -57,9 +57,11 @@ DEP = $(OBJ:.o=.d)
 MINISHELL = minishell
 MAIN = $(SRCDIR)main.c
 
+CRUTCH = $(LIBFTDIR).crutch
+
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ) $(MAIN)
+$(NAME): $(CRUTCH) $(OBJ) $(MAIN)
 	cp $(LIBFTDIR)$(LIBFT) $(NAME)
 	$(AR) $(NAME) $(OBJ)
 #	@echo "$(PURPLE)  Library $(NAME) created  $(B&W)"
@@ -73,7 +75,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 	@$(CC) -I$(HEADERDIR) -I$(LIBFTHEADERDIR) -MMD -c $< -o $@ $(FLAGS)
 	@echo "$(GREEN)  Object file $(PURPLE)$@ $(GREEN)created  $(B&W)"
 
-$(LIBFT):
+$(CRUTCH): $(LIBFTDIR)sources/*.c $(LIBFTDIR)sources_bonus/*.c $(LIBFTDIR)sources_printf/*.c $(LIBFTDIR)includes/*.h
 	@$(MAKE) -C $(LIBFTDIR)
 
 clean:

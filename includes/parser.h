@@ -54,6 +54,7 @@ char			*got_var(const char *start, const char *eq_sign,
 int				cr_var_cont(const char *start, const char *eq_sign,
 					const char *end, char **content);
 t_list			*find_elem(t_list *list, char *key);
+void			super_ctrl_d(void);
 
 typedef struct
 {

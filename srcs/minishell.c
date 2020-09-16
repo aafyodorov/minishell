@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 03:30:06 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/16 03:30:38 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 06:44:55 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,18 +108,19 @@ int		loop_read(void)
 	while (1)
 	{
 		input = NULL;
-		if (show_prompt())
-			return (1);
+		if (!g_prompt && show_prompt())
+			super_ctrl_d();
 		if ((read_stdin(&buf, &input)) && buf.buf[0] != 10)
 		{
 			if (flush_buf(&buf, &input))
 				return (1);
 			parse = parser(input);
 			free(input);
+			g_prompt = 0;
 			minishell(parse);
 			ft_lstclear(&parse, free);
 		}
 		else
-			ctrl_d();
+			super_ctrl_d();
 	}
 }

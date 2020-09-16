@@ -17,6 +17,6 @@ int	ft_exit(char **args)
 {
 	if ((args = NULL))
 		return (0);
-	ctrl_d();
+	super_ctrl_d();
 	return (0);
 }
