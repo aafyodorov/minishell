@@ -5,7 +5,7 @@ RED =  \033[0;31m
 GREEN = \033[0;32m
 PURPLE = \033[0;35m
 
-CC = gcc
+CC = clang
 FLAGS = -Wall -Werror -Wextra -g
 # FLAGS = -g
 AR = ar rs
@@ -62,7 +62,7 @@ $(NAME): $(LIBFT) $(OBJ) $(MAIN)
 	cp $(LIBFTDIR)$(LIBFT) $(NAME)
 	$(AR) $(NAME) $(OBJ)
 #	@echo "$(PURPLE)  Library $(NAME) created  $(B&W)"
-	@gcc $(MAIN) -I$(HEADERDIR) -I$(LIBFTHEADERDIR) -L./ -lminishell -o $(MINISHELL) $(FLAGS)
+	@$(CC) $(MAIN) -I$(HEADERDIR) -I$(LIBFTHEADERDIR) -L./ -lminishell -o $(MINISHELL) $(FLAGS)
 	@echo "$(PURPLE)  Minishell created  $(B&W)"
 
 -include $(DEP)
