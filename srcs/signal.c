@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:00:44 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/16 22:28:55 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/17 01:03:28 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ctrl_d(void)
 {
 	free_args(&g_env_vars);
 	ft_lstclear(&g_loc_vars, del_var_cont);
-	exit(0);
+	exit(g_exit_status);
 }
 
 void	super_ctrl_d(void)

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:56 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 03:24:23 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/17 00:55:39 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ int		next_redirect(t_list *parse)
 
 int		check_redirect(t_list **parse)
 {
+	int				ret;
 	const int		pipe_status = next_redirect(*parse);
 
 	if (pipe_status > 1)
-		g_exit_status = g_funcs_red[pipe_status](*parse);
+		ret = g_funcs_red[pipe_status](*parse);
 	if (pipe_status >= 3)
 	{
 		while (*parse && !is_redirect(get_str(*parse)))
@@ -69,7 +70,8 @@ int		check_redirect(t_list **parse)
 		*parse = (*parse)->next;
 	}
 	if (!pipe_status)
-		g_exit_status = open_stdin_stdout();
+		ret = open_stdin_stdout();
+	g_exit_status = ret ? ret : g_exit_status;
 	g_pipe_next = pipe_status;
-	return (g_exit_status);
+	return (ret);
 }
