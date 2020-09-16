@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:34 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 22:43:58 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/17 01:07:41 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ int			ft_echo(char **args)
 			i++;
 		}
 		while (args[i])
-			ft_printf("%s ", args[i++]);
+		{
+			ft_printf("%s", args[i++]);
+			if (args[i])
+				ft_printf(" ");
+		}
 	}
 	if (!flag)
 		ft_printf("\n");
