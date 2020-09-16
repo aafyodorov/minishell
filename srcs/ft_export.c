@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:46 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 03:33:18 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/16 01:31:17 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,30 @@ static int	print_env(void)
 	int		i;
 	int		size;
 	char	**sorted_vars;
+	char	*cur_str;
 
 	i = 0;
 	size = ft_strlenbuf(g_env_vars);
 	get_envs(g_env_vars, &sorted_vars);
 	insertion_sort(&sorted_vars, size);
 	while (i < size)
-		ft_printf("declare -x %s\n", sorted_vars[i++]);
+	{
+		write(1, "declare -x ", 11);
+		cur_str = sorted_vars[i++];
+		while (*cur_str)
+		{
+			ft_putchar(*cur_str);
+			if (*cur_str == '=')
+				ft_putchar('\"');
+			cur_str++;
+		}
+		write(1, "\"\n", 2);
+	}
 	free_args(&sorted_vars);
 	return (0);
 }
 
-static char	*find_env_var(char **var_list, char *str)
+int			find_env_var(char **var_list, char *str)
 {
 	int		i;
 
@@ -62,10 +74,10 @@ static char	*find_env_var(char **var_list, char *str)
 	{
 		if (!ft_strncmp(var_list[i], str, ft_strlen(str)) &&
 			var_list[i][ft_strlen(str)] == '=')
-			return (var_list[i]);
+			return (i);
 		i++;
 	}
-	return (NULL);
+	return (-1);
 }
 
 static char	*find_loc_var(t_list *var_list, char *str)
@@ -96,17 +108,16 @@ static char	*find_loc_var(t_list *var_list, char *str)
 int			ft_export(char **args)
 {
 	int		i;
-	char	*exp;
+	int		exp;
 	char	*tmp;
 
-	exp = NULL;
 	i = -1;
 	if (!args[0])
 		return (print_env());
 	while (args[++i])
 	{
 		exp = find_env_var(g_env_vars, args[i]);
-		if (exp)
+		if (exp != -1)
 			continue;
 		tmp = find_loc_var(g_loc_vars, args[i]);
 		if (tmp)

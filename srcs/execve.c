@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 02:42:01 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/15 18:20:18 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/16 02:37:40 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ char		*add_path(char *func)
 		}
 	}
 	free_args(&paths);
-	return (NULL);
+	return (ft_strdup("") + free_str(&func));
 }

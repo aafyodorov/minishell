@@ -6,14 +6,14 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 17:33:19 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/09 01:01:08 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 03:36:49 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define FT_SIZE_MAX (size_t)~0
 # include <string.h>
+# include <stdint.h>
 # include "get_next_line.h"
 
 typedef struct		s_list

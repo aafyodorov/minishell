@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:07:22 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 18:21:11 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/16 03:20:13 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,25 @@ char			**get_args_str(t_list *parse)
 	int			i;
 	int			len;
 	char		**args;
-	char		*tmp1;
-	char		*tmp2;
+	char		*tmp[2];
 
 	len = str_args_len(parse);
 	args = (char **)ft_calloc(len + 10, sizeof(char *));
 	i = 0;
 	while ((parse && i < len))
 	{
-		tmp1 = args[i];
-		tmp2 = ft_strdup_arg(get_str(parse),
+		tmp[0] = args[i];
+		tmp[1] = ft_strdup_arg(get_str(parse),
 							get_flag_parser(parse), g_env_vars);
 		if (!get_flag_parser(parse))
-			args[i++] = ft_strdup(tmp2);
+			args[i++] = ft_strdup(tmp[1]);
 		else
-			args[i++] = ft_strjoin(tmp1 ? tmp1 : "", tmp2);
-		free_str(&tmp1);
-		free_str(&tmp2);
+			args[i++] = ft_strjoin(tmp[0] ? tmp[0] : "", tmp[1]);
+		if ((get_flag_parser(parse) & 8u) && (!parse->next ||
+			(parse->next && is_redirect(get_str(parse->next)))))
+			args[i++] = ft_strdup(" ");
+		free_str(&tmp[0]);
+		free_str(&tmp[1]);
 		parse = parse->next;
 	}
 	return (args);

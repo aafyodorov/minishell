@@ -6,7 +6,7 @@
 /*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 00:47:39 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/09 01:01:08 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 02:25:58 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <limits.h>
 #include "libftprintf.h"
 #include "libft.h"
+#include <float.h>
 
 int		print_float(t_flags *f, double d)
 {
@@ -43,7 +44,7 @@ double	get_float(double d)
 	int			i;
 	double		ld;
 
-	if (d <= LLONG_MAX)
+	if (d <= (double)LLONG_MAX)
 		ld = d - (long long)d;
 	else
 	{
@@ -94,7 +95,7 @@ char	*buf_integer(double d, char buf[D_SIZE], int accuracy, t_flags *f)
 		d += 0.5;
 	ld = d;
 	len = 0;
-	if (d <= LLONG_MAX)
+	if (d <= (double)LLONG_MAX)
 		return (ft_lltobuf(buf, d));
 	while (ld >= 1)
 	{

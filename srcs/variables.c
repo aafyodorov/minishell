@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
+/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:57:46 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/13 23:44:25 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/16 03:13:54 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-int			cr_var_cont(const char *start, const char *eq_sign,
-	const char *end, char **content)
-{
-	size_t		len_name;
-	size_t		len_var;
-
-	len_name = eq_sign - start + 1;
-	len_var = end - eq_sign + 1;
-	content[0] = ft_calloc(len_name, sizeof(char));
-	content[1] = ft_calloc(len_var, sizeof(char));
-	if (!content[0] || !content[1])
-	{
-		free(content[0]);
-		free(content[1]);
-		return (1);
-	}
-	ft_strncpy(content[0], start, len_name - 1);
-	ft_strncpy(content[1], eq_sign + 1, len_var - 1);
-	return (0);
-}
 
 t_list		*find_elem(t_list *list, char *key)
 {
@@ -84,8 +63,9 @@ int			check_var_in_env(char **var_list, char **str)
 		if (!ft_strncmp(var_list[i], str[0], ft_strlen(str[0])) &&
 			var_list[i][ft_strlen(str[0])] == '=')
 		{
-			tmp = ft_strjoin(str[0], " ");
+			tmp = ft_strjoin(str[0], "=");
 			var_list[i] = ft_strjoin(tmp, str[1]);
+			free(tmp);
 			return (0);
 		}
 		i++;
@@ -93,20 +73,58 @@ int			check_var_in_env(char **var_list, char **str)
 	return (0);
 }
 
-char		*got_var(char *start, char *eq_sign, char *params)
+int			add_var_to_env(char **cont)
 {
-	char		*end;
-	char		*cont[2];
+	int			i;
+	int			idx;
+	char		*tmp;
 
+	i = -1;
+	if ((idx = find_env_var(g_env_vars, cont[0])) != -1)
+		free(g_env_vars[idx]);
+	else
+	{
+		while (++i < ENV_LENGTH && g_env_vars[i])
+			;
+		if (i == ENV_LENGTH)
+			return (1);
+		idx = i;
+	}
+	tmp = ft_strjoin("=", cont[1]);
+	if (!(g_env_vars[idx] = ft_strjoin(cont[0], tmp)))
+	{
+		free(tmp);
+		return (1);
+	}
+	free(tmp);
+	return (0);
+}
+
+char		*got_var(const char *start, const char *eq_sign, const char *params,
+	t_list *head)
+{
+	const char	*end;
+	char		*cont[2];
+	int			err_flg;
+
+	err_flg = 0;
 	end = eq_sign;
 	while (*end && is_delim(end, params) < 0)
 		end++;
-	if (cr_var_cont(start, eq_sign, end, (char **)cont))
+	if (cr_var_cont(start, eq_sign, end - 1, (char **)cont))
 		return (NULL);
-	if (check_var_in_env(g_env_vars, cont) ||
-		add_var_to_list(&g_loc_vars, cont, 1))
-		return (NULL);
-	free(cont[0]);
-	free(cont[1]);
-	return (end);
+	if (head && (get_flag_parser(head) & 4u) != 0)
+	{
+		err_flg = add_var_to_env(cont) ? 1 : 0;
+		while (head && ft_strcmp(get_str(head), "export"))
+			head = head->next;
+		if (head)
+			set_flag_parser(head, get_flag_parser(head) | 8u);
+	}
+	else
+		check_var_in_env(g_env_vars, cont);
+	if (!err_flg && add_var_to_list(&g_loc_vars, cont, 1))
+		err_flg = 1;
+	return (err_flg + free_str(&cont[0]) +
+		free_str(&cont[1]) ? NULL : (char *)end);
 }

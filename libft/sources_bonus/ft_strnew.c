@@ -6,7 +6,7 @@
 /*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/25 12:25:11 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/09 01:01:08 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/15 21:05:13 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strnew(size_t size)
 {
 	char	*str;
 
-	if (size == FT_SIZE_MAX)
+	if (size == SIZE_MAX)
 		return (NULL);
 	str = (char *)ft_calloc(size + 1, sizeof(char));
 	if (str == NULL)
