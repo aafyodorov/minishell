@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:00:44 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/15 21:05:12 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 05:20:22 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 
 void	ctrl_c(int sig)
 {
-	if ((sig = 0))
-		return ;
+	sig = 0;
 	write(1, "\n\r", 2);
 	g_exit_status = 130;
 	show_prompt();
+	g_prompt = 1;
 }
 
 void	ctrl_b(int sig)
 {
-	if ((sig = 0))
-		return ;
+	sig = 0;
 	if (!g_fork_flag)
 		write(0, "\b\b  \b\b", 6);
 }
@@ -35,6 +34,12 @@ void	ctrl_d(void)
 	free_args(&g_env_vars);
 	ft_lstclear(&g_loc_vars, del_var_cont);
 	exit(0);
+}
+
+void	super_ctrl_d(void)
+{
+	ft_putchar(10);
+	ctrl_d();
 }
 
 void	signal_handler(void)
