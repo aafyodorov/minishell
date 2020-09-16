@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:48 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 22:42:28 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 22:43:26 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 #include "libftprintf.h"
 #include "minishell.h"
 
-int	ft_env(char **args, unsigned flag)
+int	ft_env(char **args)
 {
 	int			i;
 
-	(void)flag;
 	i = 0;
 	if (args[0])
 		return (print_error("Invalid argument\n", 127));

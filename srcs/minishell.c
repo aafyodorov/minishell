@@ -6,7 +6,7 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 03:30:06 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/16 22:33:51 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 23:20:25 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ int		start_fork(char **args, t_list **list)
 	return (0);
 }
 
-int		self_funcs(char **args, int i, unsigned flag)
+int		self_funcs(char **args, int i)
 {
 	if (g_pipe_next == 2)
 	{
 		dup2(g_pipe[0], 0);
 		dup2(g_pipe[1], 1);
 	}
-	return (g_funcs[i](&args[1], flag));
+	return (g_funcs[i](&args[1]));
 }
 
 void	minishell(t_list *parse)
@@ -90,7 +90,7 @@ void	minishell(t_list *parse)
 		change_underscores(args[0], args);
 		error = check_redirect(&parse);
 		if (!error && g_pipe_next != 2 && (i = is_func(args[0])))
-			g_exit_status = self_funcs(args, i, get_flag_parser(parse));
+			g_exit_status = self_funcs(args, i);
 		else if (!error)
 			start_fork(args, &list);
 		while (parse && !is_redirect(get_str(parse)))

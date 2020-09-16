@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:52 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 22:42:29 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 22:44:22 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 #include "minishell.h"
 #include "libftprintf.h"
 
-int	ft_pwd(char **args, unsigned flag)
+int	ft_pwd(char **args)
 {
 	char		homepath[1024];
 
-	(void)flag;
 	if ((args = NULL))
 		return (0);
 	if (!getcwd(homepath, 1024))

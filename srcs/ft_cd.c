@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:28 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 22:42:28 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 22:43:20 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ static int	change_oldpwd(void)
 	return (g_env_vars[len] == NULL);
 }
 
-int			ft_cd(char **args, unsigned flag)
+int			ft_cd(char **args)
 {
 	int			i;
 	char		tmp[1024];
 
-	(void)flag;
 	i = ft_strlenbuf(args);
 	if (i > 1)
 		return (print_error("cd: слишком много аргументов\n", 1));
