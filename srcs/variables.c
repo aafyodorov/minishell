@@ -6,33 +6,11 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:57:46 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/16 01:16:43 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 03:13:54 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-#include <stdio.h>
-int			cr_var_cont(const char *start, const char *eq_sign,
-	const char *end, char **content)
-{
-	size_t		len_name;
-	size_t		len_var;
-
-	len_name = eq_sign - start + 1;
-	len_var = end - eq_sign + 1;
-	content[0] = ft_calloc(len_name, sizeof(char));
-	content[1] = ft_calloc(len_var, sizeof(char));
-	if (!content[0] || !content[1])
-	{
-		free(content[0]);
-		free(content[1]);
-		return (1);
-	}
-	ft_strncpy(content[0], start, len_name - 1);
-	ft_strncpy(content[1], eq_sign + 1, len_var - 1);
-	return (0);
-}
 
 t_list		*find_elem(t_list *list, char *key)
 {
@@ -99,23 +77,26 @@ int			add_var_to_env(char **cont)
 {
 	int			i;
 	int			idx;
+	char		*tmp;
 
 	i = -1;
 	if ((idx = find_env_var(g_env_vars, cont[0])) != -1)
-		//return (0);
 		free(g_env_vars[idx]);
 	else
 	{
 		while (++i < ENV_LENGTH && g_env_vars[i])
 			;
-		//printf("%d\t%s\n", i, g_env_vars[i] ? g_env_vars[i] : "null");
 		if (i == ENV_LENGTH)
 			return (1);
 		idx = i;
 	}
-	if (!(g_env_vars[idx] = ft_strjoin(cont[0],
-	ft_strjoin("=", cont[1]))))
+	tmp = ft_strjoin("=", cont[1]);
+	if (!(g_env_vars[idx] = ft_strjoin(cont[0], tmp)))
+	{
+		free(tmp);
 		return (1);
+	}
+	free(tmp);
 	return (0);
 }
 
@@ -125,29 +106,25 @@ char		*got_var(const char *start, const char *eq_sign, const char *params,
 	const char	*end;
 	char		*cont[2];
 	int			err_flg;
-	t_list		*tmp;
 
 	err_flg = 0;
 	end = eq_sign;
 	while (*end && is_delim(end, params) < 0)
 		end++;
-	if (cr_var_cont(start, eq_sign, end, (char **)cont))
+	if (cr_var_cont(start, eq_sign, end - 1, (char **)cont))
 		return (NULL);
-	if (head && (get_flag_parser(head) & 4u) != 0) {
+	if (head && (get_flag_parser(head) & 4u) != 0)
+	{
 		err_flg = add_var_to_env(cont) ? 1 : 0;
-		tmp = head;
-		while (tmp && ft_strcmp(get_str(tmp), "export"))
-			tmp = tmp->next;
-		if (tmp) {
-			set_flag_parser(tmp, get_flag_parser(tmp) | 8u);
-		//ft_printf("in got_var flag: '%d'\t data: '%s'\n", get_flag_parser(tmp), get_str(tmp));
-		}
+		while (head && ft_strcmp(get_str(head), "export"))
+			head = head->next;
+		if (head)
+			set_flag_parser(head, get_flag_parser(head) | 8u);
 	}
 	else
 		check_var_in_env(g_env_vars, cont);
 	if (!err_flg && add_var_to_list(&g_loc_vars, cont, 1))
 		err_flg = 1;
-	free(cont[0]);
-	free(cont[1]);
-	return (err_flg ? NULL : (char *)end);
+	return (err_flg + free_str(&cont[0]) +
+		free_str(&cont[1]) ? NULL : (char *)end);
 }

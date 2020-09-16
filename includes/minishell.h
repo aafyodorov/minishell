@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:34 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 00:45:17 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 03:28:49 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ char		**g_env_vars;
 t_list		*g_loc_vars;
 int			g_fork_flag;
 
+static int	(*g_funcs_red[6])(t_list *) = {
+	NULL,
+	NULL,
+	redirect_2,
+	redirect_3,
+	redirect_4,
+	redirect_5};
+
 int			ft_echo(char **args);
 int			ft_cd(char **args);
 int			ft_pwd(char **args);
@@ -67,5 +75,15 @@ int			read_stdin(t_buf *buf, char **input);
 int			loop_read();
 int			print_error(char *message, int exit_code);
 int			find_env_var(char **var_list, char *str);
+
+static int	(*g_funcs[8])(char **) = {
+	NULL,
+	ft_echo,
+	ft_cd,
+	ft_pwd,
+	ft_export,
+	ft_unset,
+	ft_env,
+	ft_exit};
 
 #endif

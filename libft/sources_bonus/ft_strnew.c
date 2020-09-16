@@ -18,7 +18,7 @@ char	*ft_strnew(size_t size)
 {
 	char	*str;
 
-	if (size == FT_SIZE_MAX)
+	if (size == SIZE_MAX)
 		return (NULL);
 	str = (char *)ft_calloc(size + 1, sizeof(char));
 	if (str == NULL)

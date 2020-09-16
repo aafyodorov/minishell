@@ -18,7 +18,7 @@ void	*ft_calloc(size_t n, size_t size)
 {
 	void	*buf;
 
-	if ((n && FT_SIZE_MAX / n < size) || (size && FT_SIZE_MAX / size < n))
+	if ((n && SIZE_MAX / n < size) || (size && SIZE_MAX / size < n))
 		return (NULL);
 	if (!(buf = (void *)malloc(size * n)))
 		return (NULL);

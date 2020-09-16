@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:46 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 01:30:21 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 01:31:17 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static int	print_env(void)
 	{
 		write(1, "declare -x ", 11);
 		cur_str = sorted_vars[i++];
-		while (*cur_str) {
+		while (*cur_str)
+		{
 			ft_putchar(*cur_str);
 			if (*cur_str == '=')
 				ft_putchar('\"');

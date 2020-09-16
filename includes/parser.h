@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:37 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/15 21:35:26 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 02:52:17 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ const char		*got_sing_quote(const char *start, t_list **list,
 const char		*got_space(const char *start, t_list **list,
 							const char *params);
 t_list			*parser(const char *str);
-t_list			*create_node(const char *data, size_t len, unsigned flag, t_list *head);
+t_list			*create_node(const char *data, size_t len, unsigned flag,
+					t_list *head);
 int				push_node(t_list **list, t_list *new_node);
 int				is_delim(const char *str, const char *eot);
 char			**set_params(int key, char *eot);
@@ -48,10 +49,10 @@ void			ft_lstreverse(t_list **list);
 void			ft_delspace(t_list **list);
 void			del_redirect_spaces(t_list **list);
 void			del_var_cont(void *content);
-char			*got_var(const char *start, const char *eq_sign, const char *params,
-						t_list *head);
+char			*got_var(const char *start, const char *eq_sign,
+				const char *params, t_list *head);
 int				cr_var_cont(const char *start, const char *eq_sign,
-						const char *end, char **content);
+					const char *end, char **content);
 t_list			*find_elem(t_list *list, char *key);
 
 typedef struct

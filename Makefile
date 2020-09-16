@@ -43,7 +43,8 @@ SRCS = free.c\
 	  variables.c\
 	  variables_2.c\
 	  arr_buf.c\
-	  redirect.c
+	  redirect.c\
+	  minishell.c
 SRCDIR = ./srcs/
 SRC = $(addprefix $(SRCDIR), $(SRCS))
 

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:43:51 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/15 21:33:41 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 03:33:32 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ const char	*got_space(const char *start, t_list **list, const char *params)
 }
 
 const char	*got_sing_quote(const char *start, t_list **list,
-							  const char *params)
+				const char *params)
 {
 	t_list		*node;
 	const char	*next;
@@ -65,7 +65,6 @@ const char	*got_literal(const char *start, t_list **list, const char *params)
 	char		*next;
 	t_list		*node;
 	unsigned	flag;
-//	t_list		*prev;
 
 	flag = 0;
 	next = (char *)start;
@@ -77,18 +76,16 @@ const char	*got_literal(const char *start, t_list **list, const char *params)
 	}
 	node = create_node(start, next - start, 0, *list);
 	flag |= (*params && *next && *next != *params) ? 1u : 0;
-//	prev = *list;
 	if (push_node(list, node))
 		return (NULL);
 	flag |= *list && !ft_strcmp(get_str(*list), "export") ? 4u : 0;
 	set_flag_parser(*list, get_flag_parser(*list) | flag);
-	//printf("!!!node: %s.\t flag:%d\n", get_str(*list), get_flag_parser(*list));//del
 	next += *next == '\003' ? 1 : 0;
 	return (next);
 }
 
 const char	*got_unit_delimiter(const char *start, t_list **list,
-								  const char *params)
+				const char *params)
 {
 	t_list		*node;
 	unsigned	flag;

@@ -6,11 +6,9 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/15 23:35:46 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/15 23:46:27 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//TODO check Norm libft!!!
 
 #include "parser.h"
 
@@ -55,24 +53,8 @@ t_list			*parser(const char *str)
 	list = NULL;
 	if (!rec_parser(str, &list, ""))
 		return (NULL);
-
-	 t_list *t_list = list;
-//	while(t_list) {
-//		printf("'%s'\t", get_str(t_list));
-//		t_list = t_list->next;
-//	}
-//	printf("\n________________\n");
-
 	del_redirect_spaces(&list);
 	ft_lstreverse(&list);
 	ft_delspace(&list);
-
-//		t_list = list;
-//	while(t_list) {
-//		ft_printf("flag: '%d'\t data: '%s'\n", get_flag_parser(t_list), get_str(t_list));
-//		t_list = t_list->next;
-//	}
-//	ft_printf("\n________________\n");
-
 	return (list);
 }

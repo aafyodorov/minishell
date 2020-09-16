@@ -6,24 +6,22 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 18:36:47 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/15 21:32:24 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/16 03:32:33 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_list			*create_node(const char *data, size_t len, unsigned flag, t_list *head)
+t_list			*create_node(const char *data, size_t len, unsigned flag,
+					t_list *head)
 {
 	t_list		*node;
 	char		**n_data;
 	unsigned	*flg;
 
-	static int z = -1;
-
-	z++;
 	if (!((n_data = ft_calloc(1, ++len * sizeof(char) +
-								 sizeof(void *) * 2 + sizeof(unsigned))) &&
-		  (node = ft_lstnew(NULL))))
+	sizeof(void *) * 2 + sizeof(unsigned))) &&
+		(node = ft_lstnew(NULL))))
 	{
 		free(n_data);
 		free(node);
@@ -36,7 +34,6 @@ t_list			*create_node(const char *data, size_t len, unsigned flag, t_list *head)
 	if (head && (get_flag_parser(head) & 4u) != 0 && !is_redirect(n_data[1]))
 		flag |= 4u;
 	*flg = flag;
-	//printf("node: %s.\t flag:%d\n", n_data[1], *((unsigned *)n_data[0]));//del
 	node->content = n_data;
 	set_flag_parser(node, flag);
 	return (node);
