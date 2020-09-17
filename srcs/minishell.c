@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 03:30:06 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/17 04:56:32 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/18 00:36:17 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,9 @@ void	minishell(t_list *parse)
 			start_fork(args, &list);
 		while (parse && !is_redirect(get_str(parse)))
 			parse = parse->next;
+		// int k = 0;
+		// while (parse && ((k = is_redirect(get_str(parse)) < 3) && k))
+		// 	parse = parse->next;
 		if (parse)
 			parse = parse->next;
 		free_args(&args);
