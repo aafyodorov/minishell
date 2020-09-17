@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:56 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/17 00:55:39 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/17 03:35:04 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		is_func(char *str)
 	int			i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (++i < 8)
 		if (!ft_strcmp(funcs_str[i], str))
 			return (i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 03:30:06 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/16 23:20:25 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/17 04:56:32 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,25 @@
 
 int		child_process(char **args, t_list **list)
 {
-	int			ex_stat;
+	char		func_name[1024];
 
-	ex_stat = 0;
 	g_fork_flag = 1;
 	if (g_pipe_next == 2)
 	{
 		dup2(g_pipe[1], 1);
 		close(g_pipe[0]);
 	}
+	ft_strcpy(func_name, args[0]);
 	change_underscores(args[0], args);
 	args[0] = add_path(args[0]);
-	if (execve(args[0], args, g_env_vars) == -1) {
+	if (execve(args[0], args, g_env_vars) == -1)
+	{
 		ft_lstclear(list, free);
 		free_args(&args);
 		free_args(&g_env_vars);
 		ft_lstclear(&g_loc_vars, del_var_cont);
-		exit(print_error("Command not found", 127));
+		ft_printf("%s: ", func_name);
+		exit(print_error("command not found", 127));
 	}
 	exit(0);
 }
@@ -89,9 +91,9 @@ void	minishell(t_list *parse)
 		args = get_args_str(parse);
 		change_underscores(args[0], args);
 		error = check_redirect(&parse);
-		if (!error && g_pipe_next != 2 && (i = is_func(args[0])))
+		if (args && !error && g_pipe_next != 2 && (i = is_func(args[0])))
 			g_exit_status = self_funcs(args, i);
-		else if (!error)
+		else if (args && !error)
 			start_fork(args, &list);
 		while (parse && !is_redirect(get_str(parse)))
 			parse = parse->next;

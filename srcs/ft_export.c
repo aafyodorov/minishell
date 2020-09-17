@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:46 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 22:44:11 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/17 02:27:01 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,21 @@ int			ft_export(char **args)
 	i = -1;
 	if (!args[0])
 		return (print_env());
-	while (args[++i])
-	{
-		exp = find_env_var(g_env_vars, args[i]);
-		if (exp != -1)
-			continue;
-		tmp = find_loc_var(g_loc_vars, args[i]);
-		if (tmp)
-			g_env_vars[ft_strlenbuf(g_env_vars)] = tmp;
-	}
+	if (args[0][0] != ' ')
+		while (args[++i])
+		{
+			if (ft_isdigit(args[i][0]))
+			{
+				ft_printf("bash: export: «%s»: invalid identifier\n", args[i]);
+				g_exit_status = 1;
+				continue;
+			}
+			exp = find_env_var(g_env_vars, args[i]);
+			if (exp != -1)
+				continue;
+			tmp = find_loc_var(g_loc_vars, args[i]);
+			if (tmp)
+				g_env_vars[ft_strlenbuf(g_env_vars)] = tmp;
+		}
 	return (0);
 }

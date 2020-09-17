@@ -6,14 +6,14 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:40 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/17 02:02:59 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/17 02:17:04 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "minishell.h"
 
-static int	is_number(char *str)
+static int	isnumber(char *str)
 {
 	int	i;
 	int	res;
@@ -35,9 +35,9 @@ int			ft_exit(char **args)
 	(void)args;
 	if (args[0])
 	{
-		if (is_number(args[0]) && !args[1])
+		if (isnumber(args[0]) && !args[1])
 			g_exit_status = (unsigned char)ft_atoi(args[0]);
-		else if (is_number(args[0]))
+		else if (isnumber(args[0]))
 			return (g_exit_status =
 			print_error("exit\nminishell: exit: too many arguments", 1));
 		else
