@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:43:51 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/18 05:20:30 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/18 22:44:36 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,27 @@ const char	*got_backslash(const char *start, t_list **list, const char *params)
 {
 	t_list		*node;
 	unsigned	flag;
-	const char	*ptr;
+	const char	*after_bs;
 	size_t		len;
+	const char	*last;
 
-	ptr = start;
-	while (*ptr == '\\')
-		ptr++;
-	len = ptr - start;
-	flag = (*params && *ptr && *ptr != *params) ? 1 : 0;
-	if (len % 2 && *ptr == *params)
+	after_bs = start;
+	while (*after_bs == '\\')
+		after_bs++;
+	last = after_bs;
+	while (*(last + 1) != *params && is_delim(last + 1, params) == -1)
+		last++;
+	len = after_bs - start;
+	if (len % 2 && *after_bs == *params)
 		return (NULL);
-	else if (len % 2 == 0)
-		len /= 2;
-	else if (len != 1)
-		len /= 2 + 1;
-	node = create_node(start + len, len, flag, *list);
+	else if (len % 2 != 0)
+		start++;
+	flag = (is_delim(last + 1, params) == 3 ) ? 1 : 0;
+	len /= 2;
+	node = create_node(start + len, last - start + 1 - len, flag, *list);
 	if (push_node(list, node))
 		return (NULL);
-	ptr += ((ptr - start) % 2) ? 1 : 0;
-	return (ptr);
+	return (last + 1);
 }
 
 const char	*got_space(const char *start, t_list **list, const char *params)
@@ -52,7 +54,7 @@ const char	*got_space(const char *start, t_list **list, const char *params)
 }
 
 const char	*got_sing_quote(const char *start, t_list **list,
-				const char *params)
+							  const char *params)
 {
 	t_list		*node;
 	const char	*next;
@@ -100,7 +102,7 @@ const char	*got_literal(const char *start, t_list **list, const char *params)
 }
 
 const char	*got_unit_delimiter(const char *start, t_list **list,
-				const char *params)
+								  const char *params)
 {
 	t_list		*node;
 	unsigned	flag;
