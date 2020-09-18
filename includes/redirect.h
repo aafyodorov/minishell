@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:41 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 04:27:17 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/18 05:04:03 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		next_redirect(t_list *parse);
 void	save_stdin_stdout(void);
 int		open_stdin_stdout(void);
 
-int		redirect_1(t_list *parse);
 int		redirect_2(t_list *parse);
 int		redirect_3(t_list *parse);
 int		redirect_4(t_list *parse);

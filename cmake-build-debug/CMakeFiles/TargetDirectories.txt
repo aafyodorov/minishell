@@ -1,3 +1,0 @@
-/home/kroak/School21Projects/Current/minishell/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/kroak/School21Projects/Current/minishell/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/kroak/School21Projects/Current/minishell/cmake-build-debug/CMakeFiles/minishell.dir

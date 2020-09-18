@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:24 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 04:27:17 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/18 05:04:03 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	free_args(char ***args)
 	i = 0;
 	while (*args && (*args)[i])
 		free((*args)[i++]);
-	if (*args)
-		free(*args);
+	free(*args);
 	*args = NULL;
 	return (0);
 }
