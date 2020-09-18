@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/16 04:03:58 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 04:04:01 by pdemocri         ###   ########.fr       */
+/*   Created: 2020/09/15 17:57:37 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/09/18 05:20:30 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int				cr_var_cont(const char *start, const char *eq_sign,
 					const char *end, char **content);
 t_list			*find_elem(t_list *list, char *key);
 void			super_ctrl_d(void);
+void			print_p_list(t_list *list, int exit);
 
 typedef struct
 {

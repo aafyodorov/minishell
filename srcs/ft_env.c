@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:48 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 04:03:21 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/18 05:20:30 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int	get_envs(char **envp, char ***g_env_vars)
 
 	i = ft_strlenbuf(envp);
 	if (!(*g_env_vars = (char **)ft_calloc(sizeof(char *), i + 100)))
-		return (print_error(strerror(errno), 1));
+		return (1);
 	i = 0;
 	while (envp[i])
 	{
 		if (!((*g_env_vars)[i] = (char *)malloc(ft_strlen(envp[i]) + 1)))
-			return (print_error(strerror(errno), 1));
+			return (1);
 		ft_strcpy((*g_env_vars)[i], envp[i]);
 		i++;
 	}

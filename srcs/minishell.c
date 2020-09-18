@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 03:30:06 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/16 06:44:55 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/18 05:20:31 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,34 @@
 
 int		child_process(char **args, t_list **list)
 {
-	int			ex_stat;
+	char		func_name[1024];
 
-	ex_stat = 0;
 	g_fork_flag = 1;
 	if (g_pipe_next == 2)
 	{
 		dup2(g_pipe[1], 1);
 		close(g_pipe[0]);
 	}
+	ft_strcpy(func_name, args[0]);
 	change_underscores(args[0], args);
 	args[0] = add_path(args[0]);
 	if (execve(args[0], args, g_env_vars) == -1)
-		ex_stat = print_error("Command not found", 127);
-	ft_lstclear(list, free);
-	free_args(&args);
-	ctrl_d();
-	exit(ex_stat);
+	{
+		ft_lstclear(list, free);
+		free_args(&args);
+		free_args(&g_env_vars);
+		ft_lstclear(&g_loc_vars, del_var_cont);
+		ft_printf("%s: ", func_name);
+		exit(print_error("command not found", 127));
+	}
+	exit(0);
 }
 
 int		start_fork(char **args, t_list **list)
 {
 	int			status;
 	pid_t		pid;
+	int zzz;
 
 	pid = fork();
 	if (pid == 0)
@@ -50,6 +55,8 @@ int		start_fork(char **args, t_list **list)
 		}
 		wait(&status);
 		g_exit_status = WEXITSTATUS(status);
+		if ((zzz = WIFSIGNALED(status)))
+			g_exit_status = (status != 131) ? 130 : status;
 	}
 	else
 		g_exit_status = print_error(strerror(errno), 1);
@@ -84,12 +91,15 @@ void	minishell(t_list *parse)
 		args = get_args_str(parse);
 		change_underscores(args[0], args);
 		error = check_redirect(&parse);
-		if (!error && g_pipe_next != 2 && (i = is_func(args[0])))
+		if (args && !error && g_pipe_next != 2 && (i = is_func(args[0])))
 			g_exit_status = self_funcs(args, i);
-		else if (!error)
+		else if (args && !error)
 			start_fork(args, &list);
 		while (parse && !is_redirect(get_str(parse)))
 			parse = parse->next;
+		// int k = 0;
+		// while (parse && ((k = is_redirect(get_str(parse)) < 3) && k))
+		// 	parse = parse->next;
 		if (parse)
 			parse = parse->next;
 		free_args(&args);
@@ -110,12 +120,13 @@ int		loop_read(void)
 		input = NULL;
 		if (!g_prompt && show_prompt())
 			super_ctrl_d();
-		if ((read_stdin(&buf, &input)) && buf.buf[0] != 10)
+		if (read_stdin(&buf, &input) && buf.buf[0] != 10)
 		{
 			if (flush_buf(&buf, &input))
 				return (1);
 			parse = parser(input);
 			free(input);
+			//print_p_list(parse, 1);
 			g_prompt = 0;
 			minishell(parse);
 			ft_lstclear(&parse, free);
