@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:03:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 05:20:30 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/18 07:23:44 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 #include "minishell.h"
 #include "redirect.h"
 
+int			redirect_1(t_list *parse)
+{
+	(void)parse;
+	return (0);
+}
+
 int			redirect_2(t_list *parse)
 {
-	if ((parse = NULL))
-		return (0);
+	(void)parse;
 	if (pipe(g_pipe) == -1)
 		return (errno);
 	return (0);
