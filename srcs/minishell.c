@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 03:30:06 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/18 00:36:17 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/18 04:06:16 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,14 @@ int		loop_read(void)
 		input = NULL;
 		if (!g_prompt && show_prompt())
 			super_ctrl_d();
-		if ((read_stdin(&buf, &input)) && buf.buf[0] != 10)
+		if (read_stdin(&buf, &input) && buf.buf[0] != 10)
 		{
 			if (flush_buf(&buf, &input))
 				return (1);
 			parse = parser(input);
 			free(input);
 			g_prompt = 0;
+			print_p_list(parse, 1);
 			minishell(parse);
 			ft_lstclear(&parse, free);
 		}

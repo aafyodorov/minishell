@@ -6,11 +6,19 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 18:36:47 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/16 03:32:33 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/17 18:13:56 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+/*
+**Node's flags:
+** 1 - not last element of dquotes
+** 2 - need substitute for variable
+** 4 - 'export' and it's vars
+** 8 - Was substitute in 'export'
+*/
 
 t_list			*create_node(const char *data, size_t len, unsigned flag,
 					t_list *head)
@@ -86,4 +94,15 @@ char			*get_var(const char *str)
 			str++;
 	}
 	return ((char *)str);
+}
+
+void			print_p_list(t_list *list, int ex)
+{
+	while (list)
+	{
+		ft_printf("flag: %d\tdata:%s\n", get_flag_parser(list), get_str(list));
+		list = list->next;
+	}
+	if (ex)
+		exit(0);
 }

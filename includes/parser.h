@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:37 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/16 02:52:17 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/17 00:22:49 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int				cr_var_cont(const char *start, const char *eq_sign,
 					const char *end, char **content);
 t_list			*find_elem(t_list *list, char *key);
 void			super_ctrl_d(void);
+void			print_p_list(t_list *list, int exit);
 
 typedef struct
 {
