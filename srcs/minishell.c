@@ -122,6 +122,7 @@ int		loop_read(void)
 			parse = parser(input);
 			free(input);
 			g_prompt = 0;
+			print_p_list(parse, 1);
 			minishell(parse);
 			ft_lstclear(&parse, free);
 		}

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:43:51 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/17 01:15:37 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/18 03:34:50 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ const char	*got_literal(const char *start, t_list **list, const char *params)
 	{
 		if (!*next && *params)
 			return (NULL);
-		if (*next == '=')
-			return (got_var((char *)start, next, (char *)params, *list));
+		if (*next == '=' && *params)
+			flag = 16u;
 		next++;
 	}
 	node = create_node(start, next - start, 0, *list);
