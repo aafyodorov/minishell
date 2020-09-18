@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:34 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 05:20:30 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/18 05:35:05 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int			ft_export(char **args);
 int			ft_unset(char **args);
 int			ft_env(char **args);
 int			ft_exit(char **args);
+int			ft_empty(char **args);
 
 int			ft_strlenbuf(char **buf);
 int			get_envs(char **envp, char ***g_env_varsz);
@@ -77,7 +78,7 @@ int			loop_read();
 int			print_error(char *message, int exit_code);
 int			find_env_var(char **var_list, char *str);
 
-static int	(*g_funcs[8])(char **) = {
+static int	(*g_funcs[9])(char **) = {
 	NULL,
 	ft_echo,
 	ft_cd,
@@ -85,6 +86,7 @@ static int	(*g_funcs[8])(char **) = {
 	ft_export,
 	ft_unset,
 	ft_env,
-	ft_exit};
+	ft_exit,
+	ft_empty};
 
 #endif

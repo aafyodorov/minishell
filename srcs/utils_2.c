@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 00:10:55 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/18 05:20:30 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/18 05:34:39 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,10 @@ int		print_error(char *message, int exit_code)
 {
 	ft_printf("%s\n", message);
 	return (exit_code);
+}
+
+int		ft_empty(char **args)
+{
+	(void)args;
+	return (0);
 }

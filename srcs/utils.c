@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:07:22 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 05:20:30 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/18 05:31:25 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char            **get_args_str(t_list *parse)
 		if (get_flag_parser(parse) & 16u)
 		{
 			got_var(get_str(parse), ft_strchr(get_str(parse), '='), "", parse);
-			args[i++] = ft_strdup("");
+			args[i++] = ft_strdup(" ");
 			parse = parse->next;
 			continue;
 		}

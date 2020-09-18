@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:57 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 05:20:30 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/18 06:07:16 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		change_underscores(char *func, char **args)
 		i++;
 	free(g_env_vars[i]);
 	if (!(g_env_vars[i] = ft_strjoin("_=", tmp)) && errno)
-		print_error(strerror(errno), 1);
+		print_error(strerror(i), 1);
 }
 
 int			ft_unset(char **args)
