@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 03:30:06 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/18 04:15:48 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/18 04:41:02 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ int		loop_read(void)
 				return (1);
 			parse = parser(input);
 			free(input);
+			//print_p_list(parse, 1);
 			g_prompt = 0;
 			minishell(parse);
 			ft_lstclear(&parse, free);

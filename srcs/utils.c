@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:07:22 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 04:05:05 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/18 04:55:18 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,29 +64,32 @@ static char		*ft_strdup_arg(char *str, unsigned flag, char **env)
 	return (strdup(str));
 }
 
-char			**get_args_str(t_list *parse)
+char            **get_args_str(t_list *parse)
 {
-	int			i;
-	int			len;
-	char		**args;
-	char		*tmp[2];
+	int         i;
+	int         len;
+	char        **args;
+	char        *tmp;
 
 	len = str_args_len(parse);
 	args = (char **)ft_calloc(len + 10, sizeof(char *));
 	i = 0;
-	while ((parse && i < len))
+	while (parse && i < len)
 	{
-		tmp[0] = args[i];
-		tmp[1] = ft_strdup_arg(get_str(parse),
+		if (get_flag_parser(parse) & 16u)
+		{
+			got_var(get_str(parse), ft_strchr(get_str(parse), '='), "", parse);
+			args[i++] = ft_strdup("");
+			parse = parse->next;
+			continue;
+		}
+		tmp = ft_strdup_arg(get_str(parse),
 							get_flag_parser(parse), g_env_vars);
-		if (!get_flag_parser(parse))
-			args[i++] = ft_strdup(tmp[1]);
-		else
-			args[i++] = ft_strjoin(tmp[0] ? tmp[0] : "", tmp[1]);
+		args[i++] = ft_strdup(tmp);
 		if ((get_flag_parser(parse) & 8u) && (!parse->next ||
-			(parse->next && is_redirect(get_str(parse->next)))))
+											  (parse->next && is_redirect(get_str(parse->next)))))
 			args[i++] = ft_strdup(" ");
-		(void)(free_str(&tmp[0]) + free_str(&tmp[1]));
+		free_str(&tmp);
 		parse = parse->next;
 	}
 	return (args);

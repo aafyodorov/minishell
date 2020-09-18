@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:43:51 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/18 03:34:50 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/18 04:27:17 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ const char	*got_literal(const char *start, t_list **list, const char *params)
 	{
 		if (!*next && *params)
 			return (NULL);
-		if (*next == '=' && *params)
+		if (*next == '=' && !*params)
 			flag = 16u;
 		next++;
 	}

@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="minishell"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/kroak/School21Projects/Current/minishell/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/kroak/School21Projects/Current/minishell/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/kroak/School21Projects/Current/minishell/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="minishell">
+				<Option output="/home/kroak/School21Projects/Current/minishell/cmake-build-debug/minishell" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kroak/School21Projects/Current/minishell/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/kroak/School21Projects/Current/minishell/includes"/>
+					<Add directory="/home/kroak/School21Projects/Current/minishell/libft/includes"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 minishell"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="minishell/fast">
+				<Option output="/home/kroak/School21Projects/Current/minishell/cmake-build-debug/minishell" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kroak/School21Projects/Current/minishell/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/kroak/School21Projects/Current/minishell/includes"/>
+					<Add directory="/home/kroak/School21Projects/Current/minishell/libft/includes"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 minishell/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kroak/School21Projects/Current/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/includes/arr_buf.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/includes/minishell.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/includes/parser.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/includes/redirect.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/includes/get_next_line.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/includes/libft.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/includes/libftprintf.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_atoi.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_bzero.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_calloc.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_isalnum.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_isalpha.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_isascii.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_isdigit.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_isprint.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_itoa.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_lstadd_back.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_lstadd_front.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_lstclear.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_lstdelone.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_lstiter.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_lstlast.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_lstmap.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_lstnew.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_lstsize.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_memccpy.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_memchr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_memcmp.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_memcpy.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_memmove.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_memset.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_putchar_fd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_putendl_fd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_putnbr_fd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_putstr_fd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_split.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_strchr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_strdup.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_strjoin.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_strlcat.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_strlcpy.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_strlen.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_strmapi.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_strncmp.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_strnstr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_strrchr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_strtrim.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_substr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_tolower.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources/ft_toupper.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_abs.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_atof.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_isblank.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_iscntrl.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_isgraph.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_islower.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_isspace.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_isupper.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_isxdigit.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_lltoa.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_memdel.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_pow.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_putchar.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_putendl.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_putnbr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_putstr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_putunbr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strcasecmp.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strcasestr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strcat.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strclr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strcmp.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strcpy.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strdel.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strequ.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_striter.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_striteri.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strlowcase.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strmap.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strncasecmp.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strncat.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strncpy.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strnequ.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strnew.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strstr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/ft_strupcase.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/get_next_line.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_bonus/get_next_line_utils.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/check_params.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/convert_wch_to_ch.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/flags.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/ft_printf.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/get_params.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_c.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_f_e_g.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_i.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_inf_nan.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_lc_ls.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_o.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_p_x.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_s.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_u.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_utils_double.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_utils_e.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_utils_g.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/print_utils_num.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/libft/sources_printf/util_number.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/arr_buf.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/check.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/delimiters_1.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/delimiters_2.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/execve.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/fd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/flags_parser.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/free.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/ft_cd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/ft_echo.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/ft_env.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/ft_exit.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/ft_export.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/ft_lstreverse.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/ft_pwd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/ft_unset.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/main.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/minishell.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/parser.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/parser_del_spaces.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/parser_utils.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/redirect.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/signal.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/utils.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/utils_2.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/variables.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/srcs/variables_2.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/home/kroak/School21Projects/Current/minishell/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
