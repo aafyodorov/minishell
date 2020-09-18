@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:00:44 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/18 05:20:30 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/19 02:49:59 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,11 @@
 void	ctrl_c(int sig)
 {
 	sig = 0;
-	//ft_printf("~~~~~~");
 	write(1, "\n\r", 2);
 	show_prompt();
 	g_exit_status = 130;
 	if (g_fork_flag)
-	{
-
 		exit (errno);
-	}
 	g_prompt = 1;
 }
 

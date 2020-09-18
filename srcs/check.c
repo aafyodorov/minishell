@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:56 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/19 00:00:00 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/19 02:35:38 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int			check_redirect(t_list **parse)
 	const int		pipe_status = next_redirect(*parse);
 
 	errno = 0;
+	ret = 0;
 	if (pipe_status)
 		ret = g_funcs_red[pipe_status](*parse);
 	

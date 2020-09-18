@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:40 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/17 02:17:04 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/19 00:52:16 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int	isnumber(char *str)
 		return (0);
 	i = -1;
 	res = 1;
+	if (*str == '-')
+		str++;
 	while (str[++i] && res)
 	{
 		if (!ft_isdigit(str[i]))

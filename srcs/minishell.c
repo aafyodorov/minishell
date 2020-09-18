@@ -6,11 +6,21 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 03:30:06 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/18 05:20:31 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/19 01:42:01 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		self_funcs(char **args, int i)
+{
+	if (g_pipe_next == 2)
+	{
+		dup2(g_pipe[0], 0);
+		dup2(g_pipe[1], 1);
+	}
+	return (g_funcs[i](&args[1]));
+}
 
 int		child_process(char **args, t_list **list)
 {
@@ -24,15 +34,26 @@ int		child_process(char **args, t_list **list)
 	}
 	ft_strcpy(func_name, args[0]);
 	change_underscores(args[0], args);
-	args[0] = add_path(args[0]);
-	if (execve(args[0], args, g_env_vars) == -1)
+
+	int i = 0;
+	if (args && (i = is_func(args[0])))
+		g_exit_status = self_funcs(args, i);
+	else
 	{
-		ft_lstclear(list, free);
-		free_args(&args);
-		free_args(&g_env_vars);
-		ft_lstclear(&g_loc_vars, del_var_cont);
-		ft_printf("%s: ", func_name);
-		exit(print_error("command not found", 127));
+	
+	
+
+
+		args[0] = add_path(args[0]);
+		if (execve(args[0], args, g_env_vars) == -1)
+		{
+			ft_lstclear(list, free);
+			free_args(&args);
+			free_args(&g_env_vars);
+			ft_lstclear(&g_loc_vars, del_var_cont);
+			ft_printf("%s: ", func_name);
+			exit(print_error("command not found", 127));
+		}
 	}
 	exit(0);
 }
@@ -41,7 +62,6 @@ int		start_fork(char **args, t_list **list)
 {
 	int			status;
 	pid_t		pid;
-	int zzz;
 
 	pid = fork();
 	if (pid == 0)
@@ -55,8 +75,12 @@ int		start_fork(char **args, t_list **list)
 		}
 		wait(&status);
 		g_exit_status = WEXITSTATUS(status);
-		if ((zzz = WIFSIGNALED(status)))
+		if ((WIFSIGNALED(status)))
+		{
+			if (status == 131)
+				ft_printf("quit (core dumped) %s\n", args[0]);
 			g_exit_status = (status != 131) ? 130 : status;
+		}
 	}
 	else
 		g_exit_status = print_error(strerror(errno), 1);
@@ -64,16 +88,6 @@ int		start_fork(char **args, t_list **list)
 	g_pipe_next = 0;
 	g_fork_flag = 0;
 	return (0);
-}
-
-int		self_funcs(char **args, int i)
-{
-	if (g_pipe_next == 2)
-	{
-		dup2(g_pipe[0], 0);
-		dup2(g_pipe[1], 1);
-	}
-	return (g_funcs[i](&args[1]));
 }
 
 void	minishell(t_list *parse)
