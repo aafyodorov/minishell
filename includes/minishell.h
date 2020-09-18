@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:34 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 07:24:14 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/18 05:35:05 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			g_prompt;
 
 static int	(*g_funcs_red[6])(t_list *) = {
 	NULL,
-	redirect_1,
+	NULL,
 	redirect_2,
 	redirect_3,
 	redirect_4,
