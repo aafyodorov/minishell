@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:05:34 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 05:20:30 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/18 21:38:25 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			ft_echo(char **args)
 	flag = 0;
 	if (*args)
 	{
-		if (!ft_strcmp(args[0], "-n"))
+		while (!ft_strcmp(args[i], "-n"))
 		{
 			flag = 1;
 			i++;
