@@ -1,0 +1,24 @@
+var=123; echo $var; var=456; echo $var; echo $var1
+
+
+
+157fbca6ca0973860a7cd3628d3de2effa3f18bb
+echo qwe | cat -e; echo oyoyoyoooy > 1 >> 2 > 3; pwd; ls | cat -e; cat < 1 < 2 < 3; echo qwe | cat -e; echo oyoyoyoooy > 1 >> 2 > 3; pwd; ls | cat -e; cat < 1 < 2 < 3
+
+
+redirect.c  добавлена redirect_1
+echo \$ \\$ \\\$
+
+
+"echo test tout" 
+"echo test      tout"
+"echo -n -n -n test tout"
+"minishell:~/home/cddoma/minishell"
+"mkdir test_dir ; cd test_dir ; rm -rf ../test_dir ; cd . ; pwd ; cd . ; pwd ; cd .. ; pwd"
+
+
+    fix all error exit codes and error msgs
+049c1d8edc8d911d3aa603d968805767e98b2a2e
+
+
+88744a8fa1096ea331a6a6e85789fb57c17638a7

@@ -47,7 +47,7 @@ static char		*ft_strdup_arg(char *str, unsigned flag, char **env)
 	const int	len = ft_strlen(str);
 
 	i = 0;
-	if (!ft_strcmp(str, "?") && flag == 2)
+	if (!ft_strcmp(str, "?") && flag & 2)
 		return (ft_itoa(g_exit_status));
 	if (flag & 2u)
 	{
@@ -78,12 +78,15 @@ char			**get_args_str(t_list *parse)
 	int			len;
 	char		**args;
 	char		*tmp;
+	char		*tmp2;
 
 	len = str_args_len(parse);
 	args = (char **)ft_calloc(len + 10, sizeof(char *));
 	i = 0;
 	while (parse && i < len)
 	{
+		tmp2 = args[i];
+		
 		if (get_flag_parser(parse) & 16u)
 		{
 			got_var(get_str(parse), ft_strchr(get_str(parse), '='), "", parse);
@@ -92,7 +95,10 @@ char			**get_args_str(t_list *parse)
 			continue;
 		}
 		tmp = ft_strdup_arg(get_str(parse), get_flag_parser(parse), g_env_vars);
-		args[i++] = ft_strdup(tmp);
+		if (get_flag_parser(parse) & 1)
+			args[i++] = ft_strjoin(tmp2, tmp);
+		else
+			args[i++] = ft_strdup(tmp);
 		if (is_empty_export(parse))
 			args[i++] = ft_strdup(" ");
 		free_str(&tmp);
