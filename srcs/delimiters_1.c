@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:43:51 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/18 22:44:36 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/19 03:11:25 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ const char	*got_backslash(const char *start, t_list **list, const char *params)
 		return (NULL);
 	else if (len % 2 != 0)
 		start++;
-	flag = (is_delim(last + 1, params) == 3 ) ? 1 : 0;
+	flag = (is_delim(last + 1, params) == 3) ? 1 : 0;
 	len /= 2;
 	node = create_node(start + len, last - start + 1 - len, flag, *list);
 	if (push_node(list, node))
@@ -54,7 +54,7 @@ const char	*got_space(const char *start, t_list **list, const char *params)
 }
 
 const char	*got_sing_quote(const char *start, t_list **list,
-							  const char *params)
+							const char *params)
 {
 	t_list		*node;
 	const char	*next;
@@ -102,7 +102,7 @@ const char	*got_literal(const char *start, t_list **list, const char *params)
 }
 
 const char	*got_unit_delimiter(const char *start, t_list **list,
-								  const char *params)
+								const char *params)
 {
 	t_list		*node;
 	unsigned	flag;

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:41 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 07:24:31 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/19 03:30:14 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ int				g_pipe_next;
 **	5 - <
 */
 
-int		next_redirect(t_list *parse);
-
 void	save_stdin_stdout(void);
 int		open_stdin_stdout(void);
+int		open_pipe_parent(void);
+int		open_pipe_child(void);
 
+int		next_redirect(t_list *parse);
 int		redirect_1(t_list *parse);
 int		redirect_2(t_list *parse);
 int		redirect_3(t_list *parse);

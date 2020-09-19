@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 03:30:06 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/19 01:42:01 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/19 03:29:24 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,17 @@ int		self_funcs(char **args, int i)
 int		child_process(char **args, t_list **list)
 {
 	char		func_name[1024];
+	int			i;
 
+	i = 0;
 	g_fork_flag = 1;
-	if (g_pipe_next == 2)
-	{
-		dup2(g_pipe[1], 1);
-		close(g_pipe[0]);
-	}
+	open_pipe_child();
 	ft_strcpy(func_name, args[0]);
 	change_underscores(args[0], args);
-
-	int i = 0;
 	if (args && (i = is_func(args[0])))
 		g_exit_status = self_funcs(args, i);
 	else
 	{
-	
-	
-
-
 		args[0] = add_path(args[0]);
 		if (execve(args[0], args, g_env_vars) == -1)
 		{
@@ -68,11 +60,7 @@ int		start_fork(char **args, t_list **list)
 		g_exit_status = child_process(args, list);
 	else if (pid > 0)
 	{
-		if (g_pipe_next == 2)
-		{
-			dup2(g_pipe[0], 0);
-			close(g_pipe[1]);
-		}
+		open_pipe_parent();
 		wait(&status);
 		g_exit_status = WEXITSTATUS(status);
 		if ((WIFSIGNALED(status)))
@@ -111,9 +99,6 @@ void	minishell(t_list *parse)
 			start_fork(args, &list);
 		while (parse && !is_redirect(get_str(parse)))
 			parse = parse->next;
-		// int k = 0;
-		// while (parse && ((k = is_redirect(get_str(parse)) < 3) && k))
-		// 	parse = parse->next;
 		if (parse)
 			parse = parse->next;
 		free_args(&args);
@@ -140,7 +125,6 @@ int		loop_read(void)
 				return (1);
 			parse = parser(input);
 			free(input);
-			//print_p_list(parse, 1);
 			g_prompt = 0;
 			minishell(parse);
 			ft_lstclear(&parse, free);

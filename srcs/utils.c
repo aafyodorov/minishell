@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:07:22 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 05:31:25 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/19 03:11:00 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,20 @@ static char		*ft_strdup_arg(char *str, unsigned flag, char **env)
 	return (strdup(str));
 }
 
-char            **get_args_str(t_list *parse)
+static int		is_empty_export(t_list *parse)
 {
-	int         i;
-	int         len;
-	char        **args;
-	char        *tmp;
+	return ((get_flag_parser(parse) & 8u) &&
+				(!parse->next ||
+				(parse->next &&
+					is_redirect(get_str(parse->next)))));
+}
+
+char			**get_args_str(t_list *parse)
+{
+	int			i;
+	int			len;
+	char		**args;
+	char		*tmp;
 
 	len = str_args_len(parse);
 	args = (char **)ft_calloc(len + 10, sizeof(char *));
@@ -83,11 +91,9 @@ char            **get_args_str(t_list *parse)
 			parse = parse->next;
 			continue;
 		}
-		tmp = ft_strdup_arg(get_str(parse),
-							get_flag_parser(parse), g_env_vars);
+		tmp = ft_strdup_arg(get_str(parse), get_flag_parser(parse), g_env_vars);
 		args[i++] = ft_strdup(tmp);
-		if ((get_flag_parser(parse) & 8u) && (!parse->next ||
-											  (parse->next && is_redirect(get_str(parse->next)))))
+		if (is_empty_export(parse))
 			args[i++] = ft_strdup(" ");
 		free_str(&tmp);
 		parse = parse->next;

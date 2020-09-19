@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 00:10:55 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/18 05:34:39 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/19 03:01:11 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,11 @@ int		print_error(char *message, int exit_code)
 int		ft_empty(char **args)
 {
 	(void)args;
+	return (0);
+}
+
+int		redirect_1(t_list *parse)
+{
+	(void)parse;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:00:44 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/19 02:49:59 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/19 03:00:01 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ctrl_c(int sig)
 	show_prompt();
 	g_exit_status = 130;
 	if (g_fork_flag)
-		exit (errno);
+		exit(errno);
 	g_prompt = 1;
 }
 

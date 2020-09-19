@@ -6,19 +6,13 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:03:14 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 23:53:50 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/19 03:00:27 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minishell.h"
 #include "redirect.h"
-
-int			redirect_1(t_list *parse)
-{
-	(void)parse;
-	return (0);
-}
 
 int			redirect_2(t_list *parse)
 {

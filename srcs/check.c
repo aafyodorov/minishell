@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 01:33:56 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/19 02:35:38 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/19 02:59:49 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,44 +60,11 @@ int			next_redirect(t_list *parse)
 	return (i);
 }
 
-// static void skip_redirect(t_list **parse)
-// {
-// 	int				i;
-// 	int				k;
-	
-
-// 	char *tmp = NULL;
-// 	while (*parse && !is_redirect(get_str(*parse)))
-// 	{
-// 		tmp = get_str(*parse);
-// 		*parse = (*parse)->next;
-// 	}
-// 	if (*parse)
-// 	{
-// 		tmp = get_str(*parse);
-// 		*parse = (*parse)->next;
-// 	}
-// 	while (*parse && (((k = next_redirect(*parse)) == 3) || k == 4))
-// 	{
-// 		tmp = get_str(*parse);
-// 		if ((i = is_redirect(get_str(*parse))))
-// 		{
-// 			// close (g_pipe[1]);
-// 			g_funcs_red[i](*parse);
-// 		}
-// 		*parse = (*parse)->next;
-// 	}
-// 	while (*parse && !is_redirect(get_str(*parse)))
-// 	{
-// 		tmp = get_str(*parse);
-// 		*parse = (*parse)->next;
-// 	}
-// 	*parse = *parse ? (*parse)->next : *parse;
-// }
-
-static void skip_redirect(t_list **parse)
+static void	skip_redirect(t_list **parse)
 {
-	char *tmp = NULL;
+	char *tmp;
+
+	tmp = NULL;
 	while (*parse && !is_redirect(get_str(*parse)))
 	{
 		tmp = get_str(*parse);
@@ -119,21 +86,12 @@ int			check_redirect(t_list **parse)
 	ret = 0;
 	if (pipe_status)
 		ret = g_funcs_red[pipe_status](*parse);
-	
-//
 	if (pipe_status >= 3)
 	{
 		g_pipe_prev = pipe_status;
 		skip_redirect(parse);
 		check_redirect(parse);
 	}
-//
-	// if (pipe_status >= 3)
-	// {
-	// 	while (*parse && !is_redirect(get_str(*parse)))
-	// 		*parse = (*parse)->next;
-	// 	*parse = (*parse)->next;
-	// }
 	if (!pipe_status && g_pipe_prev < 3)
 		ret = open_stdin_stdout();
 	g_exit_status = ret ? ret : g_exit_status;
