@@ -6,17 +6,13 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:07:22 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/19 03:11:00 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/19 22:20:28 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
 #include "libft.h"
 #include "minishell.h"
 #include "parser.h"
-#include "redirect.h"
 
 int				ft_strlenbuf(char **buf)
 {
@@ -47,7 +43,7 @@ static char		*ft_strdup_arg(char *str, unsigned flag, char **env)
 	const int	len = ft_strlen(str);
 
 	i = 0;
-	if (!ft_strcmp(str, "?") && flag & 2)
+	if (!ft_strcmp(str, "?") && flag & 2u)
 		return (ft_itoa(g_exit_status));
 	if (flag & 2u)
 	{
@@ -90,11 +86,11 @@ char			**get_args_str(t_list *parse)
 			continue;
 		tmp = ft_strdup_arg(get_str(parse), get_flag_parser(parse), g_env_vars);
 		args[i] = tmp2 ? ft_strjoin(tmp2, tmp) : ft_strdup(tmp);
-		if (!(get_flag_parser(parse) & 1))
+		if (!(get_flag_parser(parse) & 1u))
 			i++;
 		if (is_empty_export(parse))
 			args[i++] = ft_strdup(" ");
-		free_str(&tmp);
+		(void)(free_str(&tmp) + free_str(&tmp2));
 		parse = parse->next;
 	}
 	return (args);

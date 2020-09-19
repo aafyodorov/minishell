@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 23:35:53 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/16 03:21:34 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/19 22:24:23 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,9 @@ const char	*got_double_quotes(const char *start, t_list **list,
 			const char *params)
 {
 	(void)params;
-	return (rec_parser(start + 1, list, "\""));
+	if (*(++start) == '\"')
+		return (push_node(list, create_node("", 0, 0, *list)) ?
+			NULL : start + 1);
+	else
+		return (rec_parser(start, list, "\""));
 }
