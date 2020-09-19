@@ -95,10 +95,9 @@ char			**get_args_str(t_list *parse)
 			continue;
 		}
 		tmp = ft_strdup_arg(get_str(parse), get_flag_parser(parse), g_env_vars);
-		if (get_flag_parser(parse) & 1)
-			args[i++] = ft_strjoin(tmp2, tmp);
-		else
-			args[i++] = ft_strdup(tmp);
+		args[i] = tmp2 ? ft_strjoin(tmp2, tmp) : ft_strdup(tmp);
+		if (!(get_flag_parser(parse) & 1))
+			i++;
 		if (is_empty_export(parse))
 			args[i++] = ft_strdup(" ");
 		free_str(&tmp);
