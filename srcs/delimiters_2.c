@@ -48,7 +48,6 @@ const char	*got_dollar(const char *start, t_list **list, const char *params)
 const char	*got_double_quotes(const char *start, t_list **list,
 			const char *params)
 {
-	if ((params = NULL))
-		;
+	(void)params;
 	return (rec_parser(start + 1, list, "\""));
 }

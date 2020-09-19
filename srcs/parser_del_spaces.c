@@ -51,13 +51,13 @@ void		ft_delspace(t_list **list)
 	while (curr)
 	{
 		flag = set_flag(prev, curr);
-		if ((!flag || (prev && !ft_strcmp(get_str(prev), "echo"))) &&
-			!ft_strcmp(get_str(curr), " "))
+		if ((!flag ||
+			(prev && !ft_strcmp(get_str(prev), "echo"))) &&
+				!ft_strcmp(get_str(curr), " ") &&
+			(prev && !(get_flag_parser(prev) & 1)))
 		{
 			prev->next = curr->next;
-			free(curr->content);
-			free(curr);
-			curr = NULL;
+			ft_lstdelone(curr, free);
 			curr = prev->next;
 		}
 		else

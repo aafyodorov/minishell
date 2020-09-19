@@ -56,6 +56,7 @@ int				cr_var_cont(const char *start, const char *eq_sign,
 t_list			*find_elem(t_list *list, char *key);
 void			super_ctrl_d(void);
 void			print_p_list(t_list *list, int exit);
+int				subst_var(t_list **parse, char **args, int *i);
 
 typedef struct
 {

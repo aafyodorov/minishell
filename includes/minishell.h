@@ -62,8 +62,6 @@ char		**get_args_str(t_list *parse);
 void		change_underscores(char *func, char **args);
 char		*add_path(char *func);
 
-void		signal_handler(void);
-
 int			free_str(char **str);
 int			free_args(char ***args);
 
@@ -71,6 +69,7 @@ int			is_func(char *str);
 int			is_redirect(char *str);
 int			check_redirect(t_list **parse);
 
+void		signal_handler(void);
 void		ctrl_d(void);
 void		ctrl_c(int sig);
 int			show_prompt();

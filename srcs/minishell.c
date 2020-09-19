@@ -98,11 +98,10 @@ void	minishell(t_list *parse)
 		else if (args && !error)
 			start_fork(args, &list);
 		if (g_exit_status == 130)
-			break;
+			break ;
 		while (parse && !is_redirect(get_str(parse)))
 			parse = parse->next;
-		if (parse)
-			parse = parse->next;
+		parse = parse ? parse->next : NULL;
 		free_args(&args);
 		open_stdin_stdout();
 	}

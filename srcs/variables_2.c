@@ -44,3 +44,16 @@ int			cr_var_cont(const char *start, const char *eq_sign,
 	ft_strncpy(content[1], eq_sign + 1, len_var - 1);
 	return (0);
 }
+
+int			subst_var(t_list **parse, char **args, int *i)
+{
+	if (get_flag_parser(*parse) & 16u)
+	{
+		got_var(get_str(*parse), ft_strchr(get_str(*parse), '='), "", *parse);
+		*args = ft_strdup(" ");
+		(*i)++;
+		*parse = (*parse)->next;
+		return (1);
+	}
+	return (0);
+}

@@ -86,14 +86,8 @@ char			**get_args_str(t_list *parse)
 	while (parse && i < len)
 	{
 		tmp2 = args[i];
-		
-		if (get_flag_parser(parse) & 16u)
-		{
-			got_var(get_str(parse), ft_strchr(get_str(parse), '='), "", parse);
-			args[i++] = ft_strdup(" ");
-			parse = parse->next;
+		if (subst_var(&parse, &args[i], &i))
 			continue;
-		}
 		tmp = ft_strdup_arg(get_str(parse), get_flag_parser(parse), g_env_vars);
 		args[i] = tmp2 ? ft_strjoin(tmp2, tmp) : ft_strdup(tmp);
 		if (!(get_flag_parser(parse) & 1))
