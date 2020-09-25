@@ -29,11 +29,11 @@ int			ft_echo(char **args)
 			i++;
 		}
 		while (args[i])
-		{
+		// {
 			ft_printf("%s", args[i++]);
-			if (args[i])
-				ft_putchar(' ');
-		}
+			// if (args[i])
+			// 	ft_putchar(' ');
+		// }
 	}
 	if (!flag)
 		ft_printf("\n");

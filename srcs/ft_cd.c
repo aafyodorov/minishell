@@ -16,6 +16,19 @@
 #include "libftprintf.h"
 #include "minishell.h"
 
+void		get_home_path(void)
+{
+	int			i;
+
+	i = 0;
+	while (g_env_vars[i] && ft_strncmp("HOME=", g_env_vars[i], 5))
+			i++;
+	if (g_env_vars[i])
+		ft_strcpy(g_home_path, &g_env_vars[i][5]);
+	else
+		getcwd(g_home_path, 1024);
+}
+
 static int	change_oldpwd(void)
 {
 	int			i;
@@ -38,6 +51,21 @@ static int	change_oldpwd(void)
 	return (g_env_vars[len] == NULL);
 }
 
+static int	prev_path(void)
+{
+	int			i;
+	char		tmp[1024];
+
+	i = 0;
+	while (g_env_vars[i] && ft_strncmp("OLDPWD=", g_env_vars[i], 7))
+		i++;
+	if (g_env_vars[i])
+		ft_strcpy(tmp, &g_env_vars[i][7]);
+	else
+		ft_strcpy(tmp, g_home_path);
+	return (!chdir(tmp) ? 0 : print_error(strerror(errno), 1));
+	}
+
 int			ft_cd(char **args)
 {
 	int			i;
@@ -46,13 +74,18 @@ int			ft_cd(char **args)
 	i = ft_strlenbuf(args);
 	if (i > 1)
 		return (print_error("cd: слишком много аргументов\n", 1));
+	if (i == 1 && !ft_strcmp(args[0], "-"))
+		return (prev_path());
 	if (change_oldpwd())
 		return (print_error(strerror(errno), 1));
 	if (i == 0 || !ft_strcmp(args[0], "~"))
 	{
-		while (ft_strncmp("HOME=", g_env_vars[i], 5))
+		while (g_env_vars[i] && ft_strncmp("HOME=", g_env_vars[i], 5))
 			i++;
-		ft_strcpy(tmp, &g_env_vars[i][5]);
+		if (g_env_vars[i])
+			ft_strcpy(tmp, &g_env_vars[i][5]);
+		else
+			ft_strcpy(tmp, g_home_path);
 		return (!chdir(tmp) ? 0 : print_error(strerror(errno), 1));
 	}
 	return (!chdir(args[0]) ? 0 : print_error(strerror(errno), 1));

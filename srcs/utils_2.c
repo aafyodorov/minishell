@@ -59,6 +59,7 @@ int		read_stdin(t_buf *buf, char **input)
 int		print_error(char *message, int exit_code)
 {
 	ft_printf("%s\n", message);
+	errno = 0;
 	return (exit_code);
 }
 
@@ -70,6 +71,7 @@ int		ft_empty(char **args)
 
 int		redirect_1(t_list *parse)
 {
-	(void)parse;
+	if (parse && is_redirect(get_str(parse)))
+		return (print_error("minishell: syntax error", 2));
 	return (0);
 }

@@ -19,7 +19,7 @@ int			redirect_2(t_list *parse)
 	while (parse && !is_redirect(get_str(parse)))
 		parse = parse->next;
 	parse = parse ? parse->next : parse;
-	if (!parse || !get_str(parse) || is_redirect(get_str(parse)))
+	if ((!parse || !get_str(parse)) || is_redirect(get_str(parse)))
 		return (print_error("minishell: syntax error", 1));
 	if (pipe(g_pipe) == -1)
 		return (errno);
@@ -33,7 +33,7 @@ static char	*get_filename(t_list *parse)
 	res = NULL;
 	while (parse && !(is_redirect(get_str(parse))))
 		parse = parse->next;
-	if (parse->next)
+	if (parse->next && !(is_redirect(get_str(parse->next))))
 		res = get_str(parse->next);
 	return (res);
 }
@@ -43,11 +43,19 @@ int			redirect_3(t_list *parse)
 	const char	*filename = get_filename(parse);
 
 	if (!filename)
-		return (print_error("echo: syntax error", 2));
+	{
+		if (!is_redirect(get_str(parse)))
+			return (print_error("minishell: syntax error", 2));
+		else
+			return (2);
+	}
 	close(1);
 	g_pipe[1] = open(filename, O_WRONLY | O_TRUNC | O_CREAT, 0777);
 	if (g_pipe[1] < 0)
+	{
+		open_stdin_stdout();
 		return (print_error(strerror(errno), 1));
+	}
 	return (0);
 }
 
@@ -57,14 +65,18 @@ int			redirect_4(t_list *parse)
 
 	if (!filename)
 	{
-		g_exit_status = 2;
-		ft_printf("echo: syntax error");
-		return (2);
+		if (!is_redirect(get_str(parse)))
+			return (print_error("minishell: syntax error", 2));
+		else
+			return (2);
 	}
 	close(1);
 	g_pipe[1] = open(filename, O_WRONLY | O_APPEND | O_CREAT, 0777);
 	if (g_pipe[1] < 0)
+	{
+		open_stdin_stdout();
 		return (print_error(strerror(errno), 1));
+	}
 	return (0);
 }
 
@@ -73,10 +85,18 @@ int			redirect_5(t_list *parse)
 	const char	*filename = get_filename(parse);
 
 	if (!filename)
-		return (print_error("echo: syntax error", 2));
+	{
+		if (!is_redirect(get_str(parse)))
+			return (print_error("minishell: syntax error", 2));
+		else
+			return (2);
+	}
 	close(0);
 	g_pipe[0] = open(filename, O_RDONLY);
 	if (g_pipe[0] < 0)
+	{
+		open_stdin_stdout();
 		return (print_error(strerror(errno), 1));
+	}
 	return (0);
 }

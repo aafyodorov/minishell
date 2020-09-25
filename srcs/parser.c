@@ -55,6 +55,6 @@ t_list			*parser(const char *str)
 		return (NULL);
 	del_redirect_spaces(&list);
 	ft_lstreverse(&list);
-	ft_delspace(&list);
+	del_redirect_spaces(&list);
 	return (list);
 }

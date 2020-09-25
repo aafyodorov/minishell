@@ -22,6 +22,7 @@ int		main(int argc, char **argv, char **envp)
 	if (get_envs(envp, &g_env_vars))
 		print_error(strerror(errno), 1);
 	save_stdin_stdout();
+	get_home_path();
 	signal_handler();
 	if (!loop_read())
 		ft_putendl_fd("Error\n", 2);

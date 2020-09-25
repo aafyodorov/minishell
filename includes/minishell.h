@@ -35,6 +35,7 @@
 
 int			g_exit_status;
 char		**g_env_vars;
+char		g_home_path[1024];
 t_list		*g_loc_vars;
 int			g_fork_flag;
 int			g_prompt;
@@ -77,6 +78,7 @@ int			read_stdin(t_buf *buf, char **input);
 int			loop_read();
 int			print_error(char *message, int exit_code);
 int			find_env_var(char **var_list, char *str);
+void		get_home_path(void);
 
 static int	(*g_funcs[9])(char **) = {
 	NULL,
