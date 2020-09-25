@@ -30,6 +30,7 @@ SRCS = free.c\
 	  ft_export.c\
 	  utils.c\
 	  utils_2.c\
+	  utils_3.c\
 	  parser.c\
 	  delimiters_1.c\
 	  delimiters_2.c\
@@ -64,7 +65,6 @@ all: $(NAME)
 $(NAME): $(CRUTCH) $(OBJ) $(MAIN)
 	cp $(LIBFTDIR)$(LIBFT) $(NAME)
 	$(AR) $(NAME) $(OBJ)
-#	@echo "$(PURPLE)  Library $(NAME) created  $(B&W)"
 	@$(CC) $(MAIN) -I$(HEADERDIR) -I$(LIBFTHEADERDIR) -L./ -lminishell -o $(MINISHELL) $(FLAGS)
 	@echo "$(PURPLE)  Minishell created  $(B&W)"
 

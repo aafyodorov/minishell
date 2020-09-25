@@ -22,7 +22,7 @@ void		get_home_path(void)
 
 	i = 0;
 	while (g_env_vars[i] && ft_strncmp("HOME=", g_env_vars[i], 5))
-			i++;
+		i++;
 	if (g_env_vars[i])
 		ft_strcpy(g_home_path, &g_env_vars[i][5]);
 	else
@@ -64,7 +64,7 @@ static int	prev_path(void)
 	else
 		ft_strcpy(tmp, g_home_path);
 	return (!chdir(tmp) ? 0 : print_error(strerror(errno), 1));
-	}
+}
 
 int			ft_cd(char **args)
 {
