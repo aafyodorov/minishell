@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 23:35:53 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/19 22:24:23 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/26 19:03:33 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ const char	*got_dollar(const char *start, t_list **list, const char *params)
 	const char	*data;
 	size_t		len;
 
-	ptr = get_var(start + 1);
+	ptr = *(start + 1) != *params ? get_var(start + 1) : (char*)start + 1;
 	flag = (*params && *ptr && *ptr != *params) ? 1 : 0;
 	data = (ptr - start == 1) ? "$" : start + 1;
 	len = (ptr - start == 1) ? 1 : ptr - start - 1;

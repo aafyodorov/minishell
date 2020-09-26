@@ -32,9 +32,8 @@ var1=123; echo $var1; var1=456 var2=567; echo $var1 $var2; var1="789"; echo $var
 export 123=qwe
 
 export z=h zz=o; ec$z$zz 'z=h, zz=o'; unset z zz; ec$z$zz hello; export x=ho; ec$x 'x=ho'
+export z=h zz=o; ec$z$zz 'z=h, zz=o'; ec$z$zz hello; export x=ho; ec$x 'x=ho'
 
 /bin/''''ls
 
-export var="sdf sdf sdf sdf sdf"
-var="$var aaa"
-export | cat -e
+var1=sdf var2=zzz var1="$var1""$var2"789; echo $var1

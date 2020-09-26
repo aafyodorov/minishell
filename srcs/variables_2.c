@@ -6,7 +6,7 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:05:53 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/26 17:41:06 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/26 20:21:48 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int			subst_var(t_list **parse, char **args, int *i)
 		got_var(get_str(*parse), ft_strchr(get_str(*parse), '='), parse);
 		*args = ft_strdup(" ");
 		(*i)++;
-		*parse = (*parse)->next;
+		*parse = *parse ? (*parse)->next : NULL;
 		return (1);
 	}
 	return (0);

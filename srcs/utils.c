@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:07:22 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/26 16:04:46 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/26 21:24:16 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ char		**get_args_str(t_list *parse)
 	{
 		tmp[0] = args[i];
 		if (skip_spaces(&parse, &i, echo_flag, args[i]) ||
-				(!echo_flag && subst_var(&parse, &args[i], &i)))
+				(echo_flag != 1 && subst_var(&parse, &args[i], &i)))
 			continue;
 		tmp[1] = ft_strdup_arg(get_str(parse),
 				get_flag_parser(parse), g_env_vars);
-		if (echo_flag && tmp[1] && !tmp[1][0] &&
+		if (echo_flag == 1 && tmp[1] && !tmp[1][0] &&
 				uninitialized(&parse, args, i, &tmp[1]))
 			continue;
 		args[i] = tmp[0] ? ft_strjoin(tmp[0], tmp[1]) : ft_strdup(tmp[1]);

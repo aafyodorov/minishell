@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:57:46 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/26 16:34:28 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/26 19:53:55 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,15 @@ static int		got_var_sub(char **cont, t_list **cur)
 	int			err_flg;
 	unsigned	flag;
 
-	flag = 0;
 	cont[1] = ft_calloc(1, sizeof(char));
 	err_flg = (cont[1]) ? 0 : 1;
 	*cur = (*cur)->next;
-	while (!err_flg && *cur && (flag = get_flag_parser(*cur)) & 1u)
+	while (*cur && ft_strcmp(get_str(*cur), " ") && !is_redirect(get_str(*cur)))
 	{
+		flag = get_flag_parser(*cur);
 		cont[1] = concat_var(&cont[1], *cur, flag);
 		err_flg = (cont[1]) ? 0 : 1;
 		*cur = (*cur)->next;
-	}
-	if (*cur)
-	{
-		cont[1] = concat_var(&cont[1], *cur, flag);
-		err_flg = (cont[1]) ? 0 : 1;
 	}
 	return (err_flg);
 }
