@@ -22,7 +22,6 @@ echo  > > >>
 echo  ; ; ; ; 
 echo 123 ; ; echo 123
 
-проверка export на валидность аргументов
 контрл + Д
 
 var1=123; echo $var1; var1=456 var2=567; echo $var1 $var2; var1="789"; echo $var1; 123=qwe; echo $123

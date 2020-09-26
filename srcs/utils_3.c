@@ -63,6 +63,7 @@ int			skip_spaces(t_list **parse, int *i, int echo_flag)
 ** 1 in first byte free str1
 ** 1 in secons byte free str2
 */
+
 char		*ft_strjoin_free(char *str1, char *str2, unsigned flag)
 {
 	char		*res;

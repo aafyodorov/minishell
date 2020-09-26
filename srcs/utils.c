@@ -74,13 +74,11 @@ char		**get_args_str(t_list *parse)
 	echo_flag = get_command(&parse, &args[0], &i);
 	while (parse && !is_redirect(get_str(parse)))
 	{
-		if (skip_spaces(&parse, &i, echo_flag))
-			continue;
 		tmp[0] = args[i];
-		if (!echo_flag && subst_var(&parse, &args[i], &i))
+		if (skip_spaces(&parse, &i, echo_flag) ||
+				(!echo_flag && subst_var(&parse, &args[i], &i)))
 			continue;
-		tmp[1] = ft_strdup_arg(get_str(parse),
-				get_flag_parser(parse), g_env_vars);
+		tmp[1] = ft_strdup_arg(get_str(parse), get_flag_parser(parse), g_env_vars);
 		if (echo_flag && tmp[1] && !tmp[1][0] &&
 				uninitialized(&parse, args, i, &tmp[1]))
 			continue;
