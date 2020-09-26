@@ -48,12 +48,17 @@ int			get_command(t_list **parse, char **args, int *i)
 	return (echo_flag);
 }
 
-int			skip_spaces(t_list **parse, int *i, int echo_flag)
+int			skip_spaces(t_list **parse, int *i, int echo_flag, char *args)
 {
 	if (!echo_flag && !ft_strcmp(" ", get_str(*parse)))
 	{
 		*parse = (*parse)->next;
 		(*i)++;
+		return (1);
+	}
+	else if (!args && !ft_strcmp(" ", get_str(*parse)))
+	{
+		*parse = (*parse)->next;
 		return (1);
 	}
 	return (0);

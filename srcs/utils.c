@@ -73,7 +73,7 @@ char		**get_args_str(t_list *parse)
 	while (parse && !is_redirect(get_str(parse)))
 	{
 		tmp[0] = args[i];
-		if (skip_spaces(&parse, &i, echo_flag) ||
+		if (skip_spaces(&parse, &i, echo_flag, args[i]) ||
 				(!echo_flag && subst_var(&parse, &args[i], &i)))
 			continue;
 		tmp[1] = ft_strdup_arg(get_str(parse),
