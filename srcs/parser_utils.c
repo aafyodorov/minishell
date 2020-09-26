@@ -65,6 +65,8 @@ int				is_delim(const char *str, const char *eot)
 	const char	*ptr;
 
 	i = -1;
+	if (*str == 92)
+		return (0);
 	while (++i < DELIM_NUM)
 	{
 		ptr = str;

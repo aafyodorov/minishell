@@ -18,26 +18,27 @@ const char	*got_backslash(const char *start, t_list **list, const char *params)
 	unsigned	flag;
 	const char	*after_bs;
 	size_t		len;
-	const char	*last;
+	const char	*next;
 
 	after_bs = start;
 	while (*after_bs == '\\')
 		after_bs++;
-	last = after_bs;
-	while (*last != *params && *(last + 1) != *params &&
-			is_delim(last + 1, params) == -1)
-		last++;
 	len = after_bs - start;
-	if (len % 2 && *after_bs == *params)
-		return (NULL);
-	else if (len % 2 != 0)
-		start++;
-	flag = (is_delim(last + 1, params) == 3) ? 1 : 0;
-	len /= 2;
-	node = create_node(start + len, last - start + 1 - len, flag, *list);
+	next = after_bs;
+	if (*next && (*next == '$' || *next == '\"') && len % 2)
+		next++;
+	while (*next && *next != *params && is_delim(next, params) == -1)
+		next++;
+	if (*after_bs != '$' && *after_bs != '\"' && *params /*&& after_bs != next*/)
+		len++;
+	flag = (*next && *params &&  *next != *params) ? 1 : 0;
+	len = len / 2;
+	//ft_printf("~%s\n", after_bs - len);
+	node = create_node(after_bs - len, next - (after_bs - len), flag, *list);
+	//ft_printf("!!%s\n", get_str(node));
 	if (push_node(list, node))
 		return (NULL);
-	return (last + 1);
+	return (next);
 }
 
 const char	*got_space(const char *start, t_list **list, const char *params)
