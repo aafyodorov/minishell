@@ -24,7 +24,8 @@ const char	*got_backslash(const char *start, t_list **list, const char *params)
 	while (*after_bs == '\\')
 		after_bs++;
 	last = after_bs;
-	while (*(last + 1) != *params && is_delim(last + 1, params) == -1)
+	while (*last != *params && *(last + 1) != *params &&
+			is_delim(last + 1, params) == -1)
 		last++;
 	len = after_bs - start;
 	if (len % 2 && *after_bs == *params)

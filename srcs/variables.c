@@ -127,7 +127,9 @@ int			got_var(const char *start, const char *eq_sign, t_list **cur)
 		}
 		if (*cur)
 			err_flg = (cont[1] = concat_var(&cont[1], *cur, flag)) ? 0 : 1;
-	} else {
+	}
+	else
+	{
 		while (*end)
 			end++;
 		err_flg = (cont[1] = ft_calloc(end - eq_sign + 1, sizeof(char))) ? 0 : 1;

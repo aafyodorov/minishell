@@ -42,7 +42,8 @@ int			get_command(t_list **parse, char **args, int *i)
 			args[++(*i)] = ft_strdup(" ");
 		*parse = (*parse)->next;
 	}
-	*parse = *parse ? (*parse)->next : *parse;
+	*parse = (*parse && !is_redirect(get_str(*parse))) ?
+			(*parse)->next : *parse;
 	(*i)++;
 	return (echo_flag);
 }
@@ -76,12 +77,13 @@ char		*ft_strjoin_free(char *str1, char *str2, unsigned flag)
 	return (res);
 }
 
-int			uninitialized(t_list **parse, char **args, int i)
+int			uninitialized(t_list **parse, char **args, int i, char **tmp)
 {
 	*parse = (*parse)->next;
 	if (i && args[i] && args[i][ft_strlen(args[i]) - 1] == ' ')
 		args[i][ft_strlen(args[i]) - 1] = '\0';
 	if (*parse && !ft_strcmp(" ", get_str(*parse)))
 		*parse = (*parse)->next;
+	free_str(tmp);
 	return (1);
 }
