@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:43:51 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/19 03:11:25 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/26 15:58:04 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,11 @@ const char	*got_backslash(const char *start, t_list **list, const char *params)
 		next++;
 	while (*next && *next != *params && is_delim(next, params) == -1)
 		next++;
-	if (*after_bs != '$' && *after_bs != '\"' && *params /*&& after_bs != next*/)
+	if (*after_bs != '$' && *after_bs != '\"' && *params)
 		len++;
-	flag = (*next && *params &&  *next != *params) ? 1 : 0;
+	flag = (*next && *params && *next != *params) ? 1 : 0;
 	len = len / 2;
-	//ft_printf("~%s\n", after_bs - len);
 	node = create_node(after_bs - len, next - (after_bs - len), flag, *list);
-	//ft_printf("!!%s\n", get_str(node));
 	if (push_node(list, node))
 		return (NULL);
 	return (next);

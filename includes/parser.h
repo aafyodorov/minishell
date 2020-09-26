@@ -57,6 +57,7 @@ void			super_ctrl_d(void);
 void			print_p_list(t_list *list, int exit);
 int				subst_var(t_list **parse, char **args, int *i);
 void			check_multiple_redirect(t_list **list);
+char			*concat_var(char **str, t_list *node, unsigned flag);
 
 typedef struct
 {

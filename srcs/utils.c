@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:07:22 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/19 22:20:28 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/26 16:04:46 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,11 @@ char		*ft_strdup_arg(char *str, unsigned flag, char **env)
 char		**get_args_str(t_list *parse)
 {
 	int			i;
-	int			len;
 	char		**args;
 	char		*tmp[2];
 	int			echo_flag;
 
-	len = str_args_len(parse);
-	args = (char **)ft_calloc(len + 10, sizeof(char *));
+	args = (char **)ft_calloc(str_args_len(parse) + 10, sizeof(char *));
 	i = 0;
 	echo_flag = get_command(&parse, &args[0], &i);
 	while (parse && !is_redirect(get_str(parse)))
@@ -78,7 +76,8 @@ char		**get_args_str(t_list *parse)
 		if (skip_spaces(&parse, &i, echo_flag) ||
 				(!echo_flag && subst_var(&parse, &args[i], &i)))
 			continue;
-		tmp[1] = ft_strdup_arg(get_str(parse), get_flag_parser(parse), g_env_vars);
+		tmp[1] = ft_strdup_arg(get_str(parse),
+				get_flag_parser(parse), g_env_vars);
 		if (echo_flag && tmp[1] && !tmp[1][0] &&
 				uninitialized(&parse, args, i, &tmp[1]))
 			continue;

@@ -6,7 +6,7 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:05:53 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/26 04:07:52 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/26 15:59:52 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,26 @@ int			cr_var_cont(const char *start, const char *eq_sign,
 int			subst_var(t_list **parse, char **args, int *i)
 {
 	char		*var_name;
+
 	if (get_flag_parser(*parse) & 16u)
 	{
 		var_name = get_str(*parse);
 		if (!(ft_isalpha(var_name[0]) || var_name[0] == '_'))
 			return (0);
-		got_var(get_str(*parse), ft_strchr(get_str(*parse), '='), parse);//add error check
+		got_var(get_str(*parse), ft_strchr(get_str(*parse), '='), parse);
 		*args = ft_strdup(" ");
 		(*i)++;
 		*parse = (*parse)->next;
 		return (1);
 	}
 	return (0);
+}
+
+char		*concat_var(char **str, t_list *node, unsigned flag)
+{
+	*str = flag & 2u ?
+		ft_strjoin_free(*str, ft_strdup_arg(get_str(node), flag, g_env_vars),
+						3) :
+			ft_strjoin_free(*str, get_str(node), 1);
+	return (*str);
 }
