@@ -1,0 +1,31 @@
+echo 123 123 123 "123" "123"123 "123""123" "123"'123' '123''123' "'123'" "'123'""'123'" '"123"'"'123'" "123" 123 "123" "123" "123" '123' '123' '123' "'123'" "'123'" "'123'" '"123"' '"123"' "'123'"
+echo $USER "USER" '$USER' $GDMSESSION"GDMSESSION"'$GDMSESSION'
+echo "\"" "\'" '\' '\"' "\"1"
+echo "\\\""
+echo \qwe
+
+echo ""''""'' 	| 	cat -e
+
+echo 123 > 1; echo 123 | cat -e | wc -l >> 1; cat -e 1
+
+echo $?; echo $?; qwe; echo $?; echo $?; cd 123; echo $?; echo > libft; echo $?
+
+echo $ \$ "$" "\$" '$' '\$' $$
+
+echo \n "\n" '\n'
+
+echo var=123 $var var=zzz $var | cat -e
+
+echo  > > >>
+echo  ; ; ; ; 
+echo 123 ; ; echo 123
+
+проверка export на валидность аргументов
+контрл + Д
+
+var1=123; echo $var1; var1=456 var2=567; echo $var1 $var2; var1="789"; echo $var1; 123=qwe; echo $123
+export 123=qwe
+
+export z=h zz=o; ec$z$zz 'z=h, zz=o'; unset z zz; ec$z$zz hello; export x=ho; ec$x 'x=ho'
+
+/bin/''''ls

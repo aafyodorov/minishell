@@ -56,6 +56,7 @@ t_list			*find_elem(t_list *list, char *key);
 void			super_ctrl_d(void);
 void			print_p_list(t_list *list, int exit);
 int				subst_var(t_list **parse, char **args, int *i);
+void			check_multiple_redirect(t_list **list);
 
 typedef struct
 {

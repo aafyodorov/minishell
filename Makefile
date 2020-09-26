@@ -31,6 +31,7 @@ SRCS = free.c\
 	  utils.c\
 	  utils_2.c\
 	  utils_3.c\
+	  utils_4.c\
 	  parser.c\
 	  delimiters_1.c\
 	  delimiters_2.c\
