@@ -6,7 +6,7 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:05:53 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/26 15:59:52 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/26 16:33:47 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,6 @@ void		del_var_cont(void *content)
 	free(cont[1]);
 	cont[1] = NULL;
 	free(cont);
-}
-
-int			cr_var_cont(const char *start, const char *eq_sign,
-			const char *end, char **content)
-{
-	size_t		len_name;
-	size_t		len_var;
-
-	len_name = eq_sign - start + 1;
-	len_var = end - eq_sign + 1;
-	content[0] = ft_calloc(len_name, sizeof(char));
-	content[1] = ft_calloc(len_var, sizeof(char));
-	if (!content[0] || !content[1])
-	{
-		free(content[0]);
-		free(content[1]);
-		return (1);
-	}
-	ft_strncpy(content[0], start, len_name - 1);
-	ft_strncpy(content[1], eq_sign + 1, len_var - 1);
-	return (0);
 }
 
 int			subst_var(t_list **parse, char **args, int *i)
@@ -70,4 +49,42 @@ char		*concat_var(char **str, t_list *node, unsigned flag)
 						3) :
 			ft_strjoin_free(*str, get_str(node), 1);
 	return (*str);
+}
+
+int			add_var_to_env(char **cont)
+{
+	int			i;
+	int			idx;
+	char		*tmp;
+
+	i = -1;
+	if ((idx = find_env_var(g_env_vars, cont[0])) != -1)
+		free(g_env_vars[idx]);
+	else
+	{
+		while (++i < ENV_LENGTH && g_env_vars[i])
+			;
+		if (i == ENV_LENGTH)
+			return (1);
+		idx = i;
+	}
+	tmp = ft_strjoin("=", cont[1]);
+	if (!(g_env_vars[idx] = ft_strjoin(cont[0], tmp)))
+	{
+		free(tmp);
+		return (1);
+	}
+	free(tmp);
+	return (0);
+}
+
+t_list		*find_elem(t_list *list, char *key)
+{
+	while (list)
+	{
+		if (!ft_strcmp(key, ((char **)list->content)[0]))
+			return (list);
+		list = list->next;
+	}
+	return (NULL);
 }

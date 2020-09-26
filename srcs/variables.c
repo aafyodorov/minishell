@@ -6,22 +6,11 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:57:46 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/26 15:54:25 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/26 16:34:28 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-t_list			*find_elem(t_list *list, char *key)
-{
-	while (list)
-	{
-		if (!ft_strcmp(key, ((char **)list->content)[0]))
-			return (list);
-		list = list->next;
-	}
-	return (NULL);
-}
 
 int				add_var_to_list(t_list **list, char **cont, int create)
 {
@@ -54,8 +43,8 @@ int				add_var_to_list(t_list **list, char **cont, int create)
 
 int				check_var_in_env(char **var_list, char **str)
 {
-	int		i;
-	char	*tmp;
+	int			i;
+	char		*tmp;
 
 	i = 0;
 	while (var_list[i])
@@ -96,12 +85,32 @@ static int		got_var_sub(char **cont, t_list **cur)
 	return (err_flg);
 }
 
+int				export_check(t_list *head, char **cont)
+{
+	int			err_flg;
+
+	err_flg = 0;
+	if (head && (get_flag_parser(head) & 4u) != 0)
+	{
+		err_flg = add_var_to_env(cont) ? 1 : 0;
+		while (head && ft_strcmp(get_str(head), "export"))
+			head = head->next;
+		if (head)
+			set_flag_parser(head, get_flag_parser(head) | 8u);
+	}
+	else
+		check_var_in_env(g_env_vars, cont);
+	return (err_flg);
+}
+
 int				got_var(const char *start, const char *eq_sign, t_list **cur)
 {
 	const char	*end;
 	char		*cont[2];
 	int			err_flg;
+	t_list		*head;
 
+	head = *cur;
 	end = eq_sign;
 	if (*(eq_sign + 1) == 0)
 		err_flg = got_var_sub(cont, cur);
@@ -116,7 +125,7 @@ int				got_var(const char *start, const char *eq_sign, t_list **cur)
 	if (err_flg || !(cont[0] = ft_calloc(eq_sign - start + 1, sizeof(char))))
 		return (1);
 	ft_strncpy(cont[0], start, eq_sign - start);
-	check_var_in_env(g_env_vars, cont);
+	export_check(head, cont);
 	if (add_var_to_list(&g_loc_vars, cont, 1))
 		err_flg = 1;
 	return (err_flg + free_str(&cont[0]) + free_str(&cont[1]) ? 1 : 0);

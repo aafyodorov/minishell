@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:37 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/26 06:47:33 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/26 15:56:05 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void			print_p_list(t_list *list, int exit);
 int				subst_var(t_list **parse, char **args, int *i);
 void			check_multiple_redirect(t_list **list);
 char			*concat_var(char **str, t_list *node, unsigned flag);
+int				add_var_to_env(char **cont);
 
 typedef struct
 {
