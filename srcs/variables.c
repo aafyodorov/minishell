@@ -53,6 +53,8 @@ int				check_var_in_env(char **var_list, char **str)
 			var_list[i][ft_strlen(str[0])] == '=')
 		{
 			tmp = ft_strjoin(str[0], "=");
+			if (var_list[i])
+				free(var_list[i]);
 			var_list[i] = ft_strjoin(tmp, str[1]);
 			free(tmp);
 			return (0);
