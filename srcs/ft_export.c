@@ -117,9 +117,10 @@ int			ft_export(char **args)
 	if (args[0][0] != ' ')
 		while (args[++i])
 		{
-			if (ft_isdigit(args[i][0]))
+			if (!(ft_isalpha(args[i][0]) || args[i][0] == '_'))
 			{
-				ft_printf("bash: export: «%s»: invalid identifier\n", args[i]);
+				ft_printf("minishell: export: «%s»: invalid identifier\n",
+							args[i]);
 				g_exit_status = 1;
 				continue;
 			}
@@ -130,5 +131,5 @@ int			ft_export(char **args)
 			if (tmp)
 				g_env_vars[ft_strlenbuf(g_env_vars)] = tmp;
 		}
-	return (0);
+	return (g_exit_status);
 }

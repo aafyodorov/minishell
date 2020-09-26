@@ -25,8 +25,8 @@ echo 123 ; ; echo 123
 проверка export на валидность аргументов
 контрл + Д
 
-- var1=123; echo $var1; var1=456 var2=567; echo $var1 $var2; var1="789"; echo $var1; 123=qwe; echo $123
-- export 123=qwe
+var1=123; echo $var1; var1=456 var2=567; echo $var1 $var2; var1="789"; echo $var1; 123=qwe; echo $123
+export 123=qwe
 
 export z=h zz=o; ec$z$zz 'z=h, zz=o'; unset z zz; ec$z$zz hello; export x=ho; ec$x 'x=ho'
 
