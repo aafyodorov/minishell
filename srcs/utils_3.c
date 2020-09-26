@@ -35,7 +35,7 @@ int			get_command(t_list **parse, char **args, int *i)
 	{
 		tmp[0] = *args;
 		if (subst_var(parse, args, i))
-			return (0);
+			return (2);
 		tmp[1] = ft_strdup_arg(get_str(*parse),
 				get_flag_parser(*parse), g_env_vars);
 		*args = *args ? ft_strjoin(*args, tmp[1]) : ft_strdup(tmp[1]);
