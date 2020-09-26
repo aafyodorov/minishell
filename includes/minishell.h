@@ -64,6 +64,7 @@ char		*ft_strdup_arg(char *str, unsigned flag, char **env);
 int			get_command(t_list **parse, char **args, int *i);
 int			skip_spaces(t_list **parse, int *i, int echo_flag, char *args);
 int			uninitialized(t_list **parse, char **args, int i, char **tmp);
+void		echo_n(t_list **parse, char **args, int *i, int echo_flag);
 void		change_underscores(char *func, char **args);
 char		*add_path(char *func);
 

@@ -23,7 +23,7 @@ int			ft_echo(char **args)
 	flag = 0;
 	if (*args)
 	{
-		while (!ft_strcmp(args[i], "-n"))
+		while (args[i] && !ft_strcmp(args[i], "-n"))
 		{
 			flag = 1;
 			i++;

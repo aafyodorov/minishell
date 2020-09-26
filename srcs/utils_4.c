@@ -49,3 +49,18 @@ void		check_multiple_redirect(t_list **parse)
 		list = list->next;
 	}
 }
+
+void		echo_n(t_list **parse, char **args, int *i, int echo_flag)
+{
+	if (echo_flag == 1)
+	{
+		while (*parse && (!ft_strcmp("-n", get_str(*parse))))
+		{
+			args[*i] = ft_strdup("-n");
+			(*i)++;
+			*parse = (*parse)->next;
+			*parse = (*parse && !ft_strcmp(" ", get_str(*parse))) ?
+							(*parse)->next : *parse;
+		}
+	}
+}

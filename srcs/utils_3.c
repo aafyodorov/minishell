@@ -47,6 +47,7 @@ int			get_command(t_list **parse, char **args, int *i)
 	*parse = (*parse && !is_redirect(get_str(*parse))) ?
 			(*parse)->next : *parse;
 	(*i)++;
+	echo_n(parse, args, i, echo_flag);
 	return (echo_flag);
 }
 
