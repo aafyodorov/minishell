@@ -75,3 +75,13 @@ char		*ft_strjoin_free(char *str1, char *str2, unsigned flag)
 		free(str2);
 	return (res);
 }
+
+int			uninitialized(t_list **parse, char **args, int i)
+{
+	*parse = (*parse)->next;
+	if (i && args[i] && args[i][ft_strlen(args[i]) - 1] == ' ')
+		args[i][ft_strlen(args[i]) - 1] = '\0';
+	if (*parse && !ft_strcmp(" ", get_str(*parse)))
+		*parse = (*parse)->next;
+	return (1);
+}

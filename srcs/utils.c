@@ -77,10 +77,13 @@ char		**get_args_str(t_list *parse)
 		if (skip_spaces(&parse, &i, echo_flag))
 			continue;
 		tmp[0] = args[i];
-		if (subst_var(&parse, &args[i], &i))
+		if (!echo_flag && subst_var(&parse, &args[i], &i))
 			continue;
 		tmp[1] = ft_strdup_arg(get_str(parse),
 				get_flag_parser(parse), g_env_vars);
+		if (echo_flag && tmp[1] && !tmp[1][0] &&
+				uninitialized(&parse, args, i))
+			continue;
 		args[i] = tmp[0] ? ft_strjoin(tmp[0], tmp[1]) : ft_strdup(tmp[1]);
 		(void)(free_str(&tmp[1]) + free_str(&tmp[0]));
 		parse = parse->next;
