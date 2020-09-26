@@ -6,7 +6,7 @@
 /*   By: fgavin <fgavin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:05:53 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/16 02:53:36 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/26 04:07:52 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			subst_var(t_list **parse, char **args, int *i)
 {
 	if (get_flag_parser(*parse) & 16u)
 	{
-		got_var(get_str(*parse), ft_strchr(get_str(*parse), '='), "", *parse);
+		got_var(get_str(*parse), ft_strchr(get_str(*parse), '='), parse);//add error check
 		*args = ft_strdup(" ");
 		(*i)++;
 		*parse = (*parse)->next;

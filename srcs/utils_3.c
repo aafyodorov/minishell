@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:07:22 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/19 22:20:28 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/26 05:55:52 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,22 @@ int			skip_spaces(t_list **parse, int *i, int echo_flag)
 		return (1);
 	}
 	return (0);
+}
+
+/*
+** 1 in first byte free str1
+** 1 in secons byte free str2
+*/
+char		*ft_strjoin_free(char *str1, char *str2, unsigned flag)
+{
+	char		*res;
+
+	res = NULL;
+	if (str1 && str2)
+		res = ft_strjoin(str1, str2);
+	if (flag & 1u)
+		free(str1);
+	if (flag & 2u)
+		free(str2);
+	return (res);
 }

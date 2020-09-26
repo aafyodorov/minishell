@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:57:46 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/19 03:12:52 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/26 07:13:16 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,31 +100,44 @@ int			add_var_to_env(char **cont)
 	return (0);
 }
 
-char		*got_var(const char *start, const char *eq_sign, const char *params,
-	t_list *head)
+static char	*concat_var(char **str,t_list *node, unsigned flag)
+{
+	*str = flag & 2u ?
+		ft_strjoin_free(*str, ft_strdup_arg(get_str(node), flag, g_env_vars), 3) :
+		ft_strjoin_free(*str, get_str(node), 1);
+	return *str;
+}
+
+int			got_var(const char *start, const char *eq_sign, t_list **cur)
 {
 	const char	*end;
 	char		*cont[2];
 	int			err_flg;
+	unsigned	flag;
 
-	err_flg = 0;
 	end = eq_sign;
-	while (*end && is_delim(end, params) < 0)
-		end++;
-	if (cr_var_cont(start, eq_sign, end - 1, (char **)cont))
-		return (NULL);
-	if (head && (get_flag_parser(head) & 4u) != 0)
+	if (*(eq_sign + 1) == 0)
 	{
-		err_flg = add_var_to_env(cont) ? 1 : 0;
-		while (head && ft_strcmp(get_str(head), "export"))
-			head = head->next;
-		if (head)
-			set_flag_parser(head, get_flag_parser(head) | 8u);
+		err_flg = (cont[1] = ft_calloc(1,sizeof(char))) ? 0 : 1;
+		*cur = (*cur)->next;
+		while (!err_flg && *cur && (flag = get_flag_parser(*cur)) & 1u)
+		{
+			err_flg = (cont[1] = concat_var(&cont[1], *cur, flag)) ? 0 : 1;
+			*cur = (*cur)->next;
+		}
+		if (*cur)
+			err_flg = (cont[1] = concat_var(&cont[1], *cur, flag)) ? 0 : 1;
+	} else {
+		while (*end)
+			end++;
+		err_flg = (cont[1] = ft_calloc(end - eq_sign + 1, sizeof(char))) ? 0 : 1;
+		!err_flg ? ft_strncpy(cont[1], eq_sign + 1, end - eq_sign) : NULL;
 	}
-	else
-		check_var_in_env(g_env_vars, cont);
-	if (!err_flg && add_var_to_list(&g_loc_vars, cont, 1))
+	if (err_flg || !(cont[0] = ft_calloc(eq_sign - start + 1, sizeof(char))))
+		return (1);
+	ft_strncpy(cont[0], start, eq_sign - start);
+	check_var_in_env(g_env_vars, cont);
+	if (add_var_to_list(&g_loc_vars, cont, 1))
 		err_flg = 1;
-	return (err_flg + free_str(&cont[0]) +
-		free_str(&cont[1]) ? NULL : (char *)end);
+	return (err_flg + free_str(&cont[0]) + free_str(&cont[1]) ? 1 : 0);
 }

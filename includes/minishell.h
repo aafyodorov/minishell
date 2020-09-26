@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:34 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/18 23:50:06 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/26 05:55:52 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int			loop_read();
 int			print_error(char *message, int exit_code);
 int			find_env_var(char **var_list, char *str);
 void		get_home_path(void);
+char		*ft_strjoin_free(char *str1, char *str2, unsigned flag);
 
 static int	(*g_funcs[9])(char **) = {
 	NULL,

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:57:37 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/09/19 03:10:31 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/09/26 06:47:33 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ void			ft_lstreverse(t_list **list);
 void			ft_delspace(t_list **list);
 void			del_redirect_spaces(t_list **list);
 void			del_var_cont(void *content);
-char			*got_var(const char *start, const char *eq_sign,
-				const char *params, t_list *head);
+int				got_var(const char *start, const char *eq_sign, t_list **cur);
 int				cr_var_cont(const char *start, const char *eq_sign,
 					const char *end, char **content);
 t_list			*find_elem(t_list *list, char *key);
