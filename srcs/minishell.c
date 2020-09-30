@@ -99,7 +99,7 @@ void	minishell(t_list *parse)
 			start_fork(args, &list);
 		if (g_exit_status == 130)
 			break ;
-		while (parse && !is_redirect(get_str(parse)))
+		while (parse && !is_redirect(get_str(parse), get_flag_parser(parse)))
 			parse = parse->next;
 		parse = parse ? parse->next : NULL;
 		free_args(&args);

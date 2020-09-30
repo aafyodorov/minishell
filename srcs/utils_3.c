@@ -17,9 +17,9 @@
 static int	is_empty_export(t_list *parse)
 {
 	return ((get_flag_parser(parse) & 8u) &&
-				(!parse->next ||
-				(parse->next &&
-					is_redirect(get_str(parse->next)))));
+			(!parse->next ||
+			(parse->next &&
+			is_redirect(get_str(parse->next), get_flag_parser(parse->next)))));
 }
 
 int			get_command(t_list **parse, char **args, int *i)
@@ -30,7 +30,7 @@ int			get_command(t_list **parse, char **args, int *i)
 	echo_flag = (*parse && !ft_strcmp("echo", get_str(*parse))) ? 1 : 0;
 	echo_flag = (*parse && !ft_strcmp("export", get_str(*parse))) ? 2 :
 			echo_flag;
-	while (*parse && !is_redirect(get_str(*parse)) &&
+	while (*parse && !is_redirect(get_str(*parse), get_flag_parser(*parse)) &&
 			ft_strcmp(" ", get_str(*parse)))
 	{
 		tmp[0] = *args;
@@ -44,7 +44,7 @@ int			get_command(t_list **parse, char **args, int *i)
 			args[++(*i)] = ft_strdup(" ");
 		*parse = (*parse)->next;
 	}
-	*parse = (*parse && !is_redirect(get_str(*parse))) ?
+	*parse = (*parse && !is_redirect(get_str(*parse), get_flag_parser(*parse))) ?
 			(*parse)->next : *parse;
 	(*i)++;
 	echo_n(parse, args, i, echo_flag);

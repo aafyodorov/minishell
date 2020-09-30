@@ -29,7 +29,7 @@ static int	str_args_len(t_list *parse)
 	int			len;
 
 	len = 0;
-	while ((parse && !is_redirect(get_str(parse))))
+	while ((parse && !is_redirect(get_str(parse), get_flag_parser(parse))))
 	{
 		len++;
 		parse = parse->next;
@@ -70,7 +70,7 @@ char		**get_args_str(t_list *parse)
 	args = (char **)ft_calloc(str_args_len(parse) + 10, sizeof(char *));
 	i = 0;
 	echo_flag = get_command(&parse, &args[0], &i);
-	while (parse && !is_redirect(get_str(parse)))
+	while (parse && !is_redirect(get_str(parse), get_flag_parser(parse)))
 	{
 		tmp[0] = args[i];
 		if (skip_spaces(&parse, &i, echo_flag, args[i]) ||
