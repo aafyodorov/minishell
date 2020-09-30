@@ -114,7 +114,7 @@ int			ft_export(char **args)
 	i = -1;
 	if (!args[0])
 		return (print_env());
-	if (args[0][0] != ' ')
+	if (args[0][0] != '\t')
 		while (args[++i])
 		{
 			if (!(ft_isalpha(args[i][0]) || args[i][0] == '_'))
