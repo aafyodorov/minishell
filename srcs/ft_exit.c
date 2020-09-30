@@ -44,9 +44,9 @@ int			ft_exit(char **args)
 			print_error("exit\nminishell: exit: too many arguments", 1));
 		else
 		{
-			ft_printf("exit\nminishell: exit: %s: need numeric argument\n",
-						args[0]);
-			exit(2);
+			ft_putstr_fd("exit\nminishell: exit: ", 2);
+			ft_putstr_fd(args[0], 2);
+			exit(print_error(": need numeric argument", 2));
 		}
 	}
 	exit(g_exit_status);

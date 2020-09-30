@@ -43,7 +43,7 @@ int		child_process(char **args, t_list **list)
 			free_args(&args);
 			free_args(&g_env_vars);
 			ft_lstclear(&g_loc_vars, del_var_cont);
-			ft_printf("%s: ", func_name);
+			(void)(ft_putstr_fd(func_name, 2) + ft_putstr_fd(": ", 2));
 			exit(print_error("command not found", 127));
 		}
 	}
@@ -66,7 +66,7 @@ int		start_fork(char **args, t_list **list)
 		if ((WIFSIGNALED(status)))
 		{
 			if (status == 131)
-				ft_printf("quit (core dumped) %s\n", args[0]);
+				ft_putendl_fd("^\\Quit (core dumped)", 2);
 			g_exit_status = (status != 131) ? 130 : status;
 		}
 	}

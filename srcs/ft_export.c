@@ -119,8 +119,8 @@ int			ft_export(char **args)
 		{
 			if (!(ft_isalpha(args[i][0]) || args[i][0] == '_'))
 			{
-				ft_printf("minishell: export: «%s»: invalid identifier\n",
-							args[i]);
+				(void)(ft_putstr_fd("minishell: export: «", 2) + ft_putstr_fd(
+				args[i], 2) + ft_putendl_fd("»: invalid identifier", 2));
 				g_exit_status = 1;
 				continue;
 			}

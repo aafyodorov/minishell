@@ -58,7 +58,7 @@ int		read_stdin(t_buf *buf, char **input)
 
 int		print_error(char *message, int exit_code)
 {
-	ft_printf("%s\n", message);
+	ft_putendl_fd(message, 2);
 	errno = 0;
 	return (exit_code);
 }
