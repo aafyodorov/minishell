@@ -34,7 +34,7 @@ int			subst_var(t_list **parse, char **args, int *i)
 		if (!(ft_isalpha(var_name[0]) || var_name[0] == '_'))
 			return (0);
 		got_var(get_str(*parse), ft_strchr(get_str(*parse), '='), parse);
-		*args = ft_strdup(" ");
+		*args = ft_strdup("\t");
 		(*i)++;
 		*parse = *parse ? (*parse)->next : NULL;
 		return (1);
