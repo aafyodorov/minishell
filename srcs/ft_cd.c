@@ -73,7 +73,7 @@ int			ft_cd(char **args)
 
 	i = ft_strlenbuf(args);
 	if (i > 1)
-		return (print_error("cd: слишком много аргументов\n", 1));
+		return (print_error("cd: too many arguments", 1));
 	if (i == 1 && !ft_strcmp(args[0], "-"))
 		return (prev_path());
 	if (change_oldpwd())
