@@ -44,7 +44,7 @@ int			is_redirect(char *str, int flag)
 	i = 0;
 	while (++i < 6)
 	{
-		if (!ft_strcmp(str, redir[i]) && !(flag & 32))			// TODO заменить на (flag & 32)
+		if (!ft_strcmp(str, redir[i]) && (flag & 32))
 			return (i);
 	}
 	return (0);

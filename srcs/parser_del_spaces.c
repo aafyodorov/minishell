@@ -77,7 +77,8 @@ void		del_redirect_spaces(t_list **list)
 	while (*list)
 	{
 		if (is_redirect(get_str(*list),  get_flag_parser(*list)) &&
-			(*list)->next && !ft_strcmp(get_str((*list)->next), " "))
+			(*list)->next && !ft_strcmp(get_str((*list)->next), " ") &&
+			(get_flag_parser((*list)->next) & 32))
 		{
 			tmp = (*list)->next->next;
 			free((*list)->next->content);

@@ -56,7 +56,7 @@ t_list			*parser(const char *str)
 	del_redirect_spaces(&list);
 	ft_lstreverse(&list);
 	del_redirect_spaces(&list);
-	
 	check_multiple_redirect(&list);
+	// print_p_list(list, 0);
 	return (list);
 }

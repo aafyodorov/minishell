@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:43:51 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/26 15:58:04 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/09/30 20:42:56 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ const char	*got_space(const char *start, t_list **list, const char *params)
 	while ((*start == ' ' || *start == '\t') && *start != *params)
 		start++;
 	flag = (*params && *params != *start) ? 1 : 0;
+	flag |= !*params ? 32 : 0;
 	node = create_node(" ", 1, flag, *list);
 	if (push_node(list, node))
 		return (NULL);
@@ -108,6 +109,7 @@ const char	*got_unit_delimiter(const char *start, t_list **list,
 	unsigned	flag;
 
 	flag = (*(++start) && *params && *start != *params) ? 1 : 0;
+	flag |= !*params ? 32u : 0;
 	node = create_node(start - 1, 1, flag, *list);
 	if (push_node(list, node))
 		return (NULL);

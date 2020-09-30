@@ -53,6 +53,13 @@ int			get_command(t_list **parse, char **args, int *i)
 
 int			skip_spaces(t_list **parse, int *i, int echo_flag, char *args)
 {
+	char *chtotam = get_str(*parse);
+	(void)chtotam;
+	if (!*get_str(*parse))
+	{
+		*parse = (*parse)->next;
+		return (1);
+	}
 	if (!echo_flag && !ft_strcmp(" ", get_str(*parse)))
 	{
 		(*i)++;
