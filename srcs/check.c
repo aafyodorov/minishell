@@ -36,7 +36,7 @@ int			is_func(char *str)
 	return (0);
 }
 
-int			is_redirect(char *str)
+int			is_redirect(char *str, int flag)
 {
 	int			i;
 	const char	redir[6][3] = {"", ";", "|", ">", ">>", "<"};
@@ -44,7 +44,7 @@ int			is_redirect(char *str)
 	i = 0;
 	while (++i < 6)
 	{
-		if (!ft_strcmp(str, redir[i]))
+		if (!ft_strcmp(str, redir[i]) && !(flag & 32))			// TODO заменить на (flag & 32)
 			return (i);
 	}
 	return (0);
@@ -55,7 +55,7 @@ int			next_redirect(t_list *parse)
 	int		i;
 
 	i = 0;
-	while (parse && !(i = is_redirect(get_str(parse))))
+	while (parse && !(i = is_redirect(get_str(parse), get_flag_parser(parse))))
 		parse = parse->next;
 	return (i);
 }
@@ -65,7 +65,7 @@ static void	skip_redirect(t_list **parse)
 	char *tmp;
 
 	tmp = NULL;
-	while (*parse && !is_redirect(get_str(*parse)))
+	while (*parse && !is_redirect(get_str(*parse), get_flag_parser(parse)))
 	{
 		tmp = get_str(*parse);
 		*parse = (*parse)->next;

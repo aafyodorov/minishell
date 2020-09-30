@@ -40,7 +40,8 @@ t_list			*create_node(const char *data, size_t len, unsigned flag,
 	n_data[1] = (char *)n_data + sizeof(void *) * 2 + sizeof(unsigned);
 	flg = (unsigned *)n_data[0];
 	ft_strlcpy(n_data[1], data, len);
-	if (head && (get_flag_parser(head) & 4u) != 0 && !is_redirect(n_data[1]))
+	if (head && (get_flag_parser(head) & 4u) != 0 &&
+			!is_redirect(n_data[1], get_flag_parser(head))) //TODO не уверен, какой флаг нужно здесь передавать
 		flag |= 4u;
 	*flg = flag;
 	node->content = n_data;

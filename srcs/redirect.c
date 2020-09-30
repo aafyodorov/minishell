@@ -16,10 +16,11 @@
 
 int			redirect_2(t_list *parse)
 {
-	while (parse && !is_redirect(get_str(parse)))
+	while (parse && !is_redirect(get_str(parse), get_flag_parser(parse)))
 		parse = parse->next;
 	parse = parse ? parse->next : parse;
-	if ((!parse || !get_str(parse)) || is_redirect(get_str(parse)))
+	if ((!parse || !get_str(parse)) ||
+			is_redirect(get_str(parse), get_flag_parser(parse)))
 		return (print_error("minishell: syntax error", 1));
 	if (pipe(g_pipe) == -1)
 		return (errno);
@@ -31,9 +32,10 @@ static char	*get_filename(t_list *parse)
 	char		*res;
 
 	res = NULL;
-	while (parse && !(is_redirect(get_str(parse))))
+	while (parse && !(is_redirect(get_str(parse), get_flag_parser(parse))))
 		parse = parse->next;
-	if (parse->next && !(is_redirect(get_str(parse->next))))
+	if (parse->next &&
+			!(is_redirect(get_str(parse->next), get_flag_parser(parse->next))))
 		res = get_str(parse->next);
 	return (res);
 }
@@ -44,7 +46,7 @@ int			redirect_3(t_list *parse)
 
 	if (!filename)
 	{
-		if (!is_redirect(get_str(parse)))
+		if (!is_redirect(get_str(parse), get_flag_parser(parse)))
 			return (print_error("minishell: syntax error", 2));
 		else
 			return (2);
@@ -65,7 +67,7 @@ int			redirect_4(t_list *parse)
 
 	if (!filename)
 	{
-		if (!is_redirect(get_str(parse)))
+		if (!is_redirect(get_str(parse), get_flag_parser(parse)))
 			return (print_error("minishell: syntax error", 2));
 		else
 			return (2);
@@ -86,7 +88,7 @@ int			redirect_5(t_list *parse)
 
 	if (!filename)
 	{
-		if (!is_redirect(get_str(parse)))
+		if (!is_redirect(get_str(parse), get_flag_parser(parse)))
 			return (print_error("minishell: syntax error", 2));
 		else
 			return (2);

@@ -34,7 +34,7 @@ void		check_multiple_redirect(t_list **parse)
 	list = *parse;
 	while (list)
 	{
-		if (is_redirect(get_str(list)))
+		if (is_redirect(get_str(list), get_flag_parser(list)))
 		{
 			if (flag)
 				flag = 0;

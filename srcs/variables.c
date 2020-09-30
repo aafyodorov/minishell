@@ -72,7 +72,8 @@ static int		got_var_sub(char **cont, t_list **cur)
 	cont[1] = ft_calloc(1, sizeof(char));
 	err_flg = (cont[1]) ? 0 : 1;
 	*cur = (*cur)->next;
-	while (*cur && ft_strcmp(get_str(*cur), " ") && !is_redirect(get_str(*cur)))
+	while (*cur && ft_strcmp(get_str(*cur), " ") &&
+		!is_redirect(get_str(*cur), get_flag_parser(cur)))
 	{
 		flag = get_flag_parser(*cur);
 		cont[1] = concat_var(&cont[1], *cur, flag);

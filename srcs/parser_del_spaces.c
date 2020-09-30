@@ -18,10 +18,10 @@ static int	set_flag(t_list *prev, t_list *curr)
 	int				flag;
 
 	flag = 0;
-	if ((!prev || is_redirect(get_str(prev))) &&
+	if ((!prev || is_redirect(get_str(prev), get_flag_parser(prev))) &&
 		!ft_strcmp(get_str(curr), "echo"))
 		flag = 1;
-	if (curr->content && is_redirect(get_str(curr)))
+	if (curr->content && is_redirect(get_str(curr),  get_flag_parser(curr)))
 		flag = 0;
 	return (flag);
 }
@@ -76,8 +76,8 @@ void		del_redirect_spaces(t_list **list)
 	start = *list;
 	while (*list)
 	{
-		if (is_redirect(get_str(*list)) && (*list)->next &&
-			!ft_strcmp(get_str((*list)->next), " "))
+		if (is_redirect(get_str(*list),  get_flag_parser(list)) &&
+			(*list)->next && !ft_strcmp(get_str((*list)->next), " "))
 		{
 			tmp = (*list)->next->next;
 			free((*list)->next->content);

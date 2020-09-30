@@ -72,7 +72,7 @@ int			free_str(char **str);
 int			free_args(char ***args);
 
 int			is_func(char *str);
-int			is_redirect(char *str);
+int			is_redirect(char *str, int flag);
 int			check_redirect(t_list **parse);
 
 void		signal_handler(void);

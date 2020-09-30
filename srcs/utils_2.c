@@ -71,7 +71,7 @@ int		ft_empty(char **args)
 
 int		redirect_1(t_list *parse)
 {
-	if (parse && is_redirect(get_str(parse)))
+	if (parse && is_redirect(get_str(parse), get_flag_parser(parse)))
 		return (print_error("minishell: syntax error", 2));
 	return (0);
 }
