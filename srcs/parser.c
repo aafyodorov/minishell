@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:01:23 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/19 22:11:11 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/10/01 17:57:11 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_list			*parser(const char *str)
 		return (NULL);
 	del_redirect_spaces(&list);
 	ft_lstreverse(&list);
+	del_lead_spaces(&list);
 	del_redirect_spaces(&list);
 	check_multiple_redirect(&list);
 	return (list);

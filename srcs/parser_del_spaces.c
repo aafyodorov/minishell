@@ -26,7 +26,7 @@ static int	set_flag(t_list *prev, t_list *curr)
 	return (flag);
 }
 
-static void	del_lead_spaces(t_list **list)
+void		del_lead_spaces(t_list **list)
 {
 	t_list		*tmp;
 

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 23:35:53 by fgavin            #+#    #+#             */
-/*   Updated: 2020/09/26 19:03:33 by fgavin           ###   ########.fr       */
+/*   Updated: 2020/10/01 18:40:49 by fgavin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,18 @@ const char	*got_double_quotes(const char *start, t_list **list,
 			NULL : start + 1);
 	else
 		return (rec_parser(start, list, "\""));
+}
+
+const char	*got_unit_delimiter(const char *start, t_list **list,
+				const char *params)
+{
+	t_list		*node;
+	unsigned	flag;
+
+	flag = (*(++start) && *params && *start != *params) ? 1 : 0;
+	flag |= !*params ? 32u : 0;
+	node = create_node(start - 1, 1, flag, *list);
+	if (push_node(list, node))
+		return (NULL);
+	return (start);
 }

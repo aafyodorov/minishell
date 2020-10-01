@@ -59,6 +59,7 @@ int				subst_var(t_list **parse, char **args, int *i);
 void			check_multiple_redirect(t_list **list);
 char			*concat_var(char **str, t_list *node, unsigned flag);
 int				add_var_to_env(char **cont);
+void			del_lead_spaces(t_list **list);
 
 typedef struct
 {
