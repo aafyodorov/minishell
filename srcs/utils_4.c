@@ -17,12 +17,8 @@
 static void	syntax_error(t_list **parse)
 {
 	ft_lstclear(parse, free);
-	*parse = create_node("echo", ft_strlen("echo"), 0, *parse);
-	(*parse)->next = create_node(" ", 1, 0, *parse);
-	(*parse)->next->next =
-		create_node("minishell: syntax error\n",
-		ft_strlen("minishell: syntax error"), 0, *parse);
-	g_exit_status = 2;
+	*parse = NULL;
+	g_exit_status = print_error("minishell: syntax error", 2);
 }
 
 void		check_multiple_redirect(t_list **parse)
@@ -39,10 +35,7 @@ void		check_multiple_redirect(t_list **parse)
 			if (flag)
 				flag = 0;
 			else
-			{
-				syntax_error(parse);
-				return ;
-			}
+				return (syntax_error(parse));
 		}
 		else
 			flag = 1;
@@ -63,4 +56,24 @@ void		echo_n(t_list **parse, char **args, int *i, int echo_flag)
 							(*parse)->next : *parse;
 		}
 	}
+}
+
+static int	str_args_len(t_list *parse)
+{
+	int			len;
+
+	len = 0;
+	while ((parse && !is_redirect(get_str(parse), get_flag_p(parse))))
+	{
+		len++;
+		parse = parse->next;
+	}
+	return (len);
+}
+
+void		init_args(char ***args, t_list *parse, int *i, char **buf)
+{
+	*args = (char **)ft_calloc(str_args_len(parse) + 10, sizeof(char *));
+	*i = 0;
+	*buf = NULL;
 }

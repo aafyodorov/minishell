@@ -24,7 +24,7 @@ int			is_func(char *str)
 								"unset",
 								"env",
 								"exit",
-								" "};
+								"\t"};
 	int			i;
 
 	if (!str)

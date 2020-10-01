@@ -19,6 +19,7 @@ const char	*got_double_delimiter(const char *start, t_list **list,
 	unsigned	flag;
 
 	flag = (*params && *(start + 2) && *(start + 2) != *params) ? 1 : 0;
+	flag |= !*params ? 32u : 0;
 	node = create_node(start, 2, flag, *list);
 	if (push_node(list, node))
 		return (NULL);

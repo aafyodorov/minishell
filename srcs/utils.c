@@ -24,19 +24,6 @@ int			ft_strlenbuf(char **buf)
 	return (i);
 }
 
-static int	str_args_len(t_list *parse)
-{
-	int			len;
-
-	len = 0;
-	while ((parse && !is_redirect(get_str(parse), get_flag_p(parse))))
-	{
-		len++;
-		parse = parse->next;
-	}
-	return (len);
-}
-
 char		*ft_strdup_arg(char *str, unsigned flag, char **env)
 {
 	int			i;
@@ -64,26 +51,25 @@ char		**get_args_str(t_list *parse)
 {
 	int			i;
 	char		**args;
-	char		*tmp[2];
+	char		*tmp[3];
 	int			echo_flag;
 
-	args = (char **)ft_calloc(str_args_len(parse) + 10, sizeof(char *));
-	i = 0;
+	init_args(&args, parse, &i, &tmp[2]);
 	echo_flag = get_command(&parse, &args[0], &i);
 	while (parse && !is_redirect(get_str(parse), get_flag_p(parse)))
 	{
 		tmp[0] = args[i];
-		if (((get_flag_p(parse) & 32) || !*get_str(parse)) &&
-				(skip_spaces(&parse, &i, echo_flag, args[i]) ||
+		if ((skip_spaces(&parse, &i, echo_flag, args[i]) ||
 				(echo_flag != 1 && subst_var(&parse, &args[i], &i))))
 			continue;
 		tmp[1] = ft_strdup_arg(get_str(parse),
 				get_flag_p(parse), g_env_vars);
-		if (echo_flag == 1 && tmp[1] && !tmp[1][0] &&
-				uninitialized(&parse, args, i, &tmp[1]))
+		if (!(get_flag_p(parse) & 1) && (echo_flag == 1 && tmp[1] &&
+				!tmp[1][0] && uninitialized(&parse, args, i, tmp)))
 			continue;
 		args[i] = tmp[0] ? ft_strjoin(tmp[0], tmp[1]) : ft_strdup(tmp[1]);
 		(void)(free_str(&tmp[1]) + free_str(&tmp[0]));
+		tmp[2] = get_flag_p(parse) & 1 ? (void *)0x1 : NULL;
 		parse = parse->next;
 	}
 	return (args);

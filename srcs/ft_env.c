@@ -20,7 +20,7 @@ int	ft_env(char **args)
 
 	i = 0;
 	if (args[0])
-		return (print_error("Invalid argument\n", 127));
+		return (print_error("Invalid argument", 127));
 	while (g_env_vars[i])
 		ft_printf("%s\n", g_env_vars[i++]);
 	return (0);

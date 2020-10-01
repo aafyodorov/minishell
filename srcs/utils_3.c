@@ -58,13 +58,14 @@ int			skip_spaces(t_list **parse, int *i, int echo_flag, char *args)
 		*parse = (*parse)->next;
 		return (1);
 	}
-	if (!echo_flag && !ft_strcmp(" ", get_str(*parse)))
+	if ((echo_flag != 1 && (get_flag_p(*parse) & 32)) ||
+		(!echo_flag && !ft_strcmp(" ", get_str(*parse))))
 	{
 		(*i)++;
 		*parse = (*parse)->next;
 		return (1);
 	}
-	else if (!args && !ft_strcmp(" ", get_str(*parse)))
+	else if (echo_flag != 2 && !args && !ft_strcmp(" ", get_str(*parse)))
 	{
 		*parse = (*parse)->next;
 		return (1);
@@ -93,11 +94,13 @@ char		*ft_strjoin_free(char *str1, char *str2, unsigned flag)
 
 int			uninitialized(t_list **parse, char **args, int i, char **tmp)
 {
+	if (tmp[2])
+		return (0);
 	*parse = (*parse)->next;
 	if (i && args[i] && args[i][ft_strlen(args[i]) - 1] == ' ')
 		args[i][ft_strlen(args[i]) - 1] = '\0';
 	if (*parse && !ft_strcmp(" ", get_str(*parse)) && !(*parse)->next)
 		*parse = (*parse)->next;
-	free_str(tmp);
+	free_str(&tmp[1]);
 	return (1);
 }

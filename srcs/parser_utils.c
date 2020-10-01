@@ -104,7 +104,7 @@ void			print_p_list(t_list *list, int ex)
 {
 	while (list)
 	{
-		ft_printf("flag: %d\tdata:%s\n", get_flag_p(list), get_str(list));
+		ft_printf("flag: |%d|\tdata:|%s|\n", get_flag_p(list), get_str(list));
 		list = list->next;
 	}
 	if (ex)

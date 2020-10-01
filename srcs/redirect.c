@@ -21,7 +21,7 @@ int			redirect_2(t_list *parse)
 	parse = parse ? parse->next : parse;
 	if ((!parse || !get_str(parse)) ||
 			is_redirect(get_str(parse), get_flag_p(parse)))
-		return (print_error("minishell: syntax error", 1));
+		return (print_error("minishell: syntax error", 2));
 	if (pipe(g_pipe) == -1)
 		return (errno);
 	return (0);

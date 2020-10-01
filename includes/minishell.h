@@ -60,6 +60,7 @@ int			ft_empty(char **args);
 int			ft_strlenbuf(char **buf);
 int			get_envs(char **envp, char ***g_env_varsz);
 char		**get_args_str(t_list *parse);
+void		init_args(char ***args, t_list *parse, int *i, char **buf);
 char		*ft_strdup_arg(char *str, unsigned flag, char **env);
 int			get_command(t_list **parse, char **args, int *i);
 int			skip_spaces(t_list **parse, int *i, int echo_flag, char *args);
