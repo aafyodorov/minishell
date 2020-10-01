@@ -28,7 +28,7 @@ int			subst_var(t_list **parse, char **args, int *i)
 {
 	char		*var_name;
 
-	if (get_flag_parser(*parse) & 16u)
+	if (get_flag_p(*parse) & 16u)
 	{
 		var_name = get_str(*parse);
 		if (!(ft_isalpha(var_name[0]) || var_name[0] == '_'))

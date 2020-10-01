@@ -39,7 +39,7 @@ const char	*got_dollar(const char *start, t_list **list, const char *params)
 	len = (ptr - start == 1) ? 1 : ptr - start - 1;
 	node = create_node(data, len, flag, *list);
 	if (ptr - start != 1)
-		set_flag_parser(node, 2u | get_flag_parser(node));
+		set_flag_p(node, 2u | get_flag_p(node));
 	if (push_node(list, node))
 		return (NULL);
 	return (ptr);

@@ -16,10 +16,10 @@
 
 static int	is_empty_export(t_list *parse)
 {
-	return ((get_flag_parser(parse) & 8u) &&
+	return ((get_flag_p(parse) & 8u) &&
 			(!parse->next ||
 			(parse->next &&
-			is_redirect(get_str(parse->next), get_flag_parser(parse->next)))));
+			is_redirect(get_str(parse->next), get_flag_p(parse->next)))));
 }
 
 int			get_command(t_list **parse, char **args, int *i)
@@ -30,21 +30,21 @@ int			get_command(t_list **parse, char **args, int *i)
 	echo_flag = (*parse && !ft_strcmp("echo", get_str(*parse))) ? 1 : 0;
 	echo_flag = (*parse && !ft_strcmp("export", get_str(*parse))) ? 2 :
 			echo_flag;
-	while (*parse && !is_redirect(get_str(*parse), get_flag_parser(*parse)) &&
+	while (*parse && !is_redirect(get_str(*parse), get_flag_p(*parse)) &&
 			ft_strcmp(" ", get_str(*parse)))
 	{
 		tmp[0] = *args;
 		if (subst_var(parse, args, i))
 			return (2);
 		tmp[1] = ft_strdup_arg(get_str(*parse),
-				get_flag_parser(*parse), g_env_vars);
+				get_flag_p(*parse), g_env_vars);
 		*args = *args ? ft_strjoin(*args, tmp[1]) : ft_strdup(tmp[1]);
 		(void)(free_str(&tmp[0]) + free_str(&tmp[1]));
 		if (*parse && is_empty_export(*parse))
 			args[++(*i)] = ft_strdup(" ");
 		*parse = (*parse)->next;
 	}
-	*parse = (*parse && !is_redirect(get_str(*parse), get_flag_parser(*parse))) ?
+	*parse = (*parse && !is_redirect(get_str(*parse), get_flag_p(*parse))) ?
 			(*parse)->next : *parse;
 	(*i)++;
 	echo_n(parse, args, i, echo_flag);
@@ -53,8 +53,6 @@ int			get_command(t_list **parse, char **args, int *i)
 
 int			skip_spaces(t_list **parse, int *i, int echo_flag, char *args)
 {
-	char *chtotam = get_str(*parse);
-	(void)chtotam;
 	if (!*get_str(*parse))
 	{
 		*parse = (*parse)->next;

@@ -40,8 +40,8 @@ t_list			*create_node(const char *data, size_t len, unsigned flag,
 int				push_node(t_list **list, t_list *new_node);
 int				is_delim(const char *str, const char *eot);
 char			**set_params(int key, char *eot);
-void			set_flag_parser(t_list *node, unsigned flag);
-unsigned		get_flag_parser(t_list *node);
+void			set_flag_p(t_list *node, unsigned flag);
+unsigned		get_flag_p(t_list *node);
 char			*get_str(t_list *node);
 const char		*rec_parser(const char *str, t_list **list, char *eot);
 char			*get_var(const char *str);

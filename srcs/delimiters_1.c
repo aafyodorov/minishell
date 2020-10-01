@@ -97,7 +97,7 @@ const char	*got_literal(const char *start, t_list **list, const char *params)
 	if (push_node(list, node))
 		return (NULL);
 	flag |= *list && !ft_strcmp(get_str(*list), "export") ? 4u : 0;
-	set_flag_parser(*list, get_flag_parser(*list) | flag);
+	set_flag_p(*list, get_flag_p(*list) | flag);
 	next += *next == '\003' ? 1 : 0;
 	return (next);
 }

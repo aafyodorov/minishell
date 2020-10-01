@@ -55,7 +55,7 @@ int			next_redirect(t_list *parse)
 	int		i;
 
 	i = 0;
-	while (parse && !(i = is_redirect(get_str(parse), get_flag_parser(parse))))
+	while (parse && !(i = is_redirect(get_str(parse), get_flag_p(parse))))
 		parse = parse->next;
 	return (i);
 }
@@ -65,7 +65,7 @@ static void	skip_redirect(t_list **parse)
 	char *tmp;
 
 	tmp = NULL;
-	while (*parse && !is_redirect(get_str(*parse), get_flag_parser(*parse)))
+	while (*parse && !is_redirect(get_str(*parse), get_flag_p(*parse)))
 	{
 		tmp = get_str(*parse);
 		*parse = (*parse)->next;

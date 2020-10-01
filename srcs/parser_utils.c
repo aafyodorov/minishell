@@ -40,12 +40,12 @@ t_list			*create_node(const char *data, size_t len, unsigned flag,
 	n_data[1] = (char *)n_data + sizeof(void *) * 2 + sizeof(unsigned);
 	flg = (unsigned *)n_data[0];
 	ft_strlcpy(n_data[1], data, len);
-	if (head && (get_flag_parser(head) & 4u) != 0 &&
-			!is_redirect(n_data[1], get_flag_parser(head))) //TODO не уверен, какой флаг нужно здесь передавать
+	if (head && (get_flag_p(head) & 4u) != 0 &&
+			!is_redirect(n_data[1], get_flag_p(head))) //TODO не уверен, какой флаг нужно здесь передавать
 		flag |= 4u;
 	*flg = flag;
 	node->content = n_data;
-	set_flag_parser(node, flag);
+	set_flag_p(node, flag);
 	return (node);
 }
 
@@ -104,7 +104,7 @@ void			print_p_list(t_list *list, int ex)
 {
 	while (list)
 	{
-		ft_printf("flag: %d\tdata:%s\n", get_flag_parser(list), get_str(list));
+		ft_printf("flag: %d\tdata:%s\n", get_flag_p(list), get_str(list));
 		list = list->next;
 	}
 	if (ex)

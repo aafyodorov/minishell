@@ -73,9 +73,9 @@ static int		got_var_sub(char **cont, t_list **cur)
 	err_flg = (cont[1]) ? 0 : 1;
 	*cur = (*cur)->next;
 	while (*cur && ft_strcmp(get_str(*cur), " ") &&
-		!is_redirect(get_str(*cur), get_flag_parser(*cur)))
+		!is_redirect(get_str(*cur), get_flag_p(*cur)))
 	{
-		flag = get_flag_parser(*cur);
+		flag = get_flag_p(*cur);
 		cont[1] = concat_var(&cont[1], *cur, flag);
 		err_flg = (cont[1]) ? 0 : 1;
 		*cur = (*cur)->next;
@@ -88,13 +88,13 @@ int				export_check(t_list *head, char **cont)
 	int			err_flg;
 
 	err_flg = 0;
-	if (head && (get_flag_parser(head) & 4u) != 0)
+	if (head && (get_flag_p(head) & 4u) != 0)
 	{
 		err_flg = add_var_to_env(cont) ? 1 : 0;
 		while (head && ft_strcmp(get_str(head), "export"))
 			head = head->next;
 		if (head)
-			set_flag_parser(head, get_flag_parser(head) | 8u);
+			set_flag_p(head, get_flag_p(head) | 8u);
 	}
 	else
 		check_var_in_env(g_env_vars, cont);

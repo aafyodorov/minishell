@@ -12,7 +12,7 @@
 
 #include "parser.h"
 
-void		set_flag_parser(t_list *node, unsigned flag)
+void		set_flag_p(t_list *node, unsigned flag)
 {
 	unsigned	**cont;
 
@@ -20,7 +20,7 @@ void		set_flag_parser(t_list *node, unsigned flag)
 	cont[0][0] = flag;
 }
 
-unsigned	get_flag_parser(t_list *node)
+unsigned	get_flag_p(t_list *node)
 {
 	return (((unsigned **)(node->content))[0][0]);
 }
